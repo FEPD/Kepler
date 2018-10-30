@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "购物车",
+  "usingComponents": {
+    "jdk-cart": "plugin://myPlugin/jdk-cart"
+  }
+}

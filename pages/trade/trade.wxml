@@ -1,0 +1,6 @@
+<jdk-trade wx:if="{{options}}" id="trade" options="{{options}}"  
+bind:chooseAddress="chooseAddress"
+bind:createAddress="createAddress"
+bind:goToPayment="goToPayment"
+bind:goBack="goBack"
+></jdk-trade>

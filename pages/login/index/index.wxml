@@ -1,0 +1,3 @@
+<index bindsmsloginres='smsloginResListener' config='{{config}}'/>
+<button class='phone-btn {{stopClick ? "btn-disabled":""}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信手机号快捷登录</button>
+<instruction/>

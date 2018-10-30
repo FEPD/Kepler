@@ -1,0 +1,1 @@
+<jdk-cart options="{{options}}" bind:gotoProduct='gotoProduct' bind:gotoTrade='gotoTrade' bind:gotologin='goToLogin'></jdk-cart>

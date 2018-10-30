@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "填写订单",
+  "usingComponents": {
+    "jdk-trade": "plugin://myPlugin/jdk-trade"
+  }
+}

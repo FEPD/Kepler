@@ -1,0 +1,1 @@
+<jdk-order id="order" bind:goToPayment="goToPayment" bind:goOrderTrack="goOrderTrack" bind:goOrderDetail="goOrderDetail" bind:gotologin="goToLogin" options="{{ options }}"></jdk-order>

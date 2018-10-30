@@ -1,0 +1,1 @@
+<jdk-get-coupon id="get-coupon" bind:goToBack="goToBack" bind:gotologin="goToLogin" options="{{ options }}"></jdk-get-coupon>

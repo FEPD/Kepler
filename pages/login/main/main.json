@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "main": "plugin://loginPlugin/main",
+    "instruction": "plugin://loginPlugin/instruction"
+  },
+  "navigationBarTitleText": "登录",
+  "navigationBarTextStyle": "black"
+}

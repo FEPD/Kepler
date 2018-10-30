@@ -1,0 +1,13 @@
+/* pages/login/login.wxss */
+.phone-btn{
+  margin: 40rpx auto 152rpx auto;
+  width: 658rpx;
+  height: 92rpx;
+  border-radius: 100rpx;
+  background-color: #1AAD19;
+  border-style:none;
+  color: #fff;
+}
+.phone-btn::after{
+  border: none
+}

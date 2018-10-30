@@ -1,0 +1,1 @@
+<jdk-proxyUnion id='proxyUnion' options="{{options}}" bind:gotoindex="goToIndex" bind:gotoproduct="goToProduct" />

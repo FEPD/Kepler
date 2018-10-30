@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "收银台",
+  "usingComponents": {
+    "jdk-payment": "plugin://myPlugin/jdk-payment"
+  }
+}

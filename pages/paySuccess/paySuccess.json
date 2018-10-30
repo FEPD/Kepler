@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "支付成功",
+  "usingComponents": {
+    "jdk-paySuccess": "plugin://myPlugin/jdk-paySuccess"
+  }
+}

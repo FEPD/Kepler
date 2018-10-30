@@ -1,0 +1,8 @@
+<jdk-product wx:if="{{wareId}}" id="product" wareId="{{wareId}}" options="{{options}}" buyDisabled="{{buyDisabled}}" 
+bind:gotologin="goToLogin" 
+bind:gotopay="goToPay"
+bind:toTop="toTopTap"
+bind:gotocart="goToCart"
+bind:goToChooseAddress="goToChooseAddress"
+bind:getProductName="getProductName"
+></jdk-product>

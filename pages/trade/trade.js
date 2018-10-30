@@ -1,0 +1,45 @@
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setData({
+      options: options
+    })
+    this.trade = this.selectComponent('#trade');
+  },
+  onUnload:function(){
+    this.trade.methods.clearPresaleState();
+  },
+  //跳转新建地址页
+  createAddress:function(e){
+    let param = e.detail && e.detail.param ? e.detail.param : '';
+    wx.navigateTo({
+      url: '../address/address?' + param,
+    })
+  },
+  //跳转选择地址列表
+  chooseAddress:function(e){
+    let param = e.detail && e.detail.param ? e.detail.param : '';
+    wx.navigateTo({
+      url: '../addressul/addressul?' + param,
+    })
+  },
+  //跳转收银台页面
+  goToPayment:function(e){
+    wx.redirectTo({
+      url: `../payment/payment`,
+    })
+  },
+  goBack:function(){
+    wx.navigateBack();
+  }
+})

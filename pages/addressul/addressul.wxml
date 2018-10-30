@@ -1,0 +1,5 @@
+<jdk-addressul wx:if="{{options}}" id="addressul" options="{{options}}"
+bind:editAddress="goToEditAddress"
+bind:chooseAddressSuccess="chooseAddressSuccess"
+bind:newAddress="newAddress"
+ />

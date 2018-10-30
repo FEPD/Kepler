@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "收货地址",
+  "usingComponents":{
+    "jdk-addressul":"plugin://myPlugin/jdk-addressul"
+  }
+}

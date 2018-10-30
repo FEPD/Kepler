@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "jdk-product": "plugin://myPlugin/jdk-product"
+  }
+}

@@ -1,0 +1,1 @@
+<consignee bindgoback = 'gobackListener' mobile='{{mobile}}'/>

@@ -1,5 +1,4 @@
 var plugin = requirePlugin("myPlugin");
-let loginPlugin = requirePlugin("loginPlugin");
 var log = plugin.keplerReportInit();//埋点上报方法
 
 Page({

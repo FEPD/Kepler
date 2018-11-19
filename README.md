@@ -98,6 +98,10 @@ App({
 })
 ```
 
+Tips:
+1. globalData内的参数需要修改成插件调用方自己的，每个参数说明见下方**相关配置globalData**
+
+
 #### appShow
 
 关键数据写缓存，以及分佣处理（**非常关键必须调用！！！**）
@@ -165,6 +169,7 @@ Page({
     this.product = this.selectComponent('#product');
   },
   onShow:function(){
+    let that = this;
     //防止用户多次点击（一定要加！！！）
     this.setData({
       buyDisabled: false,
@@ -174,6 +179,17 @@ Page({
     //同步缓存中购物车角标数
     this.product.methods.updateCartNum();
     this.product.methods.firstCheckIsLogin();
+
+    // 设置分享链接，增加分佣spreadUrl
+    let app = getApp();
+    let unionId = (app.globalData && app.globalData.unionId) || ''
+    if (unionId) {
+      plugin.getSpreadUrl(that.data.wareId, unionId).then((res)=>{
+        that.data.shareUrl = `/pages/product/product?wareId=${that.data.wareId}&spreadUrl=${res.shortUrl}`
+      })
+    } else {
+      that.data.shareUrl = `/pages/product/product?wareId=${that.data.wareId}`
+    }
   },
   onReachBottom:function(){
     //图文详情触底加载
@@ -231,7 +247,7 @@ Page({
   onShareAppMessage: function (ev) {
     return {
       title: this.data.productName,
-      path: `/pages/product/product?wareId=${this.data.wareId}`,
+      path: this.data.shareUrl ? this.data.shareUrl : `/pages/product/product?wareId=${that.data.wareId}`,
       success: function (res) {
         log.click({
           "eid": "WProductDetail_ShareSuccess",

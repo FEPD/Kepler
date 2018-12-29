@@ -2,5 +2,6 @@
 bind:chooseAddress="chooseAddress"
 bind:createAddress="createAddress"
 bind:goToPayment="goToPayment"
+bind:paymentSuccess="paymentSuccess"
 bind:goBack="goBack"
 ></jdk-trade>

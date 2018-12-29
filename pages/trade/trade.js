@@ -39,7 +39,17 @@ Page({
       url: `../payment/payment`,
     })
   },
+  paymentSuccess: function (e) {
+    wx.redirectTo({
+      url: `../paySuccess/paySuccess`
+    });
+  },
   goBack:function(){
     wx.navigateBack();
+  },
+  ShowRedPacketRules:function(){
+     wx.navigateTo({
+      url:'../redPacketTxt/redPacketTxt'
+    })
   }
 })

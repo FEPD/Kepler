@@ -11,17 +11,17 @@ Page({
 			options: options
 		})
 
-		this.setCouponParams();
+		// this.setCouponParams();
 		let getCoupon = this.selectComponent('#get-coupon');
 	},
 	
 	// 领券时毕传参数
 	setCouponParams: function () {
-		plugin.fingerPrint.Jdwebm();
-		app.globalData.wxCookie = plugin.fingerPrint.CookieUtils;
-		plugin.setStorageSync('storage_shshshfp', app.globalData.wxCookie.getCookie('shshshfp'));
-		plugin.setStorageSync('storage_shshshfpa', app.globalData.wxCookie.getCookie('shshshfpa'))
-		plugin.setStorageSync('storage_shshshfpb', app.globalData.wxCookie.getCookie('shshshfpb'))
+		// plugin.fingerPrint.Jdwebm();
+		// app.globalData.wxCookie = plugin.fingerPrint.CookieUtils;
+		// plugin.setStorageSync('storage_shshshfp', app.globalData.wxCookie.getCookie('shshshfp'));
+		// plugin.setStorageSync('storage_shshshfpa', app.globalData.wxCookie.getCookie('shshshfpa'))
+		// plugin.setStorageSync('storage_shshshfpb', app.globalData.wxCookie.getCookie('shshshfpb'))
 	},
 
 	goToLogin: function (e){

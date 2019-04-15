@@ -3,6 +3,5 @@
     "index": "plugin://loginPlugin/index",
     "instruction":"plugin://loginPlugin/instruction"
   },
-  "navigationBarTitleText": "登录",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "登录"
 }

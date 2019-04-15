@@ -4,4 +4,6 @@ bind:createAddress="createAddress"
 bind:goToPayment="goToPayment"
 bind:paymentSuccess="paymentSuccess"
 bind:goBack="goBack"
+bind:goToOrderList="goToOrderList"
+bind:goAddressPage="goAddressPage"
 ></jdk-trade>

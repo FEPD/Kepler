@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "union": "plugin://loginPlugin/union"
-  },
-  "navigationBarTextStyle": "black"
-}

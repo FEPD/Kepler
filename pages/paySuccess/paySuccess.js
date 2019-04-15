@@ -14,8 +14,11 @@ Page({
    */
   onLoad: function (options) {
     log.set({
+      url: 'pages/paySuccess/paySuccess',
       urlParam: options, //onLoad事件传入的url参数对象
       title: '支付成功', //网页标题
+      shopid: '',
+      pparam: '1',
       siteId: 'WXAPP-JA2016-1', //开普勒小程序固定用：WXAPP-JA2016-1
       pageId: 'Worder_SucceedPayment',
       account: !plugin.getStorageSync('jdlogin_pt_key') ? '-' : plugin.getStorageSync('jdlogin_pt_key')  //传入用户登陆京东的账号

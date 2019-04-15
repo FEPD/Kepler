@@ -8,102 +8,159 @@
 
 [申请地址](https://mp.weixin.qq.com/wxopen/pluginbasicprofile?action=intro&appid=wx1edf489cb248852c&token=&lang=zh_CN)
 
+## 标准版（适用于所有接入者）
+> 1. 自助申请小程序专属开普勒appkey [http://k.jd.com/](http://k.jd.com/)  
+> 2. 微信公众平台申请使用好物街插件的权限  
+> 3. ERP流程中心提交小程序备案申请，并督促通过（备案地址：ERP流程中心→流程申请→运营流程→京东移动应用备案申请）（京东外部接入者可忽略）  
+
+## 扩展版(适用于京东内部接入者，京东外部接入者如有需求可联系我们）
+> 1. 自助申请小程序专属开普勒appkey [http://k.jd.com/](http://k.jd.com/)  
+> 2. 创建阿波罗应用[http://apl.jd.com/](http://apl.jd.com/)  ，获取阿波罗appid、appSecret，进入阿波罗后台，配置楼层  
+> 3. ERP流程中心提交小程序备案申请，并督促通过（备案地址：ERP流程中心→流程申请→运营流程→京东移动应用备案申请）  
+> 4. 微信公众平台申请使用好物街插件的权限  
+> 5. 在微信小程序app.js的globalData中配置apolloId、apolloSecret信息接入插件
+
 ## 快速开始
 
 ### app.json
-
 ```
 {
-  "pages": [
-    "pages/index/index",
-    "pages/product/product",
-    "pages/cart/cart",
-    "pages/proxyUnion/proxyUnion",
-    "pages/order/order",
-    "pages/orderDetail/orderDetail",
-    "pages/payment/payment",
-    "pages/getCoupon/getCoupon"
-  ],
-  "subPackages": [
-    {
-      "root": "pages/login/",
-      "pages": [
-        "index/index",
-        "main/main",
-        "union/union",
-        "web-view/web-view",
-        "consignee/consignee",
-        "wv-common/wv-common"
-      ]
+    "pages": [
+        "pages/index/index",
+        "pages/cart/cart",
+        "pages/order/order"
+    ],
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
     },
-    {
-      "root": "pages/trade/",
-      "pages": ["trade"]
+    "subPackages": [{
+            "root": "pages/login/",
+            "pages": [
+                "index/index",
+                "web-view/web-view",
+                "wv-common/wv-common"
+            ]
+        },
+        {
+            "root": "pages/trade/",
+            "pages": ["trade"]
+        },
+        {
+            "root": "pages/addressul/",
+            "pages": ["addressul"]
+        },
+        {
+            "root": "pages/address/",
+            "pages": ["address"]
+        },
+        {
+            "root": "pages/paySuccess/",
+            "pages": ["paySuccess"]
+        },
+        {
+            "root": "pages/product",
+            "pages": ["product"]
+        },
+        {
+            "root": "pages/orderDetail",
+            "pages": ["orderDetail"]
+        },
+        {
+            "root": "pages/payment",
+            "pages": ["payment"]
+        },
+        {
+            "root": "pages/getCoupon",
+            "pages": ["getCoupon"]
+        },
+        {
+            "root": "pages/proxyUnion",
+            "pages": ["proxyUnion"]
+        }
+
+    ],
+    "plugins": {
+        "myPlugin": {
+            "version": "1.1.0",
+            "provider": "wx1edf489cb248852c"
+        },
+        "loginPlugin": {
+            "version": "1.1.8",
+            "provider": "wxefe655223916819e"
+        }
     },
-    {
-      "root": "pages/addressul/",
-      "pages": ["addressul"]
-    },
-    {
-      "root": "pages/address/",
-      "pages": ["address"]
-    },
-    {
-      "root": "pages/paySuccess/",
-      "pages": ["paySuccess"]
+    "window": {
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTextStyle": "black"
     }
-  ],
-  "plugins": {
-    "myPlugin": {
-      "version": "1.0.0",
-      "provider": "wx1edf489cb248852c"
-    },
-    "loginPlugin": {
-      "version": "1.1.3",
-      "provider": "wxefe655223916819e"
-    }
-  },
-  "window": {
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTextStyle": "black"
-  }
 }
 ```
 
-Tips:
-1. **index为demo演示首页，实际开发时请替换成开发者自己的首页。**
+Tips:   
+1. **index为demo演示首页，实际开发时请替换成开发者自己的首页。**  
 2. plugins中myPlugin的版本号（version）改成对应的插件版本号即可。
 
 ### app.js
-
 ```
 var myPluginInterface = requirePlugin('myPlugin');
 App({
   onLaunch: function(options) {
-    
+    myPluginInterface.initStyle({})
   },
   onShow: function(options) {
     myPluginInterface.appShow(options, this);
   },
   globalData: {
-    unionId: "4298", //联盟ID（选填）
+    unionId: "1000072052", //联盟ID（选填）
     appkey: "wxgdtest", //小程序跟单标识（必填）
     customerinfo: "customerinfo_test", //渠道来源（选填）
     sendpay: "3", //导购小程序sendpay传1，事业部小程序sendpay传3。（必填）
     mpAppid: "wx1edf489cb248852c", //小程序appid（必填）
     pluginAppid: "wx1edf489cb248852c", //插件appid（必填）
-    tabBarPathArr: ['/pages/index/index', '/pages/cart/cart'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
+    tabBarPathArr: ['/pages/index/index','/pages/cart/cart','pages/order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
+    apolloId: 'd1543fc0e8274901be01a9d9fcfbf76e', (必填)  //阿波罗Id，标准版使用此默认值，扩展版使用申请好的阿波罗appid
+    apolloSecret: '162f0903a33a445db6af0461c63c6a3b'(必填)  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
+  tabBar: {
+    "color": "#2E2D2D",
+    "selectedColor": "#E2231A",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "selectIndex":0,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "https://newbuz.360buyimg.com/jdk/homeOff.png",
+        "selectedIconPath": "https://newbuz.360buyimg.com/jdk/homeOn.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "https://newbuz.360buyimg.com/jdk/cartOff.png",
+        "selectedIconPath": "https://newbuz.360buyimg.com/jdk/cartOn.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "我的订单",
+        "iconPath": "https://newbuz.360buyimg.com/jdk/personalOff.png",
+        "selectedIconPath": "https://newbuz.360buyimg.com/jdk/personalOn.png"
+      }
+    ],
+    "position": "bottom"
+  }
 })
 ```
 
-Tips:
-1. globalData内的参数需要修改成插件调用方自己的，每个参数说明见下方**相关配置globalData**
+Tips:  
+1. globalData内的参数需要修改成插件调用方自己的，每个参数说明见下方**相关配置globalData**  
+2. 该tabBar为我们自己写的自定义组件，非微信原生tabBar,跳转方式需要使用**wx.reLaunch**方式跳转
 
 
 #### appShow
-
 关键数据写缓存，以及分佣处理（**非常关键必须调用！！！**）
 
 | 参数名       | 类型       | 默认值     | 说明               |
@@ -122,156 +179,224 @@ Tips:
 | mpAppid                | String    | 是        |           |小程序appid                                                       |
 | pluginAppid            | String    | 是        |           |插件appid：wx1edf489cb248852c                                     |
 | tabBarPathArr          | Array     | 是        |           |tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要） |
+| apolloId          	  | String     | 是        |           |阿波罗Id，标准版使用默认值d1543fc0e8274901be01a9d9fcfbf76e，扩展版使用申请好的阿波罗appid|
+| apolloSecret           | String     | 是        |           |阿波罗Secret, 标准版使用默认值162f0903a33a445db6af0461c63c6a3b，扩展版使用申请好的阿波罗appSecret
 
 ### 页面修改配置文件JSON
-
 以商品详情页为例
 ```
 {
   "navigationBarTitleText": "商品详情",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "usingComponents": {
-    "jdk-product": "plugin://myPlugin/jdk-product"
+    "apollo": "plugin://myPlugin/apollo"
   }
 }
 ```
-
 ### 在页面的WXML中添加标签
-
 ```
-<jdk-product wx:if="{{wareId}}" id="product" wareId="{{wareId}}" options="{{options}}" buyDisabled="{{buyDisabled}}" 
-bind:gotologin="goToLogin" 
-bind:gotopay="goToPay"
-bind:toTop="toTopTap"
-bind:gotocart="goToCart"
-bind:goToChooseAddress="goToChooseAddress"
-bind:getProductName="getProductName"
-></jdk-product>
+<view style="{{ pageStyle  }}">
+	<view style="{{ wrapStyle  }}"><apollo wx:if="{{ options }}" options="{{ options }}"></apollo></view>
+</view>
+<image class="bottom-to-top {{isIphoneX? 'bottom-to-top-iphonex': ''}}" src="https://img30.360buyimg.com/jshow/jfs/t24346/97/2510484213/4973/b8ba0830/5bae1254Nfeb364a9.png" style="display:{{toTopDisplay}}" bindtap="toTopTap"></image>
 ```
-
 ### 页面JS文件中处理
-
 ```
 var plugin = requirePlugin("myPlugin");
-var log = plugin.keplerReportInit();//埋点上报方法
 const util = require('../utils/util.js');
 
 Page({
   data:{
+    option:{
+      apolloId: app.globalData.apolloId ? app.globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',       //阿波罗Id
+      apolloSecret: app.globalData.apolloSecret ? app.globalData.apolloSecret :'162f0903a33a445db6af0461c63c6a3b',   //阿波罗secret
+      moudleId: "product"                                 //标识阿波罗组件加载商祥页
+    },
+    refreshCount:0,     // 避免进来onload和onShow同时多余请求
+    scrollTop: 0,        //滚动距离
+    pageStyle: 'position: relative',
+    wrapStyle: '',
+    toTopDisplay: 'none',    // 是否展示回到顶部按钮
+    screenHeight:0,         // 屏幕高度
   },
   onLoad: function(options) {
-    util.checkVersion();
-    //处理商品sku参数
+    this.pageIndex = getCurrentPages().length;
+
+    // plugin.initStyle(this.data.option);
     this.setData({
-      wareId:options.wareId,
-      options: options
+      options: Object.assign({}, this.data.option, {
+        skuId: options.wareId,
+        pageParams: options
+      })
     })
-    this.product = this.selectComponent('#product');
+
+    util.checkVersion()
+
+    plugin.emitter.on('fixedPageBg' + this.pageIndex, this.fixedPageBg.bind(this))
+    plugin.emitter.on('goPage' + this.pageIndex, this.goPage.bind(this));
+    plugin.emitter.on('scrollToPostion' + this.pageIndex, this.scrollToPostion.bind(this))
+    plugin.emitter.on('updateSkuId' + this.pageIndex, this.updateSkuId.bind(this))
+    plugin.emitter.on('productRefreshPage' + this.pageIndex, this.productRefreshPage.bind(this))
+    this.data.refreshCount++;
+    let that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenHeight: res.windowHeight,
+          screenWidth: res.windowWidth,
+        });
+      }
+    });
+  },
+  onUnload () {
+    // 页面卸载时，注销发布事件
+    plugin.emitter.off('updateSkuId' + this.pageIndex)
+    plugin.emitter.off('goPage' + this.pageIndex);
+    plugin.emitter.off('scrollToPostion' + this.pageIndex)
+    plugin.emitter.off('fixedPageBg' + this.pageIndex)
+    plugin.emitter.off('productRefreshPage' + this.pageIndex)
   },
   onShow:function(){
     let that = this;
-    //防止用户多次点击（一定要加！！！）
-    this.setData({
-      buyDisabled: false,
-    })
-    //地址选择数据同步
-    this.product.methods.getAddressStorage();
-    //同步缓存中购物车角标数
-    this.product.methods.updateCartNum();
-    this.product.methods.firstCheckIsLogin();
 
     // 设置分享链接，增加分佣spreadUrl
     let app = getApp();
     let unionId = (app.globalData && app.globalData.unionId) || ''
     if (unionId) {
-      plugin.getSpreadUrl(that.data.wareId, unionId).then((res)=>{
-        that.data.shareUrl = `/pages/product/product?wareId=${that.data.wareId}&spreadUrl=${res.shortUrl}`
+      plugin.getSpreadUrl(that.data.options.skuId, unionId).then((res)=>{
+        that.data.shareUrl = `/pages/product/product?wareId=${that.data.options.skuId}&spreadUrl=${res.shortUrl}`
+      }, (res)=> {
+        that.data.shareUrl = `/pages/product/product?wareId=${that.data.options.skuId}`
       })
     } else {
-      that.data.shareUrl = `/pages/product/product?wareId=${that.data.wareId}`
+      that.data.shareUrl = `/pages/product/product?wareId=${that.data.options.skuId}`
+    }
+    this.data.refreshCount != 1 ? plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({},{isOnShow: true}, {data:this.data.options},)) : this.data.refreshCount++;
+  },
+  // 刷新商祥页
+  productRefreshPage () {
+    plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({}, {data:this.data.options},))
+  },
+  /**
+   * [goPage description]
+   * @param  {[type]} pageInfo [description]
+   * @param  {[type]} jumpMode [跳转方式：navigateTo，navigateBack， redirectTo]
+   * @param  {[type]} url [条状路径]
+   * @return {[type]}          [description]
+   */
+  goPage (pageInfo) {
+    if (!pageInfo || !pageInfo.jumpMode || !pageInfo.url ) {
+      return;
+    }
+    wx[pageInfo.jumpMode]({
+      url: pageInfo.url,
+      success () {
+        wx.hideToast()
+      }
+    })
+  },
+  // 切换商祥skuId
+  updateSkuId (skuId) {
+    this.data.options.skuId = skuId
+  },
+  // 触底函数
+  onReachBottom:function(e){
+    plugin.emitter.emit('reachBottom' + this.pageIndex, e)
+    //图文详情触底加载
+    // this.product.methods.showProductDetail();
+  },
+  // 动态控制滚动条
+  scrollToPostion () {
+    wx.pageScrollTo({
+      scrollTop: this.data.scrollTop + 50,
+      duration: 200
+    })
+  },
+  // 监听页面滚动
+  onPageScroll:function(e){
+    this.data.scrollTop = e.scrollTop;
+    if (e.scrollTop > this.data.screenHeight) {
+      if (this.data.toTopDisplay == 'none') {
+        this.setData({
+          toTopDisplay: "block"
+        })
+      }
+    } else {
+      if (this.data.toTopDisplay == 'block') {
+        this.setData({
+          toTopDisplay: "none"
+        })
+      }
     }
   },
-  onReachBottom:function(){
-    //图文详情触底加载
-    this.product.methods.showProductDetail();
-  },
-  onPageScroll:function(e){
-    //监听页面滑动
-    this.product.methods.pageScroll(e);
-  },
-  //跳转登录
-  goToLogin: function (e){
-    let resultObj = e.detail;
-    if (resultObj.jumpWay =='navigate'){
-      wx.navigateTo({
-        url: resultObj.loginUrl,
-      });
-    } else if (resultObj.jumpWay == 'redirect'){
-      wx.redirectTo({
-        url: resultObj.loginUrl,
+  // 当有弹框时，需固定页面背景
+  // flag: 是否固定背景，true为固定，false为恢复原位
+  fixedPageBg (flag) {
+    let pageStyle = 'position: relative; height: auto';
+    let wrapStyle = '';
+    if (flag) {
+      this.fixScrollTop = this.data.scrollTop
+      pageStyle = 'position: fixed;'
+                + 'overflow: hidden;'
+                + 'height:' + wx.getSystemInfoSync().windowHeight + 'px;'
+                + 'width: ' + wx.getSystemInfoSync().screenWidth + 'px;'
+      wrapStyle = 'top: -' + this.data.scrollTop + 'px;'
+      this.setData({
+        pageStyle: pageStyle,
+        wrapStyle: wrapStyle
+      })
+    } else {
+      this.setData({
+        pageStyle: pageStyle,
+        wrapStyle: ''
+      })
+      wx.pageScrollTo({
+        scrollTop: this.fixScrollTop ? this.fixScrollTop : 0,
+        duration: 0
       })
     }
   },
-  //去结算
-  goToPay:function(e){
-    wx.navigateTo({
-      url: e.detail.url,
-    })
-  },
+
   //返顶处理
-  toTopTap:function(){
+  toTopTap:function(e){
     wx.pageScrollTo({
       scrollTop: Math.random() * 0.001,
       duration: 300
     })
-  },
-  //跳转购物车
-  goToCart: function () {
-    wx.redirectTo({
-      url: '/pages/cart/cart',
+    plugin.emitter.emit('buryingPoint' + this.pageIndex, 'click', {
+      "eid": "WProductDetail_BackTop",
+      "elevel": "",
+      "eparam": "",
+      "pparam": this.data.options.skuId+ '_1',
+      "target": "", //选填，点击事件目标链接，凡是能取到链接的都要上报
+      "event": e //必填，点击事件event            
     })
   },
-  goToChooseAddress:function(e){
-    let wareId = e.detail && e.detail.wareId ? e.detail.wareId : '';
-    wx.navigateTo({
-      url: `plugin-private://wx1edf489cb248852c/pages/chooseaddress/chooseaddress?wareId=${wareId}`,
-    })
-  },
-  getProductName:function(e){
-    let productName = e.detail && e.detail.productName ? e.detail.productName : '';
-    this.data.productName = productName;
-  },
+
   /**
    * [onShareAppMessage 商祥页分享]
    */
   onShareAppMessage: function (ev) {
+    plugin.emitter.emit('buryingPoint' + this.pageIndex, 'click', {
+      "eid": "WProductDetail_ShareSuccess",
+      "elevel": "",
+      "eparam": "",
+      "pparam": '',
+      "target": "", //选填，点击事件目标链接，凡是能取到链接的都要上报
+      "event": ev //必填，点击事件event            
+    })
     return {
       title: this.data.productName,
       path: this.data.shareUrl ? this.data.shareUrl : `/pages/product/product?wareId=${that.data.wareId}`,
-      success: function (res) {
-        log.click({
-          "eid": "WProductDetail_ShareSuccess",
-          "elevel": "",
-          "eparam": "",
-          "pname": "",
-          "pparam": "",
-          "target": "", //选填，点击事件目标链接，凡是能取到链接的都要上报
-          "event": "" //必填，点击事件event
-        });        
-      }
     }
-  }
+  },
 })
+
 ```
-
 Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否则商祥将不展示内容
-
 ### 联盟中间页
-
 联盟中间页当前的兜底方案是跳小程序首页，插件接入方可根据自身需求修改`proxyUnion.js`文件内的`goToIndex`方法，将其中传入的跳转链接改为自己所需的地址
-
 ### 支付回调函数
-
 插件中提供了支付成功的和支付失败的回调函数（payment中的`paymentSuccess`和`paymentFail`），开发者可根据需求做相应的处理
 
 ## License

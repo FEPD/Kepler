@@ -4,6 +4,7 @@
   <button bindtap="goCoupon">点击去独立领券页</button>
   <!-- <button bindtap="goCpsProduct">携带cps跟单短链的商祥</button> -->
   <button bindtap="goOrder">我的订单</button>
+  <button bindtap='goToAppointment'>我的预约</button>
   <button wx:if="{{isLogin}}" bindtap="logout">退出登录</button>
   <text wx:else>用户未登录</text>
 </form>
@@ -11,3 +12,5 @@
   <input name="unionParam" type="text" placeholder="请在此输入cps短连接" />
   <button formType="submit">联盟中间页</button>
 </form>
+<jdk-tabbar tabBar="{{tabbarConfig}}" logSet="{{logSet}}" bind:tabBarClick="tabBarClick"></jdk-tabbar>
+<!-- <apollo  options="{{options}}" bind:gotoProduct='gotoProduct' bind:gotoTrade='gotoTrade' bind:gotologin='goToLogin'/>  -->

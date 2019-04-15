@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "consignee": "plugin://loginPlugin/consignee"
-  },
-  "navigationBarTitleText": "历史收货人",
-  "navigationBarTextStyle": "black"
-}

@@ -1,15 +1,13 @@
-import util from '../loginPluginUtils.js';
+import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
-const CURRENT_URL = '/pages/login/index/index';
-import {
-  config
-} from '../loginConfig.js'
+let config = util.getLoginConfig();
+
 Page({
   data: {
     config
   },
-  smsloginResListener(event = {}) {
-    util.handleComponentRedirect(event.detail)
+  smsloginResListener(res = {}) {
+    util.handleJump(res.detail)
   },
   getPhoneNumber(event = {}) {
     let {
@@ -17,6 +15,10 @@ Page({
     } = this.data;
     let { detail } = event;
     let { iv, encryptedData } = detail;
+    plugin.clickLog({
+      event,
+      eid: 'WLogin_Diversion_Wechat',
+    })
     if (!iv || !encryptedData) return
     if (stopClick) {
       wx.showToast({
@@ -26,14 +28,13 @@ Page({
       return
     }
     this.setData({
-      detail: event.detail,
+      detail,
       stopClick: true
     })
     this.mobileLogin()
     plugin.clickLog({
       event,
-      eid: 'WLogin_Index_QuickLog',
-      target: CURRENT_URL
+      eid: 'WLogin_DiversionWechat_Allow',
     })
   },
   mobileLogin() {
@@ -47,31 +48,15 @@ Page({
     } = detail;
     if (!code || !iv || !encryptedData) return
     plugin.WXMobileLogin({
-      detail,
+      iv,
+      encryptedData,
       code,
-      callback: (res = {}) => {
-        this.setData({
-          stopClick: false
-        })
-        let {
-          err_msg,
-          url
-        } = res;
-        if (err_msg) {
-          this.handleError({
-            detail,
-            err_msg
-          });
-        } else {
-          util.handleComponentRedirect({
-            url
-          })
-        }
-      }
-    });
+    }).then(res => util.handleJump(res));
   },
   onLoad(options) {
     util.setLoginParamsStorage(options);
+    plugin.setLog({ url: 'pages/login/index/index', pageId: 'WLogin_Diversion'})
+    util.setCustomNavigation();
     wx.login({
       success: (res = {}) => {
         this.setData({
@@ -80,24 +65,7 @@ Page({
       }
     })
   },
-  onUnload(event) {
-    plugin.clickLog({
-      event,
-      eid: 'WLogin_Mian_Close',
-      target: CURRENT_URL
-    })
-  },
-  handleError(params = {}) {
-    let {
-      err_msg,
-      detail
-    } = params
-    wx.showModal({
-      title: '提示',
-      content: err_msg || '系统错误，请退出重试',
-      success: (res) => {
-        util.handleComponentRedirect(detail)
-      }
-    });
+  onShow(){
+    plugin.pvLog()
   }
 })

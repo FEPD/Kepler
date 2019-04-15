@@ -1,1 +1,11 @@
-/* pages/product/product.wxss */
+.bottom-to-top {
+    position: fixed;
+    bottom: 216rpx;
+    right: 20rpx;
+    width: 104rpx;
+    height: 120rpx;
+    z-index: 300;
+    transform-origin: 0;
+    opacity: 1;
+    transform: scale(1, 1);
+  }

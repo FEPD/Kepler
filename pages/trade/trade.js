@@ -51,5 +51,17 @@ Page({
      wx.navigateTo({
       url:'../redPacketTxt/redPacketTxt'
     })
+  },
+  goToOrderList:function(){
+     wx.redirectTo({
+        url: '../order/order'
+     });
+  },
+  goAddressPage(e){
+    let resultObj = e.detail;
+    console.log("options++++++++==",resultObj )
+     wx.navigateTo({
+        url: `../address/address?addressType=addEdit&provinceId=${resultObj.provinceId}&cityId=${resultObj.cityId}&areaId=${resultObj.areaId}&townId=${resultObj.townId}&isGlobalPayment=${resultObj.isGlobalPayment}`
+      });
   }
 })

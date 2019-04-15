@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "购物车",
   "usingComponents": {
-    "jdk-cart": "plugin://myPlugin/jdk-cart"
+    "jdk-tabbar": "plugin://myPlugin/jdk-tabbar",
+    "apollo-cart": "plugin://myPlugin/apollo-cart"
   }
 }

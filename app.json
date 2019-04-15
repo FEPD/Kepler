@@ -1,55 +1,72 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/product/product",
-    "pages/cart/cart",
-    "pages/proxyUnion/proxyUnion",
-    "pages/order/order",
-    "pages/orderDetail/orderDetail",
-    "pages/payment/payment",
-    "pages/getCoupon/getCoupon"
-  ],
-  "subPackages": [
-    {
-      "root": "pages/login/",
-      "pages": [
-        "index/index",
-        "main/main",
-        "union/union",
-        "web-view/web-view",
-        "consignee/consignee",
-        "wv-common/wv-common"
-      ]
+    "pages": [
+        "pages/index/index",
+        "pages/cart/cart",
+        "pages/order/order"
+    ],
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
     },
-    {
-      "root": "pages/trade/",
-      "pages": ["trade"]
+    "subPackages": [{
+            "root": "pages/login/",
+            "pages": [
+                "index/index",
+                "web-view/web-view",
+                "wv-common/wv-common"
+            ]
+        },
+        {
+            "root": "pages/trade/",
+            "pages": ["trade"]
+        },
+        {
+            "root": "pages/addressul/",
+            "pages": ["addressul"]
+        },
+        {
+            "root": "pages/address/",
+            "pages": ["address"]
+        },
+        {
+            "root": "pages/paySuccess/",
+            "pages": ["paySuccess"]
+        },
+        {
+            "root": "pages/product",
+            "pages": ["product"]
+        },
+        {
+            "root": "pages/orderDetail",
+            "pages": ["orderDetail"]
+        },
+        {
+            "root": "pages/payment",
+            "pages": ["payment"]
+        },
+        {
+            "root": "pages/getCoupon",
+            "pages": ["getCoupon"]
+        },
+        {
+            "root": "pages/proxyUnion",
+            "pages": ["proxyUnion"]
+        }
+
+    ],
+    "plugins": {
+        "myPlugin": {
+            "version": "dev",
+            "provider": "wx1edf489cb248852c"
+        },
+        "loginPlugin": {
+            "version": "1.1.8",
+            "provider": "wxefe655223916819e"
+        }
     },
-    {
-      "root": "pages/addressul/",
-      "pages": ["addressul"]
-    },
-    {
-      "root": "pages/address/",
-      "pages": ["address"]
-    },
-    {
-      "root": "pages/paySuccess/",
-      "pages": ["paySuccess"]
+    "window": {
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTextStyle": "black"
     }
-  ],
-  "plugins": {
-    "myPlugin": {
-      "version": "dev",
-      "provider": "wx1edf489cb248852c"
-    },
-    "loginPlugin": {
-      "version": "1.1.3",
-      "provider": "wxefe655223916819e"
-    }
-  },
-  "window": {
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTextStyle": "black"
-  }
 }

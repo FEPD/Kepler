@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "我的订单",
   "usingComponents":{
-    "jdk-order":"plugin://myPlugin/jdk-order"
+    "jdk-order":"plugin://myPlugin/jdk-order",
+    "jdk-tabbar": "plugin://myPlugin/jdk-tabbar"
   }
 }

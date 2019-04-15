@@ -1,8 +1,4 @@
-<jdk-product wx:if="{{wareId}}" id="product" wareId="{{wareId}}" options="{{options}}" buyDisabled="{{buyDisabled}}" 
-bind:gotologin="goToLogin" 
-bind:gotopay="goToPay"
-bind:toTop="toTopTap"
-bind:gotocart="goToCart"
-bind:goToChooseAddress="goToChooseAddress"
-bind:getProductName="getProductName"
-></jdk-product>
+<view style="{{ pageStyle  }}">
+	<view style="{{ wrapStyle  }}"><apollo wx:if="{{ options }}" options="{{ options }}"></apollo></view>
+</view>
+<image class="bottom-to-top {{isIphoneX? 'bottom-to-top-iphonex': ''}}" src="https://img30.360buyimg.com/jshow/jfs/t24346/97/2510484213/4973/b8ba0830/5bae1254Nfeb364a9.png" style="display:{{toTopDisplay}}" bindtap="toTopTap"></image>

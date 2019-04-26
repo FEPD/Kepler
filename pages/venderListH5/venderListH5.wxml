@@ -1,0 +1,3 @@
+<view wxLif="{{venderListUrl_h5 != ''}}">
+    <web-view src="{{ venderListUrl_h5 }}"></web-view>
+</view>

@@ -52,6 +52,10 @@
         {
             "root": "pages/proxyUnion",
             "pages": ["proxyUnion"]
+        },
+        {
+            "root": "pages/venderListH5",
+            "pages": ["venderListH5"]
         }
 
     ],

@@ -1,10 +1,13 @@
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    option:{
+      noshowRedpacket: app.globalData.noshowRedpacket ? app.globalData.noshowRedpacket : '',
+    }
   },
 
   /**
@@ -12,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      options: options
+      options: Object.assign({}, this.data.option, options)
     })
     this.trade = this.selectComponent('#trade');
   },

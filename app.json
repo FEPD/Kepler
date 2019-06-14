@@ -1,76 +1,97 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/cart/cart",
-        "pages/order/order"
-    ],
-    "permission": {
-        "scope.userLocation": {
-            "desc": "你的位置信息将用于小程序位置接口的效果展示"
-        }
-    },
-    "subPackages": [{
-            "root": "pages/login/",
-            "pages": [
-                "index/index",
-                "web-view/web-view",
-                "wv-common/wv-common"
-            ]
-        },
-        {
-            "root": "pages/trade/",
-            "pages": ["trade"]
-        },
-        {
-            "root": "pages/addressul/",
-            "pages": ["addressul"]
-        },
-        {
-            "root": "pages/address/",
-            "pages": ["address"]
-        },
-        {
-            "root": "pages/paySuccess/",
-            "pages": ["paySuccess"]
-        },
-        {
-            "root": "pages/product",
-            "pages": ["product"]
-        },
-        {
-            "root": "pages/orderDetail",
-            "pages": ["orderDetail"]
-        },
-        {
-            "root": "pages/payment",
-            "pages": ["payment"]
-        },
-        {
-            "root": "pages/getCoupon",
-            "pages": ["getCoupon"]
-        },
-        {
-            "root": "pages/proxyUnion",
-            "pages": ["proxyUnion"]
-        },
-        {
-            "root": "pages/venderListH5",
-            "pages": ["venderListH5"]
-        }
-
-    ],
-    "plugins": {
-        "myPlugin": {
-            "version": "dev",
-            "provider": "wx1edf489cb248852c"
-        },
-        "loginPlugin": {
-            "version": "1.1.8",
-            "provider": "wxefe655223916819e"
-        }
-    },
-    "window": {
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTextStyle": "black"
+  "pages": [
+    "pages/index/index",
+    "pages/cart/cart",
+    "pages/order/order"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "subPackages": [
+    {
+      "root": "pages/login/",
+      "pages": [
+        "index/index",
+        "web-view/web-view",
+        "wv-common/wv-common"
+      ]
+    },
+    {
+      "root": "pages/trade/",
+      "pages": [
+        "trade"
+      ]
+    },
+    {
+      "root": "pages/addressul/",
+      "pages": [
+        "addressul"
+      ]
+    },
+    {
+      "root": "pages/address/",
+      "pages": [
+        "address"
+      ]
+    },
+    {
+      "root": "pages/paySuccess/",
+      "pages": [
+        "paySuccess"
+      ]
+    },
+    {
+      "root": "pages/product",
+      "pages": [
+        "product"
+      ]
+    },
+    {
+      "root": "pages/orderDetail",
+      "pages": [
+        "orderDetail"
+      ]
+    },
+    {
+      "root": "pages/payment",
+      "pages": [
+        "payment"
+      ]
+    },
+    {
+      "root": "pages/getCoupon",
+      "pages": [
+        "getCoupon"
+      ]
+    },
+    {
+      "root": "pages/proxyUnion",
+      "pages": [
+        "proxyUnion"
+      ]
+    },
+    {
+      "root": "pages/venderListH5",
+      "pages": [
+        "venderListH5"
+      ]
+    }
+  ],
+  "plugins": {
+    "myPlugin": {
+      "version": "dev",
+      "provider": "wx1edf489cb248852c"
+    },
+    "loginPlugin": {
+      "version": "1.1.8",
+      "provider": "wxefe655223916819e"
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
 }

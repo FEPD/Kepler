@@ -1,0 +1,33 @@
+.guide-address-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-address-icon {
+    background: url('http://newbuz.360buyimg.com/jingshop/pay/no-address-icon.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 143rpx;
+    height: 148rpx;
+}
+
+.no-address-text {
+    font-size: 32rpx;
+    color: #bfbfbf;
+    line-height: 32rpx;
+    margin-top: 70rpx;
+}
+
+.goto-new-address-btn {
+    width: 254rpx;
+    height: 68rpx;
+    line-height: 68rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #848689;
+    border: 1rpx solid #848689;
+    border-radius: 10rpx;
+    margin-top: 62rpx;
+}

@@ -10,8 +10,8 @@ Page({
    */
   data: {
     options: {
-      // apolloId:  '89f5bc2d5c9b4c68b3c03aaad4d0af4f',
-      // apolloSecret: '94cac8db22814664a4e5ae8cabfe7566',
+      // apolloId:  '89f5bc2d5c9b4c68b3c03aaad4d0af4f', //预发
+      // apolloSecret: '94cac8db22814664a4e5ae8cabfe7566', //预发
       apolloId: globalData.apolloId ? globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',
       apolloSecret: globalData.apolloSecret ? globalData.apolloSecret : '162f0903a33a445db6af0461c63c6a3b',
       clientVersion: '7.0.0',

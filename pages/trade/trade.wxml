@@ -6,4 +6,6 @@ bind:paymentSuccess="paymentSuccess"
 bind:goBack="goBack"
 bind:goToOrderList="goToOrderList"
 bind:goAddressPage="goAddressPage"
+bind:paymentClick="paymentClick"
+bind:goToAddressGuide="goToAddressGuide"
 ></jdk-trade>

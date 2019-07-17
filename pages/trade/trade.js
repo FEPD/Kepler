@@ -13,7 +13,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad:function (options) {
     this.setData({
       options: Object.assign({}, this.data.option, options)
     })
@@ -21,6 +21,13 @@ Page({
   },
   onUnload:function(){
     this.trade.methods.clearPresaleState();
+  },
+  // 跳转配送页
+  paymentClick:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url: e.detail.url,
+    })
   },
   //跳转新建地址页
   createAddress:function(e){
@@ -60,6 +67,11 @@ Page({
         url: '../order/order'
      });
   },
+  goToAddressGuide:function(){
+    wx.redirectTo({
+      url: `../guideAddress/guideAddress`
+    });
+ },
   goAddressPage(e){
     let resultObj = e.detail;
     console.log("options++++++++==",resultObj )

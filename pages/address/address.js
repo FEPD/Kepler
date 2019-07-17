@@ -25,7 +25,9 @@ Page({
   },
   //保存成功回调
   submitSuccess: function () {
-    wx.navigateBack();
+    wx.redirectTo({
+      url: '../trade/trade'
+    })
   },
   //删除地址回调
   deleteSuccess: function () {

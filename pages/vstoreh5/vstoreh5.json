@@ -1,0 +1,9 @@
+
+ {
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "门店选择",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":false
+  }
+

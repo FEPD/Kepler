@@ -15,9 +15,15 @@ App({
     mpAppid: "wx1edf489cb248852c", //小程序appid（必填）
     pluginAppid: "wx1edf489cb248852c", //插件appid（必填）
     tabBarPathArr: ['/pages/index/index','/pages/cart/cart','pages/order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
+
+    // 预发环境
+    // apolloId: '89f5bc2d5c9b4c68b3c03aaad4d0af4f',
+    // apolloSecret: '94cac8db22814664a4e5ae8cabfe7566',
+    noshowRedpacket: 0,//0表示展示红包楼层，1表示关闭
+    // 正式环境
     apolloId: 'd1543fc0e8274901be01a9d9fcfbf76e',  //阿波罗Id，标准版使用此默认值，扩展版使用申请好的阿波罗appid
     apolloSecret: '162f0903a33a445db6af0461c63c6a3b',  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
-    noshowRedpacket: 1//超新星等屏蔽红包楼层的小程序使用，传1不显示红包楼层,传0显示
+    noshowRedpacket: 0//超新星等屏蔽红包楼层的小程序使用，传1不显示红包楼层,传0显示
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {

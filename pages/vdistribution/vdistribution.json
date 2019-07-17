@@ -1,0 +1,10 @@
+{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "配送方式",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":false,
+    "usingComponents": {
+        "jdk-distribution": "plugin://myPlugin/jdk-distribution"
+    }
+}

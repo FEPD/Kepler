@@ -1,0 +1,1 @@
+<jdk-distribution id="distribution" options="{{options}}" distData="{{distData}}" bind:goToVstoreh5="goToVstoreh5" bind:distrBack="distrBack" bind:goOpenSettion="goOpenSettion"></jdk-distribution>

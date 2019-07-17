@@ -1,0 +1,7 @@
+<view class="guide-address-wrap" style="height:{{screenHeight}}px">
+    <view class="no-address-icon"></view>
+    <view class="no-address-text">请您新建地址后再下单哦~</view>
+    <form report-submit="true" bindsubmit="gotoNewAddress">
+        <button class="goto-new-address-btn message-push-btn" hover-class="navigator-hover" form-type="submit">新建地址</button>
+    </form>
+</view>

@@ -78,6 +78,22 @@
         {
             "root": "pages/proxyUnion",
             "pages": ["proxyUnion"]
+        },
+        {
+            "root": "pages/venderListH5",
+            "pages": [ "venderListH5"]
+        },
+        {
+            "root": "pages/vdistribution/",
+            "pages": ["vdistribution"]
+        },
+        {
+            "root": "pages/vstoreh5/",
+            "pages": ["vstoreh5"]
+        },
+        {
+            "root": "pages/guideAddress/",
+            "pages": ["guideAddress"]
         }
 
     ],

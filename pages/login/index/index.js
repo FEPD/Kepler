@@ -1,7 +1,6 @@
 import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
 let config = util.getLoginConfig();
-
 Page({
   data: {
     config
@@ -55,7 +54,8 @@ Page({
   },
   onLoad(options) {
     util.setLoginParamsStorage(options);
-    plugin.setLog({ url: 'pages/login/index/index', pageId: 'WLogin_Diversion'})
+    plugin.setLog({
+      url: `pages/login/index/index`, pageId: 'WLogin_Diversion'})
     util.setCustomNavigation();
     wx.login({
       success: (res = {}) => {

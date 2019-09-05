@@ -1,8 +1,11 @@
 import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
-
 Page({
+  data:{
+    rootPath:''
+  },
   onLoad: function (options = {}) {
+    console.log("options______________________", options)
     let { h5_url = ''} = options;
     util.h5Init({ ...options, ...{ returnPage: h5_url, pageType:'h5'}});
     this.setData({ h5_url });

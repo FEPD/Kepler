@@ -1,15 +1,25 @@
 var plugin = requirePlugin("myPlugin");
 var log = plugin.keplerReportInit();//埋点上报方法
 const util = require('../utils/util.js');
-
-let app = getApp();
+const app = getApp()
 Page({
-	onLoad: function (options) {
 
-    	util.checkVersion();
-		this.setData({
-			options: options
-		})
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    option: {
+      globalApp: app
+    }
+  },
+	onLoad: function (options) {
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    util.checkVersion();
+    this.setData({
+      options: Object.assign({}, this.data.option, options,{
+        wxCurrPage: wxCurrPage
+      })
+    })
 
 		// this.setCouponParams();
 		let getCoupon = this.selectComponent('#get-coupon');

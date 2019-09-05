@@ -1,2 +1,2 @@
-<apollo-cart options="{{options}}" bind:gotoProduct='gotoProduct' bind:goPiecelist='goPiecelist' bind:gotoTrade='gotoTrade' bind:gotologin='goToLogin'></apollo-cart>
-<jdk-tabbar tabBar="{{tabbarConfig}}" bind:tabBarClick="tabBarClick" logSet = "{{logSet}}"></jdk-tabbar>
+<apollo-cart options="{{options}}" wxCurrPage="{{wxCurrPage}}" bind:gotoProduct='gotoProduct' bind:goPiecelist='goPiecelist' bind:gotoTrade='gotoTrade' bind:gotologin='goToLogin'></apollo-cart>
+<jdk-tabbar tabBar="{{tabbarConfig}}" bind:tabBarClick="tabBarClick"  logSet = "{{logSet}}"></jdk-tabbar>

@@ -6,7 +6,7 @@ Page({
     option:{
       apolloId: app.globalData.apolloId ? app.globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',       //阿波罗Id
       apolloSecret: app.globalData.apolloSecret ? app.globalData.apolloSecret :'162f0903a33a445db6af0461c63c6a3b',   //阿波罗secret
-      moudleId: "product"                                 //标识阿波罗组件加载商祥页
+      moudleId: "product"                               //标识阿波罗组件加载商祥页
     },
     refreshCount:0,     // 避免进来onload和onShow同时多余请求
     scrollTop: 0,        //滚动距离
@@ -14,15 +14,17 @@ Page({
     wrapStyle: '',
     toTopDisplay: 'none',    // 是否展示回到顶部按钮
     screenHeight:0,         // 屏幕高度
+    rootPath:'' //全局根目录
   },
   onLoad: function(options) {
     this.pageIndex = getCurrentPages().length;
-
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
     // plugin.initStyle(this.data.option);
     this.setData({
       options: Object.assign({}, this.data.option, {
         skuId: options.wareId,
-        pageParams: options
+        pageParams: options,
+        wxCurrPage: wxCurrPage
       })
     })
 
@@ -54,18 +56,18 @@ Page({
   },
   onShow:function(){
     let that = this;
-
+    that.getRootPath();//获取全局根目录
     // 设置分享链接，增加分佣spreadUrl
     let app = getApp();
     let unionId = (app.globalData && app.globalData.unionId) || ''
     if (unionId) {
       plugin.getSpreadUrl(that.data.options.skuId, unionId).then((res)=>{
-        that.data.shareUrl = `/pages/product/product?wareId=${that.data.options.skuId}&spreadUrl=${res.shortUrl}`
+        that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}&spreadUrl=${res.shortUrl}`
       }, (res)=> {
-        that.data.shareUrl = `/pages/product/product?wareId=${that.data.options.skuId}`
+        that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}`
       })
     } else {
-      that.data.shareUrl = `/pages/product/product?wareId=${that.data.options.skuId}`
+      that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}`
     }
     this.data.refreshCount != 1 ? plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({},{isOnShow: true}, {data:this.data.options},)) : this.data.refreshCount++;
   },
@@ -168,7 +170,13 @@ Page({
       "event": e //必填，点击事件event            
     })
   },
-
+  getRootPath: function () {
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    if (wxCurrPage[wxCurrPage.length - 1].route) {
+      this.data.rootPath = wxCurrPage[wxCurrPage.length - 1].route;
+    }
+    
+  },
   /**
    * [onShareAppMessage 商祥页分享]
    */
@@ -183,7 +191,7 @@ Page({
     })
     return {
       title: this.data.productName,
-      path: this.data.shareUrl ? this.data.shareUrl : `/pages/product/product?wareId=${that.data.wareId}`,
+      path: this.data.shareUrl ? this.data.shareUrl : `/${this.data.rootPath}?wareId=${that.data.wareId}`,
     }
   },
 })

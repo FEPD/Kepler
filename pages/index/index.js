@@ -1,9 +1,9 @@
 var plugin = requirePlugin("myPlugin");
-const app = getApp();
+const app=getApp();
 Page({
   data: {
     isLogin:false,
-    returnpage:'/pages/index/index',
+    returnpage:`../../index/index`,
     options:{
       apolloId: '595cd1c1f91a4856a2de48310afe5fdf',
       apolloSecret: 'c0e631a45aa24e6399f72075ecf77f65',
@@ -45,14 +45,14 @@ Page({
   gotoProduct: function (e) {
     // let sku = e.detail.sku;
     let sku = e.detail.value.skuKey;
-    let jumpWay = plugin.getJumpLoginType('/pages/cart/cart'); //传入购物车页面路径
+    let jumpWay = plugin.getJumpLoginType('../cart/cart'); //传入购物车页面路径
     if (jumpWay == 'navigate') {
       wx.navigateTo({
-        url: '/pages/product/product?wareId=' + sku
+        url: `../product/product?wareId=` + sku
       })
     } else {
       wx.redirectTo({
-        url: '/pages/product/product?wareId=' + sku
+        url: `../product/product?wareId=` + sku
       })
     }
 
@@ -61,7 +61,7 @@ Page({
   gotoTrade: function (e) {
     let param = e.detail.param;
     wx.navigateTo({
-      url: '/pages/trade/trade?' + param
+      url: `../trade/trade?` + param
     })
   },
   // gotoProduct: function (e) {
@@ -71,17 +71,17 @@ Page({
   // },
   goUnion: function (e) {
      wx.navigateTo({
-      url: '../proxyUnion/proxyUnion?spreadUrl=' + encodeURIComponent(e.detail.value.unionParam)
+      url: `../proxyUnion/proxyUnion?spreadUrl=` + encodeURIComponent(e.detail.value.unionParam)
     });
   },
   goCpsProduct: function () {
     wx.navigateTo({
-      url: '../product/product?wareId=27116817741&spreadUrl=' + 'ddddssss'
+      url: `../product/product?wareId=27116817741&spreadUrl=` + 'ddddssss'
     });
   },
   goCoupon: function (e) {
     wx.navigateTo({
-      url: '../getCoupon/getCoupon?key=280af7901158469cba671d4ae5251b58&roleId=18502272&to=https://shop.m.jd.com/?shopId=1000001764'
+      url: `../getCoupon/getCoupon?key=280af7901158469cba671d4ae5251b58&roleId=18502272&to=https://shop.m.jd.com/?shopId=1000001764`
     });
   },
   goOrder: function (e) {
@@ -93,8 +93,11 @@ Page({
     plugin.globallogout(() => { this.goTologin()})
   },
   goTologin:function(){
+    let that=this;
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
     let jumpWay = plugin.getJumpLoginType(this.data.returnpage);
-    let loginUrl = plugin.getLoginUrl(this.data.returnpage, true)
+    let returnPage = plugin.getRootPath(this.data.returnpage, wxCurrPage)
+    let loginUrl = plugin.getLoginUrl(returnPage, true)
     if (jumpWay == 'navigate') {
       wx.navigateTo({
         url: loginUrl,
@@ -109,9 +112,10 @@ Page({
     this.setData({
       "tabbarConfig.selectIndex":e.detail.index
     })
-    if(e.detail.path!='pages/index/index'){
+    console.log("e.detail.path", e.detail.path)
+    if(e.detail.path!='../index/index'){
       wx.reLaunch({
-        url: '/'+e.detail.path,
+        url: '/' + e.detail.path,
       })
     }
 

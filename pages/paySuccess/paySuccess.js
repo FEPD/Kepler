@@ -34,7 +34,7 @@ Page({
   //跳转到订单列表页
   goToOrder:function(){
     wx.redirectTo({
-      url: `/pages/order/order`,
+      url: `../order/order`,
     })
   }
 })

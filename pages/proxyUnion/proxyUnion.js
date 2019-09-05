@@ -38,14 +38,14 @@ Page({
   //跳转首页，首页路径根据插件接入方的首页路径更改
   goToIndex:function(){
     wx.redirectTo({
-      url: '/pages/index/index',
+      url: '../index/index',
     })
   },
   //跳商祥页
   goToProduct:function(e){
     let wareId = e.detail && e.detail.wareId ? e.detail.wareId : '';
     wx.redirectTo({
-      url: '/pages/product/product?wareId=' + wareId,
+      url: '../product/product?wareId=' + wareId,
     })
   }
 })

@@ -18,7 +18,12 @@ Page({
 		})
 		this.orderDetail = this.selectComponent('#order-detail');
 	},
-	
+  onShow: function () {
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    this.setData({
+      wxCurrPage: wxCurrPage
+    })
+  },
 	goToLogin: function (e){
 	  let resultObj = e.detail;
 	  if (resultObj.jumpWay =='navigate'){

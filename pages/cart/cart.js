@@ -17,6 +17,7 @@ Page({
       clientVersion: '7.0.0',
       // moudleId: "cart",
       // colorAppId:"apollomp",
+      //colorAppId:"apollowx",//开发者工具
       // clearCart: 0
     },
     logSet:{
@@ -63,17 +64,23 @@ Page({
   //   })
 
   // },
+  onShow:function(){
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    this.setData({
+      wxCurrPage: wxCurrPage
+    })
+  },
   //跳转商祥
   gotoProduct: function (e) {
     let sku = e.detail.sku;
-    let jumpWay = plugin.getJumpLoginType('/pages/cart/cart'); //传入购物车页面路径
+    let jumpWay = plugin.getJumpLoginType('../cart/cart'); //传入购物车页面路径
     if (jumpWay == 'navigate') {
       wx.navigateTo({
-        url: '/pages/product/product?wareId=' + sku
+        url: '../product/product?wareId=' + sku
       })
     } else {
       wx.redirectTo({
-        url: '/pages/product/product?wareId=' + sku
+        url: '../product/product?wareId=' + sku
       })
     }
 
@@ -82,7 +89,7 @@ Page({
   gotoTrade: function (e) {
     let param = e.detail.param;
     wx.navigateTo({
-      url: '/pages/trade/trade?' + param
+      url: '../trade/trade?' + param
     })
   },
   goPiecelist: function (e) {
@@ -111,7 +118,7 @@ Page({
     this.setData({
       "tabbarConfig.selectIndex": e.detail.index
     })
-    if (e.detail.path !== 'pages/cart/cart') {
+    if (e.detail.path != '../cart/cart'){
       wx.reLaunch({
         url: '/' + e.detail.path,
       })

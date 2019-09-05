@@ -12,10 +12,11 @@ Page({
   }
 	},
 	onLoad: function (options) {
-
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
 		util.checkVersion();
 		this.setData({
 			options: options,
+      wxCurrPage: wxCurrPage,
 			tabbarConfig: app.tabBar
 		})
 		// util.checkVersion();
@@ -72,9 +73,9 @@ Page({
     this.setData({
       "tabbarConfig.selectIndex":e.detail.index
     })
-    if(e.detail.path!=='pages/order/order'){
+    if (e.detail.path != '../order/order'){
       wx.reLaunch({
-        url: '/' + e.detail.path,
+        url: '/'+e.detail.path,
       })
     } 
   }

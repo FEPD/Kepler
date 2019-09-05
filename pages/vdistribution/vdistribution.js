@@ -71,8 +71,8 @@ Page({
     },
     distrBack: function () {
         const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
-        console.log(wxCurrPage);
-        if (wxCurrPage[wxCurrPage.length - 1].__route__ == "pages/vdistribution/vdistribution") {
+        console.log("当前页面栈",wxCurrPage);
+        if (wxCurrPage[wxCurrPage.length - 1].__route__ .indexOf("/vdistribution/vdistribution")!=-1) {
             wx.navigateBack();
         }
     },
@@ -136,7 +136,6 @@ function getLocation(obj, params) {
                     resolve(reponse);
                 },
                 fail: function () {
-                    console.log("wwwwwwwwwwwwwwwwwwwww")
                     wx.showModal({
                         title: '打开设置页面进行授权',
                         content: '需要获取您的地理位置，请到小程序的设置中打开地理位置授权',

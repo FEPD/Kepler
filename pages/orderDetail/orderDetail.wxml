@@ -1,1 +1,1 @@
-<jdk-order-detail id="order-detail" wxCurrPage="{{wxCurrPage}}" bind:goToPayment="goToPayment" bind:gotologin="goToLogin" bind:goOrderTrack="goOrderTrack" options="{{ options }}"></jdk-order-detail>
+<jdk-order-detail id="order-detail" wxCurrPage="{{wxCurrPage}}" bind:goToPayment="goToPayment" bind:goToEvaluate="goToEvaluate" bind:gotologin="goToLogin" bind:goOrderTrack="goOrderTrack" options="{{ options }}" evaluatedSuccessOrderid="{{evaluatedSuccessOrderid}}"></jdk-order-detail>

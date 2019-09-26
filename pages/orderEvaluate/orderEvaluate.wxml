@@ -1,0 +1,1 @@
+<jdk-order-evaluate id="order-evaluate" options="{{ options }}" bind:goToEvaluate="goToEvaluate" bind:setEvaluateSuccessOrderid="setEvaluateSuccessOrderid" bind:delEvaluateSuccessOrderid="delEvaluateSuccessOrderid"></jdk-order-evaluate>

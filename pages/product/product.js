@@ -17,8 +17,14 @@ Page({
     rootPath:'' //全局根目录
   },
   onLoad: function(options) {
+    console.log('============00', options)
     this.pageIndex = getCurrentPages().length;
     const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+
+    if (options.isLocGuider == '1') {
+       plugin.setStorageSync('isLocGuider', true);
+    }
+
     // plugin.initStyle(this.data.option);
     this.setData({
       options: Object.assign({}, this.data.option, {
@@ -27,9 +33,7 @@ Page({
         wxCurrPage: wxCurrPage
       })
     })
-
     util.checkVersion()
-
     plugin.emitter.on('fixedPageBg' + this.pageIndex, this.fixedPageBg.bind(this))
     plugin.emitter.on('goPage' + this.pageIndex, this.goPage.bind(this));
     plugin.emitter.on('scrollToPostion' + this.pageIndex, this.scrollToPostion.bind(this))
@@ -60,6 +64,8 @@ Page({
     // 设置分享链接，增加分佣spreadUrl
     let app = getApp();
     let unionId = (app.globalData && app.globalData.unionId) || ''
+    // 存储当前用户所在位置经纬度
+    this.getUserAuthSetting();
     if (unionId) {
       plugin.getSpreadUrl(that.data.options.skuId, unionId).then((res)=>{
         that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}&spreadUrl=${res.shortUrl}`
@@ -177,6 +183,29 @@ Page({
     }
     
   },
+  // 存储当前用户所在位置的经纬度
+  getUserAuthSetting: function () {
+    let that = this;
+    wx.getSetting({
+      success (res) {
+        if (res && res.authSetting && res.authSetting && res.authSetting['scope.userLocation']) {
+          plugin.saveLngLat()
+        } else {
+
+            // 如果用户未授权，清楚缓存中的经纬度
+            let _lng = that.data.options && that.data.options.pageParams && that.data.options.pageParams.lng;
+            let _lat = that.data.options && that.data.options.pageParams && that.data.options.pageParams.lat;
+            if (_lng && _lat) {
+              plugin.setStorageSync('user_lng', _lng)
+              plugin.setStorageSync('user_lat', _lat)
+            } else {
+              plugin.removeStorageSync('user_lng')
+              plugin.removeStorageSync('user_lat')
+            }
+        }
+      }
+    })
+  },
   /**
    * [onShareAppMessage 商祥页分享]
    */
@@ -189,9 +218,26 @@ Page({
       "target": "", //选填，点击事件目标链接，凡是能取到链接的都要上报
       "event": ev //必填，点击事件event            
     })
+
+    // 如果是导购员，分享链接拼接经纬度信息
+    
+    let _shareUrl = this.data.shareUrl ? this.data.shareUrl : `/${this.data.rootPath}?wareId=${this.data.wareId}`;
+    let locParams = plugin.getLocParams(this.data.options.pageParams);
+    console.log('locParams====', locParams)
+    if (locParams == -1) {
+      let _lng = plugin.getStorageSync('user_lng')
+      let _lat = plugin.getStorageSync('user_lat')
+      console.log('_lng======', _lng, _lat)
+      if (_lng && _lat) {
+        _shareUrl = _shareUrl + '&lng=' + _lng + '&lat=' + _lat;
+      }
+    } else {
+      _shareUrl = _shareUrl + locParams
+    }
+    console.log('_shareUrl=======', _shareUrl)
     return {
       title: this.data.productName,
-      path: this.data.shareUrl ? this.data.shareUrl : `/${this.data.rootPath}?wareId=${that.data.wareId}`,
+      path: _shareUrl,
     }
   },
 })

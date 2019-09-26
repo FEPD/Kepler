@@ -193,7 +193,8 @@ Tips:
 | customerinfo           | String    | 否        |           |渠道来源                                                          |
 | sendpay                | String    | 是        |           |导购小程序sendpay传1，事业部小程序sendpay传3                          |
 | mpAppid                | String    | 是        |           |小程序appid                                                       |
-| pluginAppid            | String    | 是        |           |插件appid：wx1edf489cb248852c                                     |
+| pluginAppid            | String    | 是        |           |插件appid：wx1edf489cb248852c
+| heildCart              | Number    | 否        |           |是否隐藏购物车以及加购按钮，1为隐藏                                     
 | tabBarPathArr          | Array     | 是        |           |tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要） |
 | apolloId          	  | String     | 是        |           |阿波罗Id，标准版使用默认值d1543fc0e8274901be01a9d9fcfbf76e，扩展版使用申请好的阿波罗appid|
 | apolloSecret           | String     | 是        |           |阿波罗Secret, 标准版使用默认值162f0903a33a445db6af0461c63c6a3b，扩展版使用申请好的阿波罗appSecret

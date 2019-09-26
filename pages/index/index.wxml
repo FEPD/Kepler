@@ -8,6 +8,8 @@
   <button wx:if="{{isLogin}}" bindtap="logout">退出登录</button>
   <text wx:else>用户未登录</text>
 </form>
+<button bindtap="gotoLocItemByGuider">导购员身份</button>
+<button bindtap="gotoLocItem">普通用户身份</button>
 <form bindsubmit="goUnion" report-submit>
   <input name="unionParam" type="text" placeholder="请在此输入cps短连接" />
   <button formType="submit">联盟中间页</button>

@@ -95,10 +95,20 @@ Page({
   goPiecelist: function (e) {
     let param = e.detail;
     // console.log(param);
-
+   var rootPath=this.getRootPath();
     wx.navigateTo({
-      url: `plugin-private://wx1edf489cb248852c/pages/piecelist/piecelist?skuId=${param.skuId}&activityId=${param.activityId}&promotionTitle=${param.promotionTitle}&body=${param.body}&params=${param.params}&requestUrl=${param.requestUrl}&giftType=${param.giftType}`
+      url: `plugin-private://wx1edf489cb248852c/pages/piecelist/piecelist?skuId=${param.skuId}&activityId=${param.activityId}&promotionTitle=${param.promotionTitle}&body=${param.body}&params=${param.params}&requestUrl=${param.requestUrl}&giftType=${param.giftType}&rootPath=${rootPath}`
     })
+  },
+  getRootPath:function(){
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    if (wxCurrPage[wxCurrPage.length - 1].route){
+      let route=wxCurrPage[wxCurrPage.length - 1].route;
+      let routeArr = route.split('/');
+      routeArr.splice(-2,2);
+      var rootPath = routeArr.join("/")+"/"
+    }
+    return rootPath;
   },
   //跳转登录
   goToLogin: function (e) {

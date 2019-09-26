@@ -9,6 +9,7 @@ Page({
 				siteId: 'WXAPP-JA2016-1', //开普勒小程序固定用：WXAPP-JA2016-1
 				pageId:'Wpersonal_OrderList',
 				pparam: '1',
+				evaluatedSuccessOrderid: '', // 评价的订单id
 		}
 		},
 	onLoad: function (options) {
@@ -22,7 +23,23 @@ Page({
     const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
     this.setData({
       wxCurrPage: wxCurrPage
-    })
+	})
+	
+	const THAT = this
+	// console.log('****************orderDetail.js-onShow()****************')
+	wx.getStorage({
+		key: 'evaluate_success_orderid',
+		success: (res) => {
+			// console.log('wx.getStorageSync(evaluate_success_orderid)成功......orderDetail.js')
+			// console.log(res.data)
+			if (res.data) {
+				THAT.setData({
+					evaluatedSuccessOrderid: res.data
+				})
+			}
+		}
+	});
+
   },
 	goToLogin: function (e){
 	  let resultObj = e.detail;
@@ -59,5 +76,29 @@ Page({
 	  wx.navigateTo({
 	    url: '../payment/payment',
 	  })
-	}
+	},
+	/**
+     * 去评价
+     * 1. 一单一品，直接跳转 评价发布页
+     * 2. 一单多品，跳转 评价中间页
+     * @param {*} e 
+     */
+	goToEvaluate: function (e) {
+		let resultObj = e.detail;
+		// console.log(resultObj);
+		// 清除storage
+		wx.removeStorageSync('evaluate_success_orderid')
+		let navigate_url = ''
+		if (resultObj.wareLength > 1) { // 一单多品
+			// console.log('一单多品')
+			navigate_url = '../orderEvaluate/orderEvaluate?orderId=' + resultObj.orderId
+		} else { // 一单一品
+			// console.log('一单一品')
+			navigate_url = '../orderEvaluateWebview/orderEvaluateWebview?productId=' + resultObj.firstWareId + '&orderId=' + resultObj.orderId + '&productImage=' + resultObj.firstWareImg
+			
+		}
+		wx.navigateTo({
+			url: navigate_url
+		});
+	},
 })

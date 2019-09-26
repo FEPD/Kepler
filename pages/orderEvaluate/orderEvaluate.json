@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "评价晒单",
+    "usingComponents":{
+      "jdk-order-evaluate":"plugin://myPlugin/jdk-order-evaluate"
+    }
+}

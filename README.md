@@ -68,6 +68,18 @@
             "pages": ["orderDetail"]
         },
         {
+          "root": "pages/orderEvaluate",
+          "pages": [
+            "orderEvaluate"
+          ]
+        },
+        {
+          "root": "pages/orderEvaluateWebview",
+          "pages": [
+            "orderEvaluateWebview"
+          ]
+        },
+        {
             "root": "pages/payment",
             "pages": ["payment"]
         },

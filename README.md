@@ -137,7 +137,8 @@ App({
     pluginAppid: "wx1edf489cb248852c", //插件appid（必填）
     tabBarPathArr: ['/pages/index/index','/pages/cart/cart','pages/order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
     apolloId: 'd1543fc0e8274901be01a9d9fcfbf76e', (必填)  //阿波罗Id，标准版使用此默认值，扩展版使用申请好的阿波罗appid
-    apolloSecret: '162f0903a33a445db6af0461c63c6a3b'(必填)  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
+    apolloSecret: '162f0903a33a445db6af0461c63c6a3b',(必填)  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
+    heildCart: 2    //是否隐藏购物车以及加购按钮 1为隐藏
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {

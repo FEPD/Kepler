@@ -103,6 +103,12 @@
       ]
     },
     {
+      "root": "pages/web-h5/",
+      "pages": [
+        "web-h5"
+      ]
+    },
+    {
       "root": "pages/guideAddress/",
       "pages": [
         "guideAddress"

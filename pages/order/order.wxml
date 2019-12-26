@@ -1,2 +1,11 @@
-<jdk-order id="order" bind:goToPayment="goToPayment" bind:goToEvaluate="goToEvaluate" bind:goOrderTrack="goOrderTrack" bind:goOrderDetail="goOrderDetail" bind:gotologin="goToLogin" wxCurrPage="{{wxCurrPage}}" options="{{ options }}" evaluatedSuccessOrderid="{{evaluatedSuccessOrderid}}"></jdk-order>
+<jdk-order id="order" 
+bind:goToPayment="goToPayment" 
+bind:goToEvaluate="goToEvaluate" 
+bind:goOrderTrack="goOrderTrack" 
+bind:goOrderDetail="goOrderDetail" 
+bind:gotologin="goToLogin"
+bind:goPage="goPage"
+wxCurrPage="{{wxCurrPage}}" 
+options="{{ options }}" 
+evaluatedSuccessOrderid="{{evaluatedSuccessOrderid}}"></jdk-order>
 <jdk-tabbar tabBar="{{tabbarConfig}}" logSet = "{{logSet}}" bind:tabBarClick="tabBarClick"></jdk-tabbar>

@@ -40,7 +40,7 @@ Page({
 		}
 	});
 
-  },
+	},
 	goToLogin: function (e){
 	  let resultObj = e.detail;
 	  if (resultObj.jumpWay =='navigate'){
@@ -101,4 +101,13 @@ Page({
 			url: navigate_url
 		});
 	},
+	// 跳页
+	goPage: function (e) {
+		let param = e.detail;
+		if (param && param.jumpWay && param.jumpUrl) {
+			wx[param.jumpWay]({
+				url: param.jumpUrl
+			})
+		}
+	}
 })

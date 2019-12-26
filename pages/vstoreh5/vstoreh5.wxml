@@ -1,3 +1,3 @@
-<view wxLif="{{venderListUrl_h5 != ''}}">
+<view wx:if="{{venderStoreUrl_h5 != ''}}">
     <web-view src="{{venderStoreUrl_h5 }}"></web-view>
 </view>

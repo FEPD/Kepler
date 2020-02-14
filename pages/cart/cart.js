@@ -15,9 +15,10 @@ Page({
       apolloId: globalData.apolloId ? globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',
       apolloSecret: globalData.apolloSecret ? globalData.apolloSecret : '162f0903a33a445db6af0461c63c6a3b',
       clientVersion: '7.0.0',
+      
       // moudleId: "cart",
-      // colorAppId:"apollomp",
-      //colorAppId:"apollowx",//开发者工具
+      // // colorAppId:"apollomp",
+      // colorAppId:"apollowx",//开发者工具
       // clearCart: 0
     },
     logSet:{

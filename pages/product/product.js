@@ -118,7 +118,6 @@ Page({
   },
   // 监听页面滚动
   onPageScroll:function(e){
-    console.log('9==========', e)
     this.data.scrollTop = e.scrollTop;
     if (e.scrollTop > this.data.screenHeight) {
       if (this.data.toTopDisplay == 'none') {

@@ -9,7 +9,7 @@ Page({
   },
   paymentSuccess:function(e){
     wx.redirectTo({
-      url: `../paySuccess/paySuccess`
+      url: e.detail.url
     });
   },
   paymentFail:function(e){

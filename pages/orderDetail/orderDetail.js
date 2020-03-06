@@ -13,6 +13,7 @@ Page({
 		}
 		},
 	onLoad: function (options) {
+		wx.hideShareMenu();
 		this.setData({
 			options: options,
 			'logSet.urlParam':options
@@ -108,6 +109,22 @@ Page({
 			wx[param.jumpWay]({
 				url: param.jumpUrl
 			})
+		}
+	},
+	onShareAppMessage: function (res) {
+		let url = ''
+		let title = ''
+		let content = ''
+		let imgUrl = ''
+		if (res && res.from == 'button') {
+			url = `/pages/web-h5/web-h5?${res.target.dataset.shareurl}&from=groupBuyDetail`;
+			title = res.target.dataset.title;
+			imgUrl = res.target.dataset.imgurl;
+		}
+		return {
+			title: title,
+			path: url,
+			imageUrl: imgUrl
 		}
 	}
 })

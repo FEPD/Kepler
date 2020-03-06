@@ -20,6 +20,7 @@ Page({
 			wxCurrPage: wxCurrPage,
 			tabbarConfig: app.tabBar
 		})
+		wx.hideShareMenu();
 		// util.checkVersion();
 
 		// this.order = this.selectComponent('#order');
@@ -130,6 +131,22 @@ Page({
 			wx.reLaunch({
 				url: '/' + e.detail.path,
 			})
+		}
+	},
+	onShareAppMessage: function (res) {
+		let url = ''
+		let title = ''
+		let content = ''
+		let imgUrl = ''
+		if (res && res.from == 'button') {
+			url = `/pages/web-h5/web-h5?${res.target.dataset.shareurl}&from=groupBuyDetail`;
+			title = res.target.dataset.title;
+			imgUrl = res.target.dataset.imgurl;
+		}
+		return {
+			title: title,
+			path: url,
+			imageUrl: imgUrl
 		}
 	}
 })

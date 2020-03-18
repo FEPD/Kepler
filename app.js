@@ -2,6 +2,7 @@
 var myPluginInterface = requirePlugin('myPlugin');
 App({
   onLaunch: function(options) {
+    myPluginInterface.initStyle({})
     myPluginInterface.appLaunch(this)
   },
   onShow: function(options) {

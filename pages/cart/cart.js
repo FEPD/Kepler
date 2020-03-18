@@ -26,6 +26,7 @@ Page({
       title: '购物车', //网页标题
       siteId: 'WXAPP-JA2016-1', //开普勒小程序固定用：WXAPP-JA2016-1
       pageId: 'Wpersonal_OrderList',
+      pages: 'pages/cart/cart',
       pparam: '1'
   }
   },

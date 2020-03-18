@@ -1,1 +1,1 @@
-<jdk-paySuccess id="paySuccess" bind:goToOrder="goToOrder" />
+<jdk-paySuccess id="paySuccess" options="{{options}}" bind:goToOrder="goToOrder" />

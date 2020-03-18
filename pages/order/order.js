@@ -5,10 +5,11 @@ Page({
 	data: {
 		logSet: {
 			urlParam: '',
-			title: '订单详情', //网页标题
-			pageId: 'Wpersonal_OrderDetails',
+			title: '订单列表', //网页标题
+			pageId: 'Wpersonal_OrderList',
 			siteId: 'WXAPP-JA2016-1', //开普勒小程序固定用：WXAPP-JA2016-1
 			pparam: '1',
+			url: 'pages/order/order',
 			evaluatedSuccessOrderid: '' // 评价的订单id
 		}
 	},

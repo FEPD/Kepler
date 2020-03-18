@@ -24,7 +24,7 @@ Page({
     if (options.isLocGuider == '1') {
        plugin.setStorageSync('isLocGuider', true);
     }
-
+    options = plugin.initItemOptions(options)
     // plugin.initStyle(this.data.option);
     this.setData({
       options: Object.assign({}, this.data.option, {

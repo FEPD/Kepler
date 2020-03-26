@@ -36,16 +36,18 @@ Page({
   },
   
   //跳转首页，首页路径根据插件接入方的首页路径更改
-  goToIndex:function(){
+  goToIndex:function(e){
+    let param = e.detail.param
     wx.redirectTo({
-      url: '../index/index',
+      url: '../index/index?' + param,
     })
   },
   //跳商祥页
   goToProduct:function(e){
     let wareId = e.detail && e.detail.wareId ? e.detail.wareId : '';
+    let param = e.detail.param ? ('&' + e.detail.param) : ''
     wx.redirectTo({
-      url: '../product/product?wareId=' + wareId,
+      url: '../product/product?wareId=' + wareId + param,
     })
   }
 })

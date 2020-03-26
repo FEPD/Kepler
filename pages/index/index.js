@@ -126,7 +126,6 @@ Page({
     })
   },
   gotoLocItem: function () {
-    console.log('gotoLocItemByGuider========')
     wx.navigateTo({
       url: '../product/product?wareId=28270426727&spreadUrl=https://u.jd.com/f6QeKN'
     })
@@ -134,6 +133,16 @@ Page({
   gotoLocItemByGuider: function () {
     wx.navigateTo({
       url: '../product/product?wareId=28270426727&locShopName=帘到家02158号线下体验店&shopAddress=北京丰台区四环到五环之间永外大红门西马场甲14号集美家具市场82003号&locShopId=20731235&distance=7.99&un_area=1_0_0&isLocal=&category=jump&des=loc&wareId=28270426727&sid=&tapFrom=addr&storePrice=1&venderId=160839&storeGroupId=9301&selStoreId=20731235&lng=116.40717&lat=39.90469&buType=&buyCount=1&isLocGuider=1'
+    })
+  },
+  gotoLocUnion: function () {
+    wx.navigateTo({
+      url: '../proxyUnion/proxyUnion?wareId=28270426727&spreadUrl=https://u.jd.com/ecg6by'
+    })
+  },
+  gotoLocUnionByGuider: function () {
+    wx.navigateTo({
+      url: '../proxyUnion/proxyUnion?wareId=28270426727&spreadUrl=https://u.jd.com/ecg6by&locShopName=帘到家02158号线下体验店&shopAddress=北京丰台区四环到五环之间永外大红门西马场甲14号集美家具市场82003号&locShopId=20731235&distance=7.99&un_area=1_0_0&isLocal=&category=jump&des=loc&wareId=28270426727&sid=&tapFrom=addr&storePrice=1&venderId=160839&storeGroupId=9301&selStoreId=20731235&lng=116.40717&lat=39.90469&buType=&buyCount=1&isLocGuider=1'
     })
   }
 })

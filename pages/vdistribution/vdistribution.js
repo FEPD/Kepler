@@ -22,6 +22,10 @@ Page({
                     storeName: options.storeName,
                     storeAddress: options.storeAddress,
                     storeId: options.storeId,
+                    storeMark: options.storeMark,
+                    vendSource: options.vendSource,
+                    warehouseId: options.warehouseId,
+                    venderStoreStockTab: options && options.venderStoreTab,
                     currentShipmentType: 8
                 }
             })

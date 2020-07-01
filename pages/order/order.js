@@ -21,6 +21,9 @@ Page({
 			wxCurrPage: wxCurrPage,
 			tabbarConfig: app.tabBar
 		})
+		this.setData({
+			"tabbarConfig.selectIndex": 2
+		})
 		wx.hideShareMenu();
 		// util.checkVersion();
 

@@ -1,4 +1,6 @@
-<index bindsmsloginres='smsloginResListener' config='{{config}}'/> 
-<button class='phone-btn {{stopClick ? "btn-disabled":""}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信手机号快捷登录</button>
-<instruction/>
+<index bindsmsloginres='smsloginResListener' config='{{config}}'/>
+<button wx:if="{{ !stopClick}}" class='phone-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信手机号快捷登录</button>
+<!-- 防止连续点击触发获取微信用户信息 -->
+<button class='phone-btn btn-disabled' wx:else>微信手机号快捷登录</button>
+<instruction config='{{config}}'/>
 

@@ -16,5 +16,10 @@
   <input name="unionParam" type="text" placeholder="请在此输入cps短连接" />
   <button formType="submit">联盟中间页</button>
 </form>
+<button bindtap="goOrder2">待付款</button>
+<button bindtap="goOrder3">待收货</button>
+<button bindtap="goOrder4">已完成</button>
+<button bindtap="goOrder1">全部订单</button>
+
 <jdk-tabbar tabBar="{{tabbarConfig}}" logSet="{{logSet}}" bind:tabBarClick="tabBarClick"></jdk-tabbar>
 <!-- <apollo  options="{{options}}" bind:gotoProduct='gotoProduct' bind:gotoTrade='gotoTrade' bind:gotologin='goToLogin'/>  -->

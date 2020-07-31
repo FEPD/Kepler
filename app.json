@@ -1,8 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/cart/cart",
-    "pages/order/order"
+    "pages/indexC/indexC"
   ],
   "permission": {
     "scope.userLocation": {
@@ -15,114 +13,42 @@
       "pages": [
         "index/index",
         "web-view/web-view",
-        "wv-common/wv-common"
-      ]
-    },
-    {
-      "root": "pages/trade/",
-      "pages": [
-        "trade"
-      ]
-    },
-    {
-      "root": "pages/addressul/",
-      "pages": [
-        "addressul"
-      ]
-    },
-    {
-      "root": "pages/address/",
-      "pages": [
-        "address"
-      ]
-    },
-    {
-      "root": "pages/paySuccess/",
-      "pages": [
-        "paySuccess"
-      ]
-    },
-    {
-      "root": "pages/product",
-      "pages": [
-        "product"
-      ]
-    },
-    {
-      "root": "pages/orderDetail",
-      "pages": [
-        "orderDetail"
-      ]
-    },
-    {
-      "root": "pages/orderEvaluate",
-      "pages": [
-        "orderEvaluate"
-      ]
-    },
-    {
-      "root": "pages/orderEvaluateWebview",
-      "pages": [
-        "orderEvaluateWebview"
-      ]
-    },
-    {
-      "root": "pages/payment",
-      "pages": [
-        "payment"
-      ]
-    },
-    {
-      "root": "pages/getCoupon",
-      "pages": [
-        "getCoupon"
-      ]
-    },
-    {
-      "root": "pages/proxyUnion",
-      "pages": [
-        "proxyUnion"
-      ]
-    },
-    {
-      "root": "pages/venderListH5",
-      "pages": [
-        "venderListH5"
-      ]
-    },
-    {
-      "root": "pages/vdistribution/",
-      "pages": [
-        "vdistribution"
-      ]
-    },
-    {
-      "root": "pages/vstoreh5/",
-      "pages": [
-        "vstoreh5"
-      ]
-    },
-    {
-      "root": "pages/web-h5/",
-      "pages": [
-        "web-h5"
-      ]
-    },
-    {
-      "root": "pages/guideAddress/",
-      "pages": [
-        "guideAddress"
-      ]
+        "wv-common/wv-common",
+        "kepler/indexB/indexB",
+        "kepler/index/index",
+        "kepler/cart/cart",
+        "kepler/trade/trade",
+        "kepler/addressul/addressul",
+        "kepler/address/address",
+        "kepler/paySuccess/paySuccess",
+        "kepler/product/product",
+        "kepler/orderDetail/orderDetail",
+        "kepler/payment/payment",
+        "kepler/getCoupon/getCoupon",
+        "kepler/proxyUnion/proxyUnion",
+        "kepler/venderListH5/venderListH5",
+        "kepler/vdistribution/vdistribution",
+        "kepler/vstoreh5/vstoreh5",
+        "kepler/guideAddress/guideAddress",
+        "kepler/order/order",
+        "kepler/web-h5/web-h5"
+      ],
+      "plugins": {
+        "myPlugin": {
+          "version": "dev",
+          "provider": "wx1edf489cb248852c"
+        },
+        "loginPlugin": {
+          "version": "1.1.8",
+          "provider": "wxefe655223916819e"
+        }
+      }
     }
   ],
-  "plugins": {
-    "myPlugin": {
-      "version": "dev",
-      "provider": "wx1edf489cb248852c"
-    },
-    "loginPlugin": {
-      "version": "1.2.0",
-      "provider": "wxefe655223916819e"
+  "preloadRule": {
+    "pages/indexC/indexC": {
+      "network":"all",
+      "packages":["pages/login/"]
     }
   },
   "window": {

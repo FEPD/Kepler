@@ -1,15 +1,18 @@
 import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
-
 Page({
+  data:{
+    rootPath:''
+  },
   onLoad: function (options = {}) {
-    let { h5_url = '' } = options;
-    util.h5Init(options);
+    console.log("options______________________", options)
+    let { h5_url = ''} = options;
+    util.h5Init({ ...options, ...{ returnPage: h5_url, pageType:'h5'}});
     this.setData({ h5_url });
     util.setCustomNavigation();
     this._genToken();
   },
-  _genToken() {
+  _genToken(){
     let { h5_url } = this.data
     plugin.genToken({
       h5_url,
@@ -34,7 +37,7 @@ Page({
           }
         })
       }
-    }).catch(res => console.jdLoginLog(res))
+    })
   },
   onShareAppMessage: function () {
     let { h5_url } = this.data;

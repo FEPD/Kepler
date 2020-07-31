@@ -2,45 +2,17 @@ import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
 
 Page({
-  onLoad(options = {}) {
-    // wx.showModal({
-    //   title: '提示',
-    //   content: 'JIN',
-    //   success: res => {
-    //   }
-    // })
-
-    util.setCustomNavigation();
-    let {
-      token,
-      islogin
-    } = options;
-    if (Number(islogin) === 0 ){
-      // wx.showModal({
-      //   title: '提示',
-      //   content: JSON.stringify(options),
-      //   success: res => {
-      //     if (res.confirm) {
-      //       util.redirectPage('/pages/login/index/index?riskFail=1')
-      //     }
-      //   }
-      // })
-      util.redirectPage('/pages/login/index/index?riskFail=1')
-      return
-    }
+  onLoad(options={}){
+    let { token } = options;
     this.handleBackFromH5(token);
-    
+    util.setCustomNavigation();
   },
   handleBackFromH5(token) {
     plugin.tokenLogin({
       token,
-    }).then((res = {}) => {
-      let {
-        goback,
-        err_msg
-      } = res;
-      if (goback) {
-        plugin.gobackLog({ route: 7 })
+    }).then((res ={}) => {
+      let { goback, err_msg } = res;
+      if(goback){
         util.goBack();
         return
       }
@@ -53,6 +25,6 @@ Page({
           }
         }
       })
-    }).catch(res => console.jdLoginLog(res))
+    })
   }
 })

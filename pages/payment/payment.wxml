@@ -1,2 +1,0 @@
-<!--pages/payment/payment.wxml-->
-<jdk-payment wx:if="{{ options }}" args="{{args}}" options="{{options}}" bind:success="paymentSuccess" bind:fail="paymentFail" />

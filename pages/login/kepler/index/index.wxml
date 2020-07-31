@@ -10,16 +10,9 @@
 </form>
 <button bindtap="gotoLocItemByGuider">导购员身份</button>
 <button bindtap="gotoLocItem">普通用户身份</button>
-<!-- <button bindtap="gotoLocUnionByGuider">导购员身份/联盟</button>
-<button bindtap="gotoLocUnion">普通用户身份/联盟</button> -->
 <form bindsubmit="goUnion" report-submit>
   <input name="unionParam" type="text" placeholder="请在此输入cps短连接" />
   <button formType="submit">联盟中间页</button>
 </form>
-<button bindtap="goOrder2">待付款</button>
-<button bindtap="goOrder3">待收货</button>
-<button bindtap="goOrder4">已完成</button>
-<button bindtap="goOrder1">全部订单</button>
-
 <jdk-tabbar tabBar="{{tabbarConfig}}" logSet="{{logSet}}" bind:tabBarClick="tabBarClick"></jdk-tabbar>
 <!-- <apollo  options="{{options}}" bind:gotoProduct='gotoProduct' bind:gotoTrade='gotoTrade' bind:gotologin='goToLogin'/>  -->

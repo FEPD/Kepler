@@ -78,5 +78,8 @@ Page({
      wx.navigateTo({
         url: `../address/address?addressType=addEdit&provinceId=${resultObj.provinceId}&cityId=${resultObj.cityId}&areaId=${resultObj.areaId}&townId=${resultObj.townId}&isGlobalPayment=${resultObj.isGlobalPayment}`
       });
+  },
+  toHideKeyboard() {
+    wx.hideKeyboard()
   }
 })

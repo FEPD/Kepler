@@ -8,4 +8,5 @@ bind:goToOrderList="goToOrderList"
 bind:goAddressPage="goAddressPage"
 bind:paymentClick="paymentClick"
 bind:goToAddressGuide="goToAddressGuide"
+bind:toHideKeyboard="toHideKeyboard"
 ></jdk-trade>

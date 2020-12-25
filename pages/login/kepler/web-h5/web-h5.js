@@ -10,6 +10,10 @@ Page({
 		pvFlag: true,	
 	},
 	onLoad: function (options) {
+		let pageLists = getCurrentPages && getCurrentPages()
+		let currentPath = pageLists.length > 0 ? ('/'+pageLists[pageLists.length -1].__route__) : '/pages/web-h5/web-h5'
+		options.currentPath = currentPath
+		options.isSubPackage = true
     let that = this
     app.urlAddSeries = log.urlAddSeries('');
     plugin.getwebH5Param(options, app, (webObj)=>{

@@ -1,3 +1,11 @@
+/*
+ * @Date: 2020-09-28 11:14:40
+ * @FilePath: /jdk_mpPlugin/miniprogram/pages/web-h5/web-h5.js
+ * @Autor: wangjiguang
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2020-12-01 18:02:37
+ * @Description: 
+ */
 var plugin = requirePlugin("myPlugin");
 var log = plugin.log.init()
 var app = getApp()
@@ -10,9 +18,14 @@ Page({
 		pvFlag: true,	
 	},
 	onLoad: function (options) {
+		let pageLists = getCurrentPages && getCurrentPages()
+		let currentPath = '/pages/web-h5/web-h5'
+		options.currentPath = currentPath
+		options.isSubPackage = false
     let that = this
     app.urlAddSeries = log.urlAddSeries('');
     plugin.getwebH5Param(options, app, (webObj)=>{
+    	console.log(webObj)
 			if(!webObj.url) {
         return;
       }

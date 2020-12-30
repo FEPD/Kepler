@@ -24,6 +24,7 @@ Page({
     let that = this;
     myPluginInterface.initStyle({})
     myPluginInterface.appShow(that.data.option, app);
+    myPluginInterface.appLaunch(that)
   }
 
 })

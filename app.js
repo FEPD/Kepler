@@ -1,14 +1,12 @@
 //app.js
-var myPluginInterface = requirePlugin('myPlugin');
+//var myPluginInterface = requirePlugin('myPlugin');
 App({
   onLaunch: function(options) {
-    myPluginInterface.initStyle({})
-    myPluginInterface.appLaunch(this)
+    //myPluginInterface.initStyle({})
   },
   onShow: function(options) {
-    myPluginInterface.appShow(options, this);
+    //myPluginInterface.appShow(options, this);
   },
-  
   globalData: {
     unionId: "1000072052", //联盟ID（选填）
     appkey: "wxgdtest", //小程序跟单标识（必填）
@@ -37,19 +35,19 @@ App({
     "selectIndex":0,
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/login/kepler/index/index",
         "text": "首页",
         "iconPath": "https://newbuz.360buyimg.com/jdk/homeOff.png",
         "selectedIconPath": "https://newbuz.360buyimg.com/jdk/homeOn.png"
       },
       {
-        "pagePath": "pages/cart/cart",
+        "pagePath": "pages/login/kepler/cart/cart",
         "text": "购物车",
         "iconPath": "https://newbuz.360buyimg.com/jdk/cartOff.png",
         "selectedIconPath": "https://newbuz.360buyimg.com/jdk/cartOn.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/login/kepler/order/order",
         "text": "我的订单",
         "iconPath": "https://newbuz.360buyimg.com/jdk/personalOff.png",
         "selectedIconPath": "https://newbuz.360buyimg.com/jdk/personalOn.png"

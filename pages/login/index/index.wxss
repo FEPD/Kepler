@@ -11,3 +11,13 @@
 .phone-btn::after{
   border: none
 }
+.f8be360ead1f4a3d9afb5e312b845ebb{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border:solid 1px #cdcdcd;
+    opacity: 0;
+    left: -100%;
+    top: -100%;
+    z-index:-2147483648;
+}

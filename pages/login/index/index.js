@@ -1,12 +1,31 @@
 import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
 let config = util.getLoginConfig();
+let fm = require("../fm.min.js")
+
 Page({
   data: {
-    config
+    config,
+    stopClick: false,
+    checkboxChecked: !config.author
   },
   smsloginResListener(res = {}) {
     util.handleJump(res.detail)
+  },
+  showLoad(){
+    wx.showToast({
+      title: '请阅读并勾选页面底部协议',
+      icon: "none",
+      duration: 3000
+    })
+  },
+  changeCheckbox(e){
+    this.setData({checkboxChecked: e.detail})
+  },
+  needAuthor(){
+    if(!this.data.checkboxChecked){
+      this.showLoad();
+    };
   },
   getPhoneNumber(event = {}) {
     let {
@@ -26,6 +45,9 @@ Page({
       })
       return
     }
+    wx.showLoading({
+      title: '加载中',
+    })
     this.setData({
       detail,
       stopClick: true
@@ -46,23 +68,64 @@ Page({
       encryptedData
     } = detail;
     if (!code || !iv || !encryptedData) return
+
+    const startClick = () => {
+      wx.hideLoading();
+      this.setData({
+        stopClick: false
+      })
+    }
     plugin.WXMobileLogin({
       iv,
       encryptedData,
       code,
-    }).then(res => util.handleJump(res));
+    }).then(res => {
+      if(res.err_code==32) return plugin.loginRequest({})
+      if(res.err_code==124) return this.getWxcode(); // 风控提示用户去浏览器解除 重新获取code
+      return res;
+    }).then(res=>{
+      let { pt_key,rsa_modulus, guid } = res;
+      if (!pt_key&&rsa_modulus&&guid){ // login 返回
+        res.pluginUrl = plugin.formatPluginPage('main')
+      }
+      // startClick()
+      util.handleJump(res)
+    }).catch(res => {
+      startClick()
+      console.jdLoginLog(res)
+    }); 
+
   },
-  onLoad(options) {
-    util.setLoginParamsStorage(options);
-    plugin.setLog({
-      url: `pages/login/index/index`, pageId: 'WLogin_Diversion'})
-    util.setCustomNavigation();
+  getWxcode(){
     wx.login({
       success: (res = {}) => {
+        console.log('页面的wxcode',res.code)
         this.setData({
           code: res.code
         })
       }
+    })
+  },
+  onLoad(options) {
+    let { riskFail } = options
+    this.setData({
+      config: util.getLoginConfig(options)
+    })
+    console.log(util.getLoginConfig(options))
+    //风控失败不重置缓存
+    if (!riskFail) {
+      util.setLoginParamsStorage(options);
+    }
+    plugin.setLog({ url: 'pages/login/index/index', pageId: 'WLogin_Diversion'})
+    util.setCustomNavigation();
+    this.getWxcode();
+    this.setFingerData()
+  },
+  setFingerData() {
+    fm.config(this, { bizKey: plugin.bizKey });
+    fm.init();
+    fm.getEid((res = {}) => {
+      plugin.setJdStorageSync('finger_tk', res.tk)
     })
   },
   onShow(){

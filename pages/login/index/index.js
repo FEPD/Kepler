@@ -1,13 +1,31 @@
 import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
 let config = util.getLoginConfig();
+let fm = require("../fm.min.js")
 
 Page({
   data: {
-    config
+    config,
+    stopClick: false,
+    checkboxChecked: !config.author
   },
   smsloginResListener(res = {}) {
     util.handleJump(res.detail)
+  },
+  showLoad(){
+    wx.showToast({
+      title: '请阅读并勾选页面底部协议',
+      icon: "none",
+      duration: 3000
+    })
+  },
+  changeCheckbox(e){
+    this.setData({checkboxChecked: e.detail})
+  },
+  needAuthor(){
+    if(!this.data.checkboxChecked){
+      this.showLoad();
+    };
   },
   getPhoneNumber(event = {}) {
     let {
@@ -101,6 +119,14 @@ Page({
     plugin.setLog({ url: 'pages/login/index/index', pageId: 'WLogin_Diversion'})
     util.setCustomNavigation();
     this.getWxcode();
+    this.setFingerData()
+  },
+  setFingerData() {
+    fm.config(this, { bizKey: plugin.bizKey });
+    fm.init();
+    fm.getEid((res = {}) => {
+      plugin.setJdStorageSync('finger_tk', res.tk)
+    })
   },
   onShow(){
     plugin.pvLog()

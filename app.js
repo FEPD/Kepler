@@ -27,6 +27,7 @@ App({
     apolloSecret: '162f0903a33a445db6af0461c63c6a3b',  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
     heildCart: 2, //是否隐藏购物车以及加购按钮 1为隐藏
     noshowCustomerService: '0', //是否展示客服入口 不为1则展示
+    logPluginName: "", // 引入的埋点插件名称(app.json内plugins引入的埋点插件)，默认值为''。引入埋点插件，可以使宿主小程序、交易插件统一标识(uuid)
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {

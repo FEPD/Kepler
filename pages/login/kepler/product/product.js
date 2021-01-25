@@ -1,6 +1,10 @@
 var plugin = requirePlugin("myPlugin");
 const util = require('../utils/util.js');
 let app = getApp();
+console.log('=> product.js')
+if (app && app.globalData && app.globalData.isSubpackage === 1) {
+  plugin.pageInitOfSubpackage({appOptions: {}, app})
+}
 Page({
   data:{
     option:{

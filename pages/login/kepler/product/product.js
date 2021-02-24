@@ -1,10 +1,6 @@
 var plugin = requirePlugin("myPlugin");
 const util = require('../utils/util.js');
 let app = getApp();
-console.log('=> product.js')
-if (app && app.globalData && app.globalData.isSubpackage === 1) {
-  plugin.pageInitOfSubpackage({appOptions: {}, app})
-}
 Page({
   data:{
     option:{
@@ -148,7 +144,7 @@ Page({
                 + 'overflow: hidden;'
                 + 'height:' + wx.getSystemInfoSync().windowHeight + 'px;'
                 + 'width: ' + wx.getSystemInfoSync().screenWidth + 'px;'
-      wrapStyle = 'top: -' + this.data.scrollTop + 'px;'
+      wrapStyle = 'top: -' + this.data.scrollTop + 'px; position: relative;'
       this.setData({
         pageStyle: pageStyle,
         wrapStyle: wrapStyle

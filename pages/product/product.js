@@ -144,7 +144,7 @@ Page({
                 + 'overflow: hidden;'
                 + 'height:' + wx.getSystemInfoSync().windowHeight + 'px;'
                 + 'width: ' + wx.getSystemInfoSync().screenWidth + 'px;'
-      wrapStyle = 'top: -' + this.data.scrollTop + 'px;'
+      wrapStyle = 'top: -' + this.data.scrollTop + 'px; position: relative;'
       this.setData({
         pageStyle: pageStyle,
         wrapStyle: wrapStyle

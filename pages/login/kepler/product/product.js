@@ -21,6 +21,12 @@ Page({
     this.pageIndex = getCurrentPages().length;
     const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
 
+    let pageStackLists = []
+    wxCurrPage.forEach(item => {
+      pageStackLists.push({
+        route: item.route
+      })
+    })
     if (options.isLocGuider == '1') {
        plugin.setStorageSync('isLocGuider', true);
     }
@@ -30,7 +36,7 @@ Page({
       options: Object.assign({}, this.data.option, {
         skuId: options.wareId,
         pageParams: options,
-        wxCurrPage: wxCurrPage
+        wxCurrPage: pageStackLists
       })
     })
     util.checkVersion()
@@ -77,8 +83,9 @@ Page({
     }
     this.data.refreshCount != 1 ? plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({},{isOnShow: true}, {data:this.data.options},)) : this.data.refreshCount++;
   },
-  // 刷新商祥页
-  productRefreshPage () {
+  // 刷新商祥页，切换地址后，重新渲染商详
+  productRefreshPage (sitesAddress) {
+    let regionIdStr = sitesAddress && sitesAddress.regionIdStr
     plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({}, {data:this.data.options},))
   },
   /**

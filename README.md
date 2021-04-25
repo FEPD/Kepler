@@ -1,7 +1,7 @@
 # 京东微信小程序交易流程插件使用Demo - 京东好物街
 
 ## 简介
-	
+  
 京东交易流程插件，通过插件可实现京东商品的小程序内闭环购买。
 
 ## 插件申请使用地址
@@ -132,14 +132,17 @@ Tips:
 
 ### app.js
 ```
+//app.js
 var myPluginInterface = requirePlugin('myPlugin');
 App({
   onLaunch: function(options) {
     myPluginInterface.initStyle({})
+    myPluginInterface.appLaunch(this)
   },
   onShow: function(options) {
     myPluginInterface.appShow(options, this);
   },
+  
   globalData: {
     unionId: "1000072052", //联盟ID（选填）
     appkey: "wxgdtest", //小程序跟单标识（必填）
@@ -147,11 +150,20 @@ App({
     sendpay: "3", //导购小程序sendpay传1，事业部小程序sendpay传3。（必填）
     mpAppid: "wx1edf489cb248852c", //小程序appid（必填）
     pluginAppid: "wx1edf489cb248852c", //插件appid（必填）
-    tabBarPathArr: ['/pages/index/index','/pages/cart/cart','pages/order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
-    apolloId: 'd1543fc0e8274901be01a9d9fcfbf76e', (必填)  //阿波罗Id，标准版使用此默认值，扩展版使用申请好的阿波罗appid
-    apolloSecret: '162f0903a33a445db6af0461c63c6a3b',(必填)  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
-    heildCart: 2,   //是否隐藏购物车以及加购按钮 1为隐藏
-    noshowCustomerService: '0', //是否展示客服入口 1为隐藏(选填)
+    tabBarPathArr: ['../index/index','../cart/cart','../order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
+
+    // 预发环境
+    // apolloId: '89f5bc2d5c9b4c68b3c03aaad4d0af4f',
+    // apolloSecret: '94cac8db22814664a4e5ae8cabfe7566',
+    noshowRedpacket: 0,//0表示展示红包楼层，1表示关闭
+    // 正式环境
+    apolloId: 'd1543fc0e8274901be01a9d9fcfbf76e',  //阿波罗Id，标准版使用此默认值，扩展版使用申请好的阿波罗appid
+    apolloSecret: '162f0903a33a445db6af0461c63c6a3b',  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
+    heildCart: 2, //是否隐藏购物车以及加购按钮 1为隐藏
+    noshowCustomerService: '0', //是否展示客服入口 不为1则展示
+    logPluginName: "", // 引入的埋点插件名称(app.json内plugins引入的埋点插件)，默认值为''。引入埋点插件，可以使宿主小程序、交易插件统一标识(uuid)
+    isPrivate: '', // 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
+    shopIds: '', // 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {
@@ -183,6 +195,7 @@ App({
     "position": "bottom"
   }
 })
+
 ```
 
 Tips:  
@@ -210,7 +223,7 @@ Tips:
 | pluginAppid            | String    | 是        |           |插件appid：wx1edf489cb248852c
 | heildCart              | Number    | 否        |           |是否隐藏购物车以及加购按钮，1为隐藏                                     
 | tabBarPathArr          | Array     | 是        |           |tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要） |
-| apolloId          	  | String     | 是        |           |阿波罗Id，标准版使用默认值d1543fc0e8274901be01a9d9fcfbf76e，扩展版使用申请好的阿波罗appid|
+| apolloId              | String     | 是        |           |阿波罗Id，标准版使用默认值d1543fc0e8274901be01a9d9fcfbf76e，扩展版使用申请好的阿波罗appid|
 | apolloSecret           | String     | 是        |           |阿波罗Secret, 标准版使用默认值162f0903a33a445db6af0461c63c6a3b，扩展版使用申请好的阿波罗appSecret
 | heildCart              | String     | 否        |           |是否隐藏购物车以及加购按钮 1为隐藏
 | noshowCustomerService  | String     | 否        |           |是否展示客服入口 1为隐藏
@@ -233,7 +246,7 @@ Tips:
 ### 在页面的WXML中添加标签
 ```
 <view style="{{ pageStyle  }}">
-	<view style="{{ wrapStyle  }}"><apollo wx:if="{{ options }}" options="{{ options }}"></apollo></view>
+  <view style="{{ wrapStyle  }}"><apollo wx:if="{{ options }}" options="{{ options }}"></apollo></view>
 </view>
 <image class="bottom-to-top {{isIphoneX? 'bottom-to-top-iphonex': ''}}" src="https://img30.360buyimg.com/jshow/jfs/t24346/97/2510484213/4973/b8ba0830/5bae1254Nfeb364a9.png" style="display:{{toTopDisplay}}" bindtap="toTopTap"></image>
 ```

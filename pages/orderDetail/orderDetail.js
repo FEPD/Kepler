@@ -23,6 +23,7 @@ Page({
 	},
   onShow: function () {
     const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    this.getRootPath();//获取全局根目录
     this.setData({
       wxCurrPage: wxCurrPage
 	})
@@ -42,6 +43,12 @@ Page({
 		}
 	});
 
+	},
+	getRootPath: function () {
+	    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+	    if (wxCurrPage[wxCurrPage.length - 1].route) {
+	      this.data.rootPath = wxCurrPage[wxCurrPage.length - 1].route;
+	    }
 	},
 	goToLogin: function (e){
 	  let resultObj = e.detail;
@@ -118,7 +125,9 @@ Page({
 		let content = ''
 		let imgUrl = ''
 		if (res && res.from == 'button') {
-			url = `/pages/web-h5/web-h5?${res.target.dataset.shareurl}&from=groupBuyDetail`;
+			let _arr = this.data.rootPath && this.data.rootPath.split('/')
+	     	let _sharePath = (this.data.rootPath.split('/').slice(0, _arr.length-2).concat(['web-h5', 'web-h5'])).join('/')
+			url = `/${_sharePath}?${res.target.dataset.shareurl}&from=groupBuyDetail`;
 			title = res.target.dataset.title;
 			imgUrl = res.target.dataset.imgurl;
 		}

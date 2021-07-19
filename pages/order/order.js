@@ -32,6 +32,7 @@ Page({
 
 	onShow: function() {
 		const THAT = this
+	    this.getRootPath();//获取全局根目录
 		// console.log('%%%%%%%%%%%order.js-onShow()%%%%%%%%%%%%%%%%')
 		wx.getStorage({
 			key: 'evaluate_success_orderid',
@@ -48,7 +49,12 @@ Page({
 			}
 		});
 	},
-
+	getRootPath: function () {
+	    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+	    if (wxCurrPage[wxCurrPage.length - 1].route) {
+	      this.data.rootPath = wxCurrPage[wxCurrPage.length - 1].route;
+	    }
+	},
 	goOrderDetail: function(e) {
 		let data = e.detail;
 		wx.navigateTo({
@@ -143,7 +149,9 @@ Page({
 		let content = ''
 		let imgUrl = ''
 		if (res && res.from == 'button') {
-			url = `/pages/web-h5/web-h5?${res.target.dataset.shareurl}&from=groupBuyDetail`;
+			let _arr = this.data.rootPath && this.data.rootPath.split('/')
+	     	let _sharePath = (this.data.rootPath.split('/').slice(0, _arr.length-2).concat(['web-h5', 'web-h5'])).join('/')
+			url = `/${_sharePath}?${res.target.dataset.shareurl}&from=groupBuyDetail`;
 			title = res.target.dataset.title;
 			imgUrl = res.target.dataset.imgurl;
 		}

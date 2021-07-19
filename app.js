@@ -30,6 +30,7 @@ App({
     logPluginName: "", // 引入的埋点插件名称(app.json内plugins引入的埋点插件)，默认值为''。引入埋点插件，可以使宿主小程序、交易插件统一标识(uuid)
     isPrivate: '', // 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
     shopIds: '', // 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
+    livestreamBusinessId: '',  //直播专享价渠道ID（选填）
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {

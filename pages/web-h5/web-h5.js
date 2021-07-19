@@ -3,7 +3,7 @@
  * @FilePath: /jdk_mpPlugin/miniprogram/pages/web-h5/web-h5.js
  * @Autor: wangjiguang
  * @LastEditors: Do not edit
- * @LastEditTime: 2020-12-01 18:02:37
+ * @LastEditTime: 2021-01-13 16:05:35
  * @Description: 
  */
 var plugin = requirePlugin("myPlugin");
@@ -19,9 +19,9 @@ Page({
 	},
 	onLoad: function (options) {
 		let pageLists = getCurrentPages && getCurrentPages()
-		let currentPath = '/pages/web-h5/web-h5'
+		let currentPath = pageLists.length > 0 ? ('/'+pageLists[pageLists.length -1].__route__) : '/pages/web-h5/web-h5'
 		options.currentPath = currentPath
-		options.isSubPackage = false
+		options.isSubPackage = currentPath.indexOf('login/kepler/') != -1 ? true : false
     let that = this
     app.urlAddSeries = log.urlAddSeries('');
     plugin.getwebH5Param(options, app, (webObj)=>{

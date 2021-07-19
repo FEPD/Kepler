@@ -1,1 +1,4 @@
 /* pages/index/index.wxss */
+.paddingBtm {
+    height: 200rpx;
+}

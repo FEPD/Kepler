@@ -1,14 +1,20 @@
+/*
+ * @Date: 2021-02-01 10:30:56
+ * @FilePath: /jdk_mpPlugin/subfile/app.js
+ * @Autor: wangjiguang
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2021-02-01 10:32:03
+ * @Description: 
+ */
 //app.js
-var myPluginInterface = requirePlugin('myPlugin');
+//var myPluginInterface = requirePlugin('myPlugin');
 App({
   onLaunch: function(options) {
-    myPluginInterface.initStyle({})
-    myPluginInterface.appLaunch(this)
+    //myPluginInterface.initStyle({})
   },
   onShow: function(options) {
-    myPluginInterface.appShow(options, this);
+    //myPluginInterface.appShow(options, this);
   },
-  
   globalData: {
     unionId: "1000072052", //联盟ID（选填）
     appkey: "wxgdtest", //小程序跟单标识（必填）
@@ -26,7 +32,7 @@ App({
     apolloId: 'd1543fc0e8274901be01a9d9fcfbf76e',  //阿波罗Id，标准版使用此默认值，扩展版使用申请好的阿波罗appid
     apolloSecret: '162f0903a33a445db6af0461c63c6a3b',  //阿波罗Secret, 标准版使用此默认值，扩展版使用申请好的阿波罗appSecret
     heildCart: 2, //是否隐藏购物车以及加购按钮 1为隐藏
-    noshowCustomerService: '0', //是否展示客服入口 不为1则展示
+    noshowRedpacket: 0,//超新星等屏蔽红包楼层的小程序使用，传1不显示红包楼层,传0显示
     logPluginName: "", // 引入的埋点插件名称(app.json内plugins引入的埋点插件)，默认值为''。引入埋点插件，可以使宿主小程序、交易插件统一标识(uuid)
     isPrivate: '', // 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
     shopIds: '', // 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
@@ -40,19 +46,19 @@ App({
     "selectIndex":0,
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/login/kepler/index/index",
         "text": "首页",
         "iconPath": "https://newbuz.360buyimg.com/jdk/homeOff.png",
         "selectedIconPath": "https://newbuz.360buyimg.com/jdk/homeOn.png"
       },
       {
-        "pagePath": "pages/cart/cart",
+        "pagePath": "pages/login/kepler/cart/cart",
         "text": "购物车",
         "iconPath": "https://newbuz.360buyimg.com/jdk/cartOff.png",
         "selectedIconPath": "https://newbuz.360buyimg.com/jdk/cartOn.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/login/kepler/order/order",
         "text": "我的订单",
         "iconPath": "https://newbuz.360buyimg.com/jdk/personalOff.png",
         "selectedIconPath": "https://newbuz.360buyimg.com/jdk/personalOn.png"

@@ -24,11 +24,11 @@ Page({
     let pageStackLists = []
     wxCurrPage.forEach(item => {
       pageStackLists.push({
-        route: item.route
+        route: item && item.route
       })
     })
     if (options.isLocGuider == '1') {
-       plugin.setStorageSync('isLocGuider', true);
+      plugin.setStorageSync('isLocGuider', true);
     }
     options = plugin.initItemOptions(options)
     // plugin.initStyle(this.data.option);
@@ -39,6 +39,7 @@ Page({
         wxCurrPage: pageStackLists
       })
     })
+    this.updateShareurl(options.wareId)
     util.checkVersion()
     plugin.emitter.on('fixedPageBg' + this.pageIndex, this.fixedPageBg.bind(this))
     plugin.emitter.on('goPage' + this.pageIndex, this.goPage.bind(this));
@@ -67,20 +68,8 @@ Page({
   onShow:function(){
     let that = this;
     that.getRootPath();//获取全局根目录
-    // 设置分享链接，增加分佣spreadUrl
-    let app = getApp();
-    let unionId = (app.globalData && app.globalData.unionId) || ''
     // 存储当前用户所在位置经纬度
     this.getUserAuthSetting();
-    if (unionId) {
-      plugin.getSpreadUrl(that.data.options.skuId, unionId).then((res)=>{
-        that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}&spreadUrl=${res.shortUrl}`
-      }, (res)=> {
-        that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}`
-      })
-    } else {
-      that.data.shareUrl = `/${this.data.rootPath}?wareId=${that.data.options.skuId}`
-    }
     this.data.refreshCount != 1 ? plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({},{isOnShow: true}, {data:this.data.options},)) : this.data.refreshCount++;
   },
   // 刷新商祥页，切换地址后，重新渲染商详
@@ -109,6 +98,21 @@ Page({
   // 切换商祥skuId
   updateSkuId (skuId) {
     this.data.options.skuId = skuId
+    this.updateShareurl(skuId)
+  },
+  // 更新shareurl
+  updateShareurl (skuId) {
+    const that = this;
+    skuId = skuId || that.data.options.skuId
+    // 设置分享链接，增加分佣spreadUrl
+    const app = getApp();
+    const unionId = (app && app.globalData && app.globalData.unionId) || ''
+    that.data.shareUrl = ''
+    if (unionId) {
+      plugin.getSpreadUrl(skuId, unionId).then((res)=>{
+        that.data.shareUrl = `spreadUrl=${res.shortUrl}`
+      }, (res)=> {})
+    }
   },
   // 触底函数
   onReachBottom:function(e){
@@ -227,8 +231,8 @@ Page({
     })
 
     // 如果是导购员，分享链接拼接经纬度信息
-    
-    let _shareUrl = this.data.shareUrl ? this.data.shareUrl : `/${this.data.rootPath}?wareId=${this.data.wareId}`;
+    let _sharePath = `/${this.data.rootPath}?wareId=${this.data.options.skuId}`
+    _sharePath = this.data.shareUrl ? `${_sharePath}&${this.data.shareUrl}` : _sharePath
     let locParams = plugin.getLocParams(this.data.options.pageParams);
     console.log('locParams====', locParams)
     if (locParams == -1) {
@@ -236,15 +240,16 @@ Page({
       let _lat = plugin.getStorageSync('user_lat')
       console.log('_lng======', _lng, _lat)
       if (_lng && _lat) {
-        _shareUrl = _shareUrl + '&lng=' + _lng + '&lat=' + _lat;
+        _sharePath = _sharePath + '&lng=' + _lng + '&lat=' + _lat;
       }
     } else {
-      _shareUrl = _shareUrl + locParams
+      _sharePath = _sharePath + locParams
     }
-    console.log('_shareUrl=======', _shareUrl)
+    console.log('_sharePath=======', _sharePath)
+    const productName = plugin.getStorageSync('shareProName');
     return {
-      title: this.data.productName,
-      path: _shareUrl,
+      title: productName,
+      path: _sharePath,
     }
   },
 })

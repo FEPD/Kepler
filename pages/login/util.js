@@ -45,6 +45,7 @@ const utils = {
     } else {
       console.jdLoginLog('登录参数必须为对象')
     }
+    console.log(loginParams,"============================")
     return loginParams
   },
   getDefaultConfig() {
@@ -113,6 +114,31 @@ const utils = {
       { cookie } = obj.header ;
     obj.header.cookie = cookie ? `${cookie};${_cookie}` : _cookie;
     wx.request(obj)
+  },
+
+  silentauthlogin(options, goToLogin, callback) {
+    wx.login({
+        success(res = {}) {
+            let { code } = res;
+            if (code) {
+                utils.setLoginParamsStorage(options);
+                plugin.silentauthlogin({ ...options, code }, goToLogin)
+                    .then((res) => {
+                        callback && callback();
+                    })
+                    .catch((res) => {
+                        callback && callback();
+                        console.jdLoginLog('请重试一次');
+                    });
+            } else {
+                callback && callback();
+                console.jdLoginLog('wx.login 获取code失败');
+            }
+        },
+        fail() {
+            callback && callback();
+        },
+    });
   }
 }
 

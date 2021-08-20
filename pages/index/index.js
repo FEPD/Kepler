@@ -21,6 +21,8 @@ Page({
   }
   },
   onLoad: function (options) {
+    // 主动调用 Ezr 打标
+    this.setEZRText()
     // plugin.initStyle({
       // apolloId: '595cd1c1f91a4856a2de48310afe5fdf',
       // apolloSecret: 'c0e631a45aa24e6399f72075ecf77f65',
@@ -35,6 +37,11 @@ Page({
   onShow:function(){
     var styleStorageData = wx.getStorageSync('style');
     plugin.isLogin(this.setLoginState)
+  },
+  setEZRText() {
+    // 手动设置 EZR 小程序打标 orderText 字段
+    const openid = 'xxxxx' // 去获取用户 openid 格式保持 openid_ksz|xx#_#businessType|3;
+    plugin.setStorageSync('K_orderText', `openid_ksz|${openid}#_#businessType|3;`)
   },
   setLoginState:function(isLogin){
     this.setData({

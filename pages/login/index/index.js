@@ -1,7 +1,7 @@
 import util from '../util.js'
 let plugin = requirePlugin("loginPlugin");
-let config = util.getLoginConfig();
 let fm = require("../fm.min.js")
+let config = util.getLoginConfig();
 
 Page({
   data: {
@@ -10,7 +10,11 @@ Page({
     checkboxChecked: !config.author
   },
   smsloginResListener(res = {}) {
-    util.handleJump(res.detail)
+    if(this.data.checkboxChecked){
+      util.handleJump(res.detail)
+    }else{
+      this.showLoad();
+    }
   },
   showLoad(){
     wx.showToast({
@@ -31,13 +35,6 @@ Page({
     let {
       stopClick
     } = this.data;
-    let { detail } = event;
-    let { iv, encryptedData } = detail;
-    plugin.clickLog({
-      event,
-      eid: 'WLogin_Diversion_Wechat',
-    })
-    if (!iv || !encryptedData) return
     if (stopClick) {
       wx.showToast({
         icon: 'none',
@@ -45,12 +42,24 @@ Page({
       })
       return
     }
+    this.setData({
+      stopClick: true
+    })
+    let { detail } = event;
+    let { iv, encryptedData } = detail;
+    plugin.clickLog({
+      event,
+      eid: 'WLogin_Diversion_Wechat',
+    })
+    if (!iv || !encryptedData) {
+      this.setData({stopClick:false});
+      return;
+    }
     wx.showLoading({
       title: '加载中',
     })
     this.setData({
-      detail,
-      stopClick: true
+      detail
     })
     this.mobileLogin()
     plugin.clickLog({
@@ -80,12 +89,12 @@ Page({
       encryptedData,
       code,
     }).then(res => {
-      if(res.err_code==32) return plugin.loginRequest({})
-      if(res.err_code==124) return this.getWxcode(); // 风控提示用户去浏览器解除 重新获取code
+      if ([32,33].indexOf(res.err_code)>=0) return plugin.loginRequest({})
+      if (res.err_code == 124) return this.getWxcode(); // 风控提示用户去浏览器解除 重新获取code
       return res;
-    }).then(res=>{
-      let { pt_key,rsa_modulus, guid } = res;
-      if (!pt_key&&rsa_modulus&&guid){ // login 返回
+    }).then(res => {
+      let { pt_key, rsa_modulus, guid } = res;
+      if (!pt_key && rsa_modulus && guid) { // login 返回
         res.pluginUrl = plugin.formatPluginPage('main')
       }
       // startClick()
@@ -93,13 +102,12 @@ Page({
     }).catch(res => {
       startClick()
       console.jdLoginLog(res)
-    }); 
+    });
 
   },
-  getWxcode(){
+  getWxcode() {
     wx.login({
       success: (res = {}) => {
-        console.log('页面的wxcode',res.code)
         this.setData({
           code: res.code
         })
@@ -111,12 +119,11 @@ Page({
     this.setData({
       config: util.getLoginConfig(options)
     })
-    console.log(util.getLoginConfig(options))
     //风控失败不重置缓存
     if (!riskFail) {
       util.setLoginParamsStorage(options);
     }
-    plugin.setLog({ url: 'pages/login/index/index', pageId: 'WLogin_Diversion'})
+    plugin.setLog({ url: 'pages/login/index/index', pageId: 'WLogin_Diversion' })
     util.setCustomNavigation();
     this.getWxcode();
     this.setFingerData()
@@ -128,7 +135,16 @@ Page({
       plugin.setJdStorageSync('finger_tk', res.tk)
     })
   },
-  onShow(){
+  // 拒绝协议
+  reject(){
+    let {rejectReturnPage, rejectPageType} = this.data.config;
+    if(rejectReturnPage){
+      wx[`${rejectPageType}` || 'rejectTo']({url:rejectReturnPage})
+    }else{
+      wx.navigateBack()
+    }
+  },
+  onShow() {
     plugin.pvLog()
   }
 })

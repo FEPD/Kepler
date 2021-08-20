@@ -10,14 +10,16 @@ export let config = {
   isKepler: true,
   navigationBarColor: undefined,
   navigationBarTitle: undefined,
-  author:true, //增加协议勾选框 默认为不展示
   tabNum: 2,
-  requestHost:'https://wxapplogin.m.jd.com',
-  selfTips: [{
-    tip: '《京东用户注册协议》',
-    url: 'https://wxapplogin.m.jd.com/static/registration.html'
-  }, {
-    tip: '《京东隐私政策》',
-    url: 'https://wxapplogin.m.jd.com/static/private.html'
-  }]
+  // requestHost:'https://wxapplogin.m.jd.com',
+  // logPluginName: "DDDDDDDDD", // 埋点插件的名字 例如：'log-plugin'
+  selfTipsDialog:false, // 是否弹窗展示协议授权，默认为false，如果为true，author必须为false
+  author: true,  
+  // selfTips: [{  //无特殊需求不需要配置
+    //   tip:'我是测试1',
+    //   url: 'm.jd.com'
+    // }, {
+    //   tip:'我是测试2',
+    //   url:'https://pro.m.jd.com/mall/active/2hqsQcyM5bEUVSStkN3BwrBHqVLd/index.html'
+    // }]
 }

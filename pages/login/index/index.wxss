@@ -7,6 +7,7 @@
   border-radius: 100rpx;
   background-color: #1AAD19;
   color: #fff;
+  font-size: 32rpx;
 }
 .phone-btn::after{
   border: none
@@ -20,4 +21,53 @@
     left: -100%;
     top: -100%;
     z-index:-2147483648;
+}
+/* 协议弹窗样式 */
+.dialog-tips{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.8);
+}
+.dialog-tips>view{
+  position:absolute;
+  border-radius: 16rpx;
+  width: 80%;
+  padding:60rpx 40rpx;
+  background-color: #fff;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.dialog-tips view button{
+  display: inline-block;
+  width: 45%;
+  margin:0;
+}
+.dialog-tips view button.phone-btn{
+  margin-left:10%
+}
+.dialog-tips view button.bg-btn{
+  background: rgba(242,242,242,1);
+  border-radius: 50rpx;
+  color: rgba(136,136,136,1);
+  margin:0;
+}
+.dialog-tips .no-fix>view {
+  position: static;
+  margin-bottom: 20rpx;
+  text-align: left;
+}
+.dialog-tips .no-fix>view>view{
+  font-size: 28rpx;
+  line-height: 50rpx;
+  color: #1269E2;
+}
+.dialog-tips .no-fix>view>view:first-child {
+  color: #000;
+}
+.dialog-tips .no-fix>view>text:last-child{
+  display: block;
 }

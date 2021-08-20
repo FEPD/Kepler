@@ -20,6 +20,7 @@
 <button bindtap="goOrder3">待收货</button>
 <button bindtap="goOrder4">已完成</button>
 <button bindtap="goOrder1">全部订单</button>
+<button bindtap="setEZRText">EZR 打标</button>
 
 <form bindsubmit="goTrade">
   <textarea name="tradeUrl" type="text" placeholder="请在此输入结算页链接" style="width: 100%; height: 160rpx;"/>

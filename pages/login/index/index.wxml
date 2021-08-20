@@ -1,8 +1,20 @@
 <index bindsmsloginres='smsloginResListener' config='{{config}}' checkboxChecked='{{checkboxChecked}}'/>
-<button wx:if="{{ !stopClick && checkboxChecked}}" class='phone-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信手机号快捷登录</button>
+<button wx:if="{{!stopClick && checkboxChecked}}" class='phone-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信手机号快捷登录</button>
 <!-- 防止连续点击触发获取微信用户信息 -->
-<button class='phone-btn btn-disabled' bindtap="needAuthor" wx:else>微信手机号快捷登录</button>
-<instruction config='{{config}}' bindchangeCheck="changeCheckbox"/>
+<button class='phone-btn' wx:else bindtap="needAuthor">微信手机号快捷登录</button>
+<!-- 弹窗类型展示协议授权 -->
+<view class="dialog-tips" wx:if="{{config.selfTipsDialog}}">
+    <view>
+        <instruction class="no-fix" config='{{config}}' bindchangeCheck="changeCheckbox"/>
+        <p>
+            <button class='phone-btn bg-btn' bindtap="reject">拒绝</button>
+            <button wx:if="{{!stopClick && checkboxChecked}}" class='phone-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">同意</button>
+        </p>
+    </view>
+</view>
+<!-- 底部展示协议授权 -->
+<instruction wx:else config='{{config}}' bindchangeCheck="changeCheckbox"/>
 <view>
     <canvas class="f8be360ead1f4a3d9afb5e312b845ebb" canvas-id='fbfd3ec3c4ab4213b9a09b5c5e769ceb' ></canvas>
 </view>
+ 

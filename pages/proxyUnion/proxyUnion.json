@@ -1,6 +1,5 @@
 {
-  "navigationBarTitleText": "",
   "usingComponents": {
-    "jdk-proxyUnion": "plugin://myPlugin/jdk-proxyUnion"
+    "jdk-union": "plugin://myPlugin/jdk-union"
   }
 }

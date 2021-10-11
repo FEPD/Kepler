@@ -38,6 +38,7 @@ App({
     isPrivate: '', // 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
     shopIds: '', // 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
     livestreamBusinessId: '',  //直播专享价渠道ID（选填）
+    errorPage: '/pages/index/index', // 必传，错误兜底页路径，格式：/pages/**/**；使用场景：联盟逻辑时跳转的错误兜底页
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {

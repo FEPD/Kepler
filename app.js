@@ -24,6 +24,8 @@ App({
     pluginAppid: "wx1edf489cb248852c", //插件appid（必填）
     tabBarPathArr: ['../index/index','../cart/cart','../order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
 
+    // EZR 小程序使用
+    businessType: '', // EZR写 '3;'注意是字符串3和分号;
     // 预发环境
     // apolloId: '89f5bc2d5c9b4c68b3c03aaad4d0af4f',
     // apolloSecret: '94cac8db22814664a4e5ae8cabfe7566',
@@ -36,6 +38,8 @@ App({
     logPluginName: "", // 引入的埋点插件名称(app.json内plugins引入的埋点插件)，默认值为''。引入埋点插件，可以使宿主小程序、交易插件统一标识(uuid)
     isPrivate: '', // 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
     shopIds: '', // 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
+    livestreamBusinessId: '',  //直播专享价渠道ID（选填）
+    errorPage: '/pages/login/kepler/index/index', // 必传，错误兜底页路径，格式：/pages/**/**；使用场景：联盟逻辑时跳转的错误兜底页
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {

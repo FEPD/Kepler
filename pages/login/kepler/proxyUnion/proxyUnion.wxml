@@ -1,1 +1,1 @@
-<jdk-proxyUnion id='proxyUnion' options="{{options}}" bind:gotoindex="goToIndex" bind:gotoproduct="goToProduct" />
+<jdk-union id='proxyUnion' wx:if="{{options}}" options="{{options}}" customConfig="{{customConfig}}" bind:gotoindex="goToIndex" bind:gotoproduct="goToProduct" />

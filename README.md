@@ -165,6 +165,7 @@ App({
     isPrivate: '', // 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
     shopIds: '', // 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
     livestreamBusinessId: '',  //直播专享价渠道ID（选填）
+    errorPage: '', // 接入联盟必传，联盟错误兜底页路径，格式：/pages/**/**；使用场景：联盟逻辑时跳转的错误兜底页
   },
   globalRequestUrl: 'https://wxapp.m.jd.com', //插件request域名（必填）
   tabBar: {
@@ -232,6 +233,7 @@ Tips:
 | isPrivate              | String     | 否        |           | 1-需要进行私域化。若要进行店铺过滤，isPrivate和shopIds字段必须都有值才能生效。
 | shopIds                | String     | 否        |           | 本期支持单个店铺过滤；保留当前传入shopid的商品，且屏蔽此外的其他店铺商品（若配置isPrivate=1但不配置shopIds 视为不进行私域化）
 | livestreamBusinessId   | String     | 否        |           | 直播专享价渠道ID
+| errorPage   | String     | 否        |           | 接入联盟必传，联盟错误兜底页路径，格式：/pages/**/**；使用场景：联盟逻辑时跳转的错误兜底页
 
 ### 页面修改配置文件JSON
 以商品详情页为例
@@ -446,7 +448,7 @@ Page({
 ```
 Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否则商祥将不展示内容
 ### 联盟中间页
-联盟中间页当前的兜底方案是跳小程序首页，插件接入方可根据自身需求修改`proxyUnion.js`文件内的`goToIndex`方法，将其中传入的跳转链接改为自己所需的地址
+联盟中间页当前的兜底方案是跳小程序首页，插件接入方可根据自身需求修改`proxyUnion/config.js`文件内的`handleError`方法，将其中传入的跳转链接改为自己所需的地址。也可以修改`app.js`文件内的`errorPage`字段，
 ### 支付回调函数
 插件中提供了支付成功的和支付失败的回调函数（payment中的`paymentSuccess`和`paymentFail`），开发者可根据需求做相应的处理
 

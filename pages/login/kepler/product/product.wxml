@@ -1,4 +1,6 @@
-<view style="{{ pageStyle  }}">
-	<view style="{{ wrapStyle  }}"><apollo wx:if="{{ options }}" options="{{ options }}"></apollo></view>
-</view>
-<image class="bottom-to-top {{isIphoneX? 'bottom-to-top-iphonex': ''}}" src="https://img30.360buyimg.com/jshow/jfs/t24346/97/2510484213/4973/b8ba0830/5bae1254Nfeb364a9.png" style="display:{{toTopDisplay}}" bindtap="toTopTap"></image>
+<jdk-product wx:if="{{options}}" options="{{options}}" feGlobalConfig="{{feGlobalConfig}}" isTemplate="{{false}}" 
+bind:doAfterGetdataSuccessInject="doAfterGetdataSuccessInject"
+></jdk-product>
+
+<!-- 置顶按钮，放置在主页面，因为要监听页面滚动事件 -->
+<view class="bottom-to-top {{isIphoneX? 'bottom-to-top-iphonex': ''}}" style="display:{{toTopDisplay}}" bindtap="toTopTap"></view>

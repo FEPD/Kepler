@@ -2,6 +2,6 @@
   "navigationBarTitleText": "商品详情",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "apollo": "plugin://myPlugin/apollo"
+    "jdk-product": "plugin://myPlugin/jdk-product"
   }
 }

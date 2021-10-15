@@ -7,26 +7,46 @@ Page({
   data: {
     option:{
       noshowRedpacket: app.globalData.noshowRedpacket ? app.globalData.noshowRedpacket : '',
-    }
+    },
+    scrollTop: 0, // 页面滚动距离
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad:function (options) {
+    const wxCurrPage = getCurrentPages(); // 获取当前页面的页面栈
+    let pageStackLists = []
+    wxCurrPage.forEach(item => {
+      pageStackLists.push({
+        route: item && item.route
+      })
+    })
+
     this.setData({
-      options: Object.assign({}, this.data.option, options)
+      options: Object.assign({}, this.data.option, options, {
+        wxCurrPage: pageStackLists,
+        pageIndex: wxCurrPage.length
+      })
     })
     this.trade = this.selectComponent('#trade');
   },
   onUnload:function(){
     this.trade.methods.clearPresaleState();
   },
-  // 跳转配送页
-  paymentClick:function(e){
-    console.log(e)
-    wx.navigateTo({
-      url: e.detail.url,
+  onPageScroll:function(e){
+    this.data.scrollTop = e.scrollTop;
+  },
+  goPage (e) {
+    const { detail } = e
+    if (!detail || !detail.jumpMode || !detail.url ) {
+      return;
+    }
+    wx[detail.jumpMode]({
+      url: detail.url,
+      success () {
+        wx.hideToast()
+      }
     })
   },
   //跳转新建地址页
@@ -81,5 +101,14 @@ Page({
   },
   toHideKeyboard() {
     wx.hideKeyboard()
+  },
+  setScrollTop() { // 获取页面滚动高度设置到options传递给组件，组件显示弹框时用来固定背景
+    this.setData({
+      'options.scrollTop': this.data.scrollTop
+    })
+  },
+  pageScrollTo(e = {}) {
+    let { scrollTop = 0, duration = 0 } = e.detail || {}
+     wx.pageScrollTo({ scrollTop, duration })
   }
 })

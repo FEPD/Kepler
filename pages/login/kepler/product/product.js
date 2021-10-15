@@ -3,6 +3,22 @@ const util = require('../utils/util.js');
 let app = getApp();
 Page({
   data:{
+    // 全局配置项
+    feGlobalConfig: {
+      coverMethodsAllDefine: [], // 需要覆写的方法，需在此申明注册
+      isHideJDLogo: false, // 是否屏蔽京东元素标识
+      hasRecommendFloor: true, // 是否展示推荐楼层
+      isCanCouponBuy: true, // boolean类型，默认：true。是否支持领券购买
+      share: {
+        qrCodeImgurl: '', // 小程序码
+      },
+      prodFavorableInfo: null,
+      singlePage: {
+        isShowPromotionFloor: true, // 是否展示优惠券
+        discountCoupon: null,
+      },
+      bpChoice: null
+    },
     option:{
       apolloId: app.globalData.apolloId ? app.globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',       //阿波罗Id
       apolloSecret: app.globalData.apolloSecret ? app.globalData.apolloSecret :'162f0903a33a445db6af0461c63c6a3b',   //阿波罗secret
@@ -18,87 +34,77 @@ Page({
   },
   onLoad: function(options) {
     console.log('============00', options)
-    this.pageIndex = getCurrentPages().length;
-    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
-
-    let pageStackLists = []
-    wxCurrPage.forEach(item => {
-      pageStackLists.push({
-        route: item && item.route
-      })
-    })
-    if (options.isLocGuider == '1') {
+    const that = this;
+    if (plugin && options.isLocGuider == '1') {
       plugin.setStorageSync('isLocGuider', true);
     }
-    options = plugin.initItemOptions(options)
-    // plugin.initStyle(this.data.option);
+    options = plugin ? plugin.initItemOptions(options) : options;
+    const curPages = getCurrentPages();
+    this.pageIndex = curPages.length;
+    const pageStackLists = that.setBasicInfo()
     this.setData({
-      options: Object.assign({}, this.data.option, {
+      isIphoneX: !!((app && app.globalData && app.globalData.isIphoneX) || (plugin.getStorageSync('isIphoneX'))),
+      options: Object.assign({}, options, {
+        wareId: options.wareId,
         skuId: options.wareId,
         pageParams: options,
+        pageIndex: curPages.length,
         wxCurrPage: pageStackLists
       })
     })
     this.updateShareurl(options.wareId)
     util.checkVersion()
-    plugin.emitter.on('fixedPageBg' + this.pageIndex, this.fixedPageBg.bind(this))
     plugin.emitter.on('goPage' + this.pageIndex, this.goPage.bind(this));
     plugin.emitter.on('scrollToPostion' + this.pageIndex, this.scrollToPostion.bind(this))
+    plugin.emitter.on('getScrollTop' + this.pageIndex, this.getScrollTop.bind(this))
     plugin.emitter.on('updateSkuId' + this.pageIndex, this.updateSkuId.bind(this))
-    plugin.emitter.on('productRefreshPage' + this.pageIndex, this.productRefreshPage.bind(this))
+    // plugin.emitter.on('productRefreshPage' + this.pageIndex, this.productRefreshPage.bind(this))
     this.data.refreshCount++;
-    let that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          screenHeight: res.windowHeight,
-          screenWidth: res.windowWidth,
-        });
-      }
-    });
   },
   onUnload () {
     // 页面卸载时，注销发布事件
-    plugin.emitter.off('updateSkuId' + this.pageIndex)
     plugin.emitter.off('goPage' + this.pageIndex);
     plugin.emitter.off('scrollToPostion' + this.pageIndex)
-    plugin.emitter.off('fixedPageBg' + this.pageIndex)
-    plugin.emitter.off('productRefreshPage' + this.pageIndex)
+    plugin.emitter.off("getScrollTop" + this.pageIndex);
+    plugin.emitter.off('updateSkuId' + this.pageIndex)
+    // plugin.emitter.off('productRefreshPage' + this.pageIndex)
   },
   onShow:function(){
-    let that = this;
+    const that = this;
     that.getRootPath();//获取全局根目录
     // 存储当前用户所在位置经纬度
     this.getUserAuthSetting();
-    this.data.refreshCount != 1 ? plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({},{isOnShow: true}, {data:this.data.options},)) : this.data.refreshCount++;
-  },
-  // 刷新商祥页，切换地址后，重新渲染商详
-  productRefreshPage (sitesAddress) {
-    let regionIdStr = sitesAddress && sitesAddress.regionIdStr
-    plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({}, {data:this.data.options},))
+    // this.data.refreshCount != 1 ? plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({},{isOnShow: true}, {data:this.data.options},)) : this.data.refreshCount++;
   },
   /**
-   * [goPage description]
-   * @param  {[type]} pageInfo [description]
-   * @param  {[type]} jumpMode [跳转方式：navigateTo，navigateBack， redirectTo]
-   * @param  {[type]} url [条状路径]
-   * @return {[type]}          [description]
+   * 商详主接口获取成功后，回调。
    */
-  goPage (pageInfo) {
-    if (!pageInfo || !pageInfo.jumpMode || !pageInfo.url ) {
-      return;
-    }
-    wx[pageInfo.jumpMode]({
-      url: pageInfo.url,
-      success () {
-        wx.hideToast()
-      }
-    })
+  doAfterGetdataSuccessInject(triggerDetail) {
+    const { wareInfo: wareData } = triggerDetail.detail;
+    this.data.wareData = wareData
+  },
+  coverMethodsAll: function(triggerDetail) {
+    const {doMethodName, fnparam} = triggerDetail.detail;
+    this[doMethodName](fnparam);
+  },
+  // 刷新商祥页，切换地址后，重新渲染商详
+  // productRefreshPage (sitesAddress) {
+  //   let regionIdStr = sitesAddress && sitesAddress.regionIdStr
+  //   plugin.emitter.emit('refreshPage' + this.pageIndex, Object.assign({}, {data:this.data.options},))
+  // },
+  getScrollTop() {
+    return this.data.scrollTop
   },
   // 切换商祥skuId
   updateSkuId (skuId) {
-    this.data.options.skuId = skuId
     this.updateShareurl(skuId)
+    this.setData({
+      options: Object.assign({}, this.data.options, {
+        wareId: skuId,
+        skuId: skuId,
+      })
+    })
+    return `skuId=${skuId}`
   },
   // 更新shareurl
   updateShareurl (skuId) {
@@ -117,15 +123,19 @@ Page({
   // 触底函数
   onReachBottom:function(e){
     plugin.emitter.emit('reachBottom' + this.pageIndex, e)
-    //图文详情触底加载
-    // this.product.methods.showProductDetail();
+    plugin.emitter.emit("getRecommend" + this.pageIndex, e);
   },
   // 动态控制滚动条
-  scrollToPostion () {
-    wx.pageScrollTo({
+  scrollToPostion ({ type, top, duration }) {
+    const pageScroll = {
       scrollTop: this.data.scrollTop + 50,
       duration: 200
-    })
+    }
+    if (type === 1) {
+      pageScroll.scrollTop = top
+      pageScroll.duration = duration || 0
+    }
+    wx.pageScrollTo(pageScroll)
   },
   // 监听页面滚动
   onPageScroll:function(e){
@@ -144,34 +154,6 @@ Page({
       }
     }
   },
-  // 当有弹框时，需固定页面背景
-  // flag: 是否固定背景，true为固定，false为恢复原位
-  fixedPageBg (flag) {
-    let pageStyle = 'position: relative; height: auto';
-    let wrapStyle = '';
-    if (flag) {
-      this.fixScrollTop = this.data.scrollTop
-      pageStyle = 'position: fixed;'
-                + 'overflow: hidden;'
-                + 'height:' + wx.getSystemInfoSync().windowHeight + 'px;'
-                + 'width: ' + wx.getSystemInfoSync().screenWidth + 'px;'
-      wrapStyle = 'top: -' + this.data.scrollTop + 'px; position: relative;'
-      this.setData({
-        pageStyle: pageStyle,
-        wrapStyle: wrapStyle
-      })
-    } else {
-      this.setData({
-        pageStyle: pageStyle,
-        wrapStyle: ''
-      })
-      wx.pageScrollTo({
-        scrollTop: this.fixScrollTop ? this.fixScrollTop : 0,
-        duration: 0
-      })
-    }
-  },
-
   //返顶处理
   toTopTap:function(e){
     wx.pageScrollTo({
@@ -217,40 +199,74 @@ Page({
       }
     })
   },
+  setBasicInfo() {
+    const that = this;
+    // 获取可视区域
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          screenHeight: res.windowHeight,
+          screenWidth: res.windowWidth,
+        });
+      },
+    });
+    let pageStackLists = []
+    const wxCurrPage = getCurrentPages();//获取当前页面的页面栈
+    wxCurrPage.forEach(item => {
+      pageStackLists.push({
+        route: item && item.route
+      })
+    })
+    return pageStackLists
+  },
   /**
    * [onShareAppMessage 商祥页分享]
    */
   onShareAppMessage: function (ev) {
     plugin.emitter.emit('buryingPoint' + this.pageIndex, 'click', {
-      "eid": "WProductDetail_ShareSuccess",
-      "elevel": "",
-      "eparam": "",
-      "pparam": '',
-      "target": "", //选填，点击事件目标链接，凡是能取到链接的都要上报
-      "event": ev //必填，点击事件event            
+      eid: 'WProductDetail_ShareSuccess',
+      event: ev //必填，点击事件event            
     })
-
     // 如果是导购员，分享链接拼接经纬度信息
     let _sharePath = `/${this.data.rootPath}?wareId=${this.data.options.skuId}`
     _sharePath = this.data.shareUrl ? `${_sharePath}&${this.data.shareUrl}` : _sharePath
-    let locParams = plugin.getLocParams(this.data.options.pageParams);
-    console.log('locParams====', locParams)
-    if (locParams == -1) {
-      let _lng = plugin.getStorageSync('user_lng')
-      let _lat = plugin.getStorageSync('user_lat')
-      console.log('_lng======', _lng, _lat)
-      if (_lng && _lat) {
-        _sharePath = _sharePath + '&lng=' + _lng + '&lat=' + _lat;
-      }
-    } else {
-      _sharePath = _sharePath + locParams
-    }
-    console.log('_sharePath=======', _sharePath)
-    const productName = plugin.getStorageSync('shareProName');
+    const res = plugin.emitter.emit("onShareAppMessageFn" + this.pageIndex, ev, _sharePath);
+    return res;
+  },
+  /**
+     * [onShareTimeline 商详分享至朋友圈]
+     */
+  onShareTimeline: function (ev) {
+    const { wareData } = this.data;
+    const wareInfo = wareData.wareInfo;
+    let query = `wareId=${this.data.options.skuId}`;
+    query = this.data.shareUrl ? `${query}&${this.data.shareUrl}` : query;
     return {
-      title: productName,
-      path: _sharePath,
+      title: wareInfo.name,
+      query,
+      imageUrl: wareData.wareImage[0].big,
     }
+  },
+  /**
+     * [goPage description]
+     * @param  {[type]} pageInfo [description]
+     * @param  {[type]} jumpMode [跳转方式：navigateTo，navigateBack， redirectTo]
+     * @param  {[type]} url [条状路径]
+     * @return {[type]}          [description]
+     */
+  goPage(pageInfo) {
+    console.log(pageInfo);
+    // const pageInfo = triggerObj.detail.pageInfo
+    if (!pageInfo || !pageInfo.jumpMode || !pageInfo.url) {
+      return;
+    }
+    wx[pageInfo.jumpMode]({
+      url: pageInfo.url,
+      success() {},
+      fail(err) {
+        console.log(err);
+      },
+    });
   },
 })
 

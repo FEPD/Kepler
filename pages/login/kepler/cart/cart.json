@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "购物车",
+  "disableScroll": true,
   "usingComponents": {
     "jdk-tabbar": "plugin://myPlugin/jdk-tabbar",
     "apollo-cart": "plugin://myPlugin/apollo-cart"

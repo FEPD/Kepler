@@ -1,1 +1,7 @@
-<jdk-distribution id="distribution" options="{{options}}" distData="{{distData}}" bind:goToVstoreh5="goToVstoreh5" bind:distrBack="distrBack" bind:goOpenSettion="goOpenSettion"></jdk-distribution>
+<jdk-distribution 
+  id="distribution"
+  originalOptions="{{options}}"
+  bind:distrBack="distrBack"
+  bind:goPage="goPage"
+  bind:goOpenSettion="goOpenSettion"
+></jdk-distribution>

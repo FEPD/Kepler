@@ -14,6 +14,7 @@ Page({
             locUrl = encodeURIComponent(locUrlStr);
         plugin.promiseGentoken().then(function(res){
             console.log(res)
+
             if(res.data.err_code==0){
                 newLocUrl = res.data.url+'?to='+locUrl+'&tokenkey='+res.data.tokenkey;
                 console.log(newLocUrl)

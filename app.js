@@ -24,7 +24,7 @@ App({
     tabBarPathArr: ['../index/index','../cart/cart','../order/order'],//tabBar页面路径，有tabBar页面则传相应路径，没有传空数组即可（登录跳转需要）
 
     // EZR 小程序使用
-    businessType: '3;', // EZR写 '3;'注意是字符串3和分号;
+    businessType: '', // EZR写 '3;'注意是字符串3和分号;
     // 预发环境
     // apolloId: '89f5bc2d5c9b4c68b3c03aaad4d0af4f',
     // apolloSecret: '94cac8db22814664a4e5ae8cabfe7566',

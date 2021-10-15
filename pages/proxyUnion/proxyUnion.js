@@ -19,7 +19,6 @@ Page({
     let pageLists = getCurrentPages && getCurrentPages()
     let currentPath = pageLists[pageLists.length - 1] && pageLists[pageLists.length - 1].__route__
     console.log(currentPath)
-    debugger;
     const isSubPackage = currentPath.indexOf('login/kepler/') !== -1 ? true : false
     config.isSubPackage = isSubPackage;
     return isSubPackage;

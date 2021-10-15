@@ -1,4 +1,4 @@
- <jdk-addressedit id="addressedit" options="{{options}}" addressType="{{addressType}}" defaultFlag="{{defaultFlag}}"
+<jdk-addressedit id="addressedit" options="{{options}}" addressType="{{addressType}}" defaultFlag="{{defaultFlag}}"
  bind:submitSuccess="submitSuccess"
  bind:deleteSuccess="deleteSuccess"
  /> 

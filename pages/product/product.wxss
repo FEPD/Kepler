@@ -1,11 +1,21 @@
 .bottom-to-top {
-    position: fixed;
-    bottom: 216rpx;
-    right: 20rpx;
-    width: 104rpx;
-    height: 120rpx;
-    z-index: 300;
-    transform-origin: 0;
-    opacity: 1;
-    transform: scale(1, 1);
-  }
+  position: fixed;
+  width: 110rpx;
+  height: 110rpx;
+  right: 17rpx;
+  bottom: 294rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bottom-to-top {
+  bottom: 185rpx;
+  background-image: url('https://newbuz.360buyimg.com/jingshop/product/icon_top_new.png'); 
+  background-size: auto 110rpx;
+  background-position: top;
+  background-repeat: no-repeat;
+  z-index: 20;
+}
+.bottom-to-top-iphonex {
+  bottom : 252rpx;
+}

@@ -35,6 +35,7 @@ Page({
   onLoad: function(options) {
     console.log('============00', options)
     const that = this;
+    this.initOptionsVal = options;
     if (plugin && options.isLocGuider == '1') {
       plugin.setStorageSync('isLocGuider', true);
     }
@@ -45,6 +46,7 @@ Page({
     this.setData({
       isIphoneX: !!((app && app.globalData && app.globalData.isIphoneX) || (plugin.getStorageSync('isIphoneX'))),
       options: Object.assign({}, options, {
+        initOptionsVal: this.initOptionsVal,
         wareId: options.wareId,
         skuId: options.wareId,
         pageParams: options,

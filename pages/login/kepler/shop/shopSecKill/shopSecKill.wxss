@@ -1,0 +1,69 @@
+/* shopRcmd.wxss */
+
+@import "../components/skuList/index.wxss";
+@import "../shop_utils/loading.wxss";
+page{
+  background-color:#f6f6f6;
+}
+.loadingFrame{
+  width: 750rpx;
+  height: 90rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 90rpx;
+  font-size: 22rpx;
+  background-color: #f8f8f8;
+  color: #848689;
+  text-align: center;
+}
+
+.bottom-to-top {
+  position: fixed;
+  bottom: 140rpx;
+  right: 20rpx;
+  width: 78rpx;
+  height: 78rpx;
+  z-index: 300;
+  transform-origin: 0;
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.no-more {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 28rpx;
+  height: 78rpx;
+}
+.load {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #f6f6f6;
+  border: 5rpx solid #f6f6f6;
+  border-radius: 0rpx;
+  height: 80rpx;
+  font-size: 28rpx;
+  color: #888;
+  position: static;
+}
+.pt-hasNoData{
+  margin-top: 320rpx;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.pt-img-noData {
+  width: 236rpx;
+  height: 140rpx;
+}
+.fontNodata {
+  color: #838588;
+  text-align: center;
+  font-size: 34rpx;
+  margin-top: 44rpx;
+}

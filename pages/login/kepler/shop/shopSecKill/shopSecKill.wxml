@@ -1,0 +1,35 @@
+
+
+<!--商品列表  -->
+<block wx:if="{{proInfo&&proInfo.data.length>0}}">
+  <scroll-view class="my-order-viewport" scroll-x="false" scroll-y="true" style="height:{{screenHeight}}px;" scroll-top="{{scrollTop}}" bindscroll="scroll" bindscrolltolower="onReachBottom">
+    <secKillList bind:clickFunc="clickFunc" sec-list="{{proInfo}}" module-type="list" sku-type="{{skuType}}"/> 
+    <image class="bottom-to-top" src="https://commonst.360buyimg.com/common/wx-images/scroll-to-top-icon-new.png" style="display:{{toTopDisplay}}" bindtap="toTopTap"></image>
+    <view wx:if="{{!hasNext}}" class="loadingFrame">
+      <view class="weui-loadmore__tips">我是有底线的~</view>
+    </view>
+    <view wx:if="{{loadmore}}" class="loadingFrame">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </scroll-view>
+</block>
+<block wx:else>
+  <view wx:if="{{proInfo&&proInfo.total==0}}" class='pt-hasNoData'>
+    <image class="pt-img-noData" src='http://njst.360buyimg.com/jdreact/program/shop_joy.png' />
+    <view class = "fontNodata">抱歉，暂无符合条件的商品</view>
+  </view>
+</block>
+
+
+
+
+
+
+
+
+
+
+
+
+

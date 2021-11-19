@@ -1,0 +1,48 @@
+.netError {
+  display: flex;
+  width: 750rpx;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 1111111111;
+  margin-top: 300rpx;
+}
+
+.errorWifi {
+  color: #838588;
+  text-align: center;
+  font-size: 34rpx;
+  margin-top: 28rpx;
+}
+
+.img-wifi {
+  width: 210rpx;
+  height: 210rpx;
+}
+
+.btnReload {
+  width: 220rpx;
+  height: 66rpx;
+  background-color: #ffffff;
+  color: #666666;
+  font-size: 28rpx;
+  margin-top: 36rpx;
+  border-color: #bebebe;
+  border-radius: 8rpx;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+  line-height: 66rpx;
+}
+
+.errorBottom{
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 22rpx;
+  background-color: #f8f8f8;
+  color: #848689;
+  text-align: center;
+
+}

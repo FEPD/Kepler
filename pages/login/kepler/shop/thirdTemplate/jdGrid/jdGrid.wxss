@@ -1,0 +1,225 @@
+/* pages/shop/thirdTemplate/jdGrid/jdGrid.wxss */
+.skulist{
+    box-sizing: border-box;
+    width: 750rpx;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: #f8f8f8;
+    padding-bottom:6rpx;
+}
+.skuitem{
+    box-sizing: border-box;
+    width: 372rpx;
+    margin-top: 6rpx;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+.sku-right{
+    margin-right: 6rpx;
+}
+.skuimg{
+    width: 372rpx;
+    height: 372rpx;
+    background-image: url('http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.skutitle{
+    font-size: 26rpx;
+    color:#232326;
+    margin-top: 10rpx;
+    margin-left: 22rpx;
+    margin-right: 22rpx;
+    margin-bottom: 10rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+    overflow: hidden;
+    height: 70rpx;
+}
+
+.skutitleStock{
+    color:#81838e;
+}
+/*拼购  */
+.fightbuy_box{
+    width: 215rpx;
+    height: 24rpx;
+    line-height: 24rpx;
+    display: inline-block;
+    margin-top:11rpx;
+    margin-left:18rpx;
+    position: relative;
+    overflow: hidden;
+}
+.fightbuy_box image{
+    width: 108rpx;
+    height: 24rpx;
+    display: block;
+    z-index: 0;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.fightbuy{
+    min-width: 108rpx;
+    font-family: PingFangSC-Regular;
+    font-size: 20rpx;
+    height: 24rpx;
+    position: absolute;
+    top: 0;
+    left: 11rpx;
+    white-space: nowrap;
+    text-indent: 10rpx;
+    z-index: 10;
+    padding-right: 5rpx;
+    box-sizing: border-box;
+    background-color: rgb(242, 48, 48);
+    line-height: 24rpx;
+    color: #FFFFFF;
+}
+.skuprice{
+    margin-left: 22rpx;
+    display: inline-block;
+    height: 48rpx;
+    color:#f23030;
+}
+
+.skuPriceLeft,.skuprice::first-letter{
+    color:#f23030;
+    font-size: 20rpx;
+}
+.skuPriceRight{
+    color:#f23030;
+    font-size: 36rpx;
+}
+
+
+.pt-newProduct-tips{
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    background-color: #f8f8f8;
+    font-size: 28rpx;
+    color: #686868;
+    position: relative;
+    z-index: 0;
+    margin-top: 12rpx;
+}
+.pt-newProduct-tips view{
+    margin: 0 auto;
+    width: 315rpx;
+    height: 100%;
+    z-index: 2;
+    background-color: #f8f8f8;
+    position: relative;
+
+}
+.pt-newProduct-tips image{
+    width: 23rpx;
+    height: 23rpx;
+    margin-right: 12rpx;
+}
+.pt-newProduct-tips:before{
+    content: '';
+    border-bottom: 1px solid #e0e0e0;
+    height: 1px;
+    position: absolute;
+    left: 20rpx;
+    top: 30rpx;
+    z-index: 1;
+    width: 710rpx;
+}
+
+.promoitem{
+    box-sizing: border-box;
+    width: 344rpx;
+    margin-top: 20rpx;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e0e0e0;
+}
+
+.promo-leftb{
+    margin-left: 20rpx;
+}
+.promo-lefts{
+    margin-left: 22rpx;
+}
+
+.stock {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .5);
+    justify-content: center;
+    align-items: center;
+}
+
+
+.stockbgimg{
+    width: 372rpx;
+    height: 372rpx;
+}
+
+.stockImg{
+    width: 122rpx;
+    height: 122rpx;
+}
+
+
+.skunderCarriage{
+    color:#81838e;
+    font-size: 26rpx;
+}
+
+.priceOther {
+    color:#81838e;
+    font-size: 26rpx;
+}
+
+.color_gray {
+    color:#81838e;
+}
+
+.promFrame{
+    display: flex;
+    width: 344rpx;
+    flex-direction: row;
+}
+
+.txt_promName{
+    padding-left: 8rpx;
+    padding-right: 8rpx;
+    padding-top: 2rpx;
+    padding-bottom: 2rpx;
+    background-color: #f23030;
+    border-radius: 4rpx;
+    font-size: 20rpx;
+    color: #ffffff;
+    margin-left: 20rpx;
+}
+
+.txt_promDesc{
+    padding-top: 2rpx;
+    padding-bottom: 2rpx;
+    font-size: 20rpx;
+    color: #999999;
+    margin-left: 10rpx;
+    max-width: 200rpx;
+    /* line-height: 40rpx; */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    word-break: break-all;
+    overflow: hidden;
+}
+.hide{
+    display: none;
+}

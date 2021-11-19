@@ -1,0 +1,10 @@
+<view wx:if="{{netState===2}}" class='netError'>
+  <image class="img-wifi" src='/pages/shop/shop_images/shop_wifi.png' />
+  <view class = "errorWifi">网络请求失败</view>
+  <view bindtap = "onReachBottom" class = "btnReload">重新加载</view>
+</view>
+<view wx:elif="{{netState===3}}">
+  <view class="errorBottom">
+      加载失败，请稍后重试
+  </view>
+</view>

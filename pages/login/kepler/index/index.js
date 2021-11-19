@@ -102,6 +102,11 @@ Page({
       url: '../order/order'
     });
   },
+  goShop: function (e) {
+    wx.navigateTo({
+      url: '../shop/shop?shopId=1000040105&shopName=中粮福临门米面京东自营旗舰店'
+    });
+  },
   logout:function(){
     plugin.globallogout(() => { this.goTologin()})
   },

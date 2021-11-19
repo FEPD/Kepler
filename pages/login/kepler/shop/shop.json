@@ -1,0 +1,22 @@
+{
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom",
+    "enablePullDownRefresh":false ,
+    "disableScroll":false,
+    "usingComponents": {
+      "floatImage": "./components/floatImage/index",
+      "skuList": "./components/skuList/index",
+      "shopTab": "./components/shopTab/index",
+      "activity": "./components/activity/index",
+      "suitList": "./components/suitList/index",
+      "netError": "./components/netError/index",
+      "jdTemplate": "./thirdTemplate/jdTemplate/jdTemplate",
+      "businessplat":"./components/businessplat/index",
+      "giftbag": "./components/giftbag/index",
+      "secKillList":"./components/secKillList/secKillList",
+      "couponList":"./components/couponList/couponList",
+      "addToMy" : "./components/addToMy/addToMy"
+    }
+}

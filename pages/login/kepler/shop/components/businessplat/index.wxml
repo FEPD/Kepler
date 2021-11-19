@@ -1,0 +1,19 @@
+<view style="z-Index:301;height: 65px;width: 65px;background: rgba(0,0,0,0);" class="entryShow">
+  <block wx:if="{{PendantParam.jumpType=='5'}}">
+    <navigator target="miniProgram" app-id="{{PendantParam.jumpAppid}}" path="{{PendantParam.jumpLink}}" version="release" extra-data="" hover-class="none" bindtap='jumpToOther' data-id="{{PendantParam.id}}">
+      <button form-type="submit" class="  buttonId">
+        <image style='width:65px;height:65px' src='{{PendantParam.iconAddress}}'></image>
+      </button>
+    </navigator>
+  </block>
+  <block wx:if="{{PendantParam.jumpType==='4'}}">
+    <button form-type="submit" class="  buttonId" bindtap='jumpToPage' data-path="{{PendantParam.jumpLink}}" data-id="{{PendantParam.id}}">
+      <image style='width:65px;height:65px' src='{{PendantParam.iconAddress}}'></image>
+    </button>
+  </block>
+  <block wx:if="{{PendantParam.jumpType==='1'||PendantParam.jumpType==='2'||PendantParam.jumpType==='3'}}">
+    <button form-type="submit" class="  buttonId" bindtap='jumpClick' data-type="{{PendantParam.jumpType}}" data-link="{{PendantParam.jumpLink}}" data-id="{{PendantParam.id}}">
+      <image style='width:65px;height:65px' src='{{PendantParam.iconAddress}}'></image>
+    </button>
+  </block>
+</view>

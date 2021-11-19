@@ -1,0 +1,71 @@
+/*弹窗样式*/
+.drawer_box_toast {
+  width: 416rpx;
+  height: 176rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 70%;
+  left: 0;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.6);
+  margin: -150px 50rpx 0 167rpx;
+  border-radius: 6px;
+}
+
+.toast_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.toast_title {
+  font-size: 30rpx;
+  color: white;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.coupon1 {
+  height: 186rpx;
+  width: 100%;
+  position: relative;
+  vertical-align: top;
+}
+
+.coupon2 {
+  height: 186rpx;
+  width: 50%;
+  position: relative;
+  vertical-align: top;
+}
+
+.coupon3 {
+  height: 250rpx;
+  width: 100%;
+  width: calc(100%/3);
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.coupon_status {
+  position: absolute;
+  top: 50rpx;
+  right: 0;
+  width: 100rpx;
+  height: 100rpx;
+  z-index: 100;
+}
+
+.shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .3)
+}

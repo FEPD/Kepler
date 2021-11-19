@@ -1,0 +1,66 @@
+.giftItem{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 100rpx;
+}
+.oneItem{
+ margin-top: 18rpx;
+}
+.twoItem{
+  margin-top: 48rpx;
+}
+.bean{
+  width: 68rpx;
+  height: 68rpx;
+  margin: 6rpx 20rpx 6rpx 6rpx;
+}
+.content{
+  display: flex;
+  height: 80rpx;
+  flex-direction: column;
+}
+.tit_box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.one{
+   height: 45rpx;
+   align-items:center;
+}
+.two{
+  height:80rpx;
+  align-items: center;
+}
+.tit{
+    font-family: PingFangSC-Semibold;
+    font-size: 32rpx;
+    color: #FDEC23;
+    margin-right:12rpx;
+
+}
+.subtitle{
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  margin-top:11rpx;
+}
+.jindou{
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+.jifen{
+  margin-top: 4rpx;
+}
+.txt_appear{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFC9D5;
+}
+.txt_none{
+  display: none;
+}

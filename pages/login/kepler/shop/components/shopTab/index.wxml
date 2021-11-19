@@ -1,0 +1,175 @@
+
+<!--<view class='frame' style="z-index: {{showTab?99999:-1}};background-image:url({{!isScroll?userInfoBac:''}})
+  ">-->
+<view wx:if="{{tabKey==='1004'||tabKey==='1008'}}">
+    <view class="cate-bg"></view>
+    <view class="cate-bg-cover"></view>
+</view>
+<view class='frame' style="z-index: {{showTab?9999:-1}};background-image:url({{userInfoBac}})">
+  <slot></slot>
+  <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!--  <block wx:if="{{!isScroll}}">-->
+  <block>
+    <view class='body body-concern' style='height:94rpx'>
+        <scroll-view scroll-x="true" style="height: 94rpx;width: 600rpx;white-space: nowrap" class="shop-tab-list">
+          <block wx:for="{{shopTabs}}" wx:key="index">
+            <view bindtap='click' data-key="{{item.key}}" data-name="{{item.name}}" class='tabitem'>
+              <form bindsubmit="navFormId">
+                <view style="transform: translateY(6px);display:flex;flex-direction:column;justify-content:center">
+                  <view wx:if="{{item.key==='1008'&&tabFlag&&showActFlag}}" class="promotion-flag">{{tabFlag}}</view>
+                  <button form-type="submit" class="nameNormal concernName formBtn" style="color:{{item.key === key?'#ffffff':'#ffffff'}};font-family:{{item.key === key?'PingFangSC-Semibold':'PingFangSC-Regular'}}">{{item.name}}
+                  </button>
+                  <!-- <text class="nameNormal concernName" style="color:{{item.key === key?'#ffffff':'#ffffff'}};font-family:{{item.key === key?'PingFangSC-Semibold':'PingFangSC-Regular'}}">{{item.name}}
+                </text> -->
+                  <view style="z-index:2;border-radius: 5rpx;margin:5rpx auto 12rpx;width:50rpx;height:6rpx;background-color:{{item.key===key?'#ffffff;':''}};"></view>
+                </view>
+              </form>
+            </view>
+          </block>
+        </scroll-view>
+        <view class="banner-search" catchtap="clickSearch" wx:if="{{shopTabs.length}}">
+            <image class="banner-search-icon"
+                   src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_icon.png"></image>
+            <text>搜索</text>
+        </view>
+
+    </view>
+  </block>
+  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!--  <block wx:if="{{isScroll}}">-->
+<!--    <view class='body' style='height:94rpx;margin-top:-5px'>-->
+<!--      <block wx:for="{{shopTabs}}" wx:key="index">-->
+<!--        <view bindtap='click' data-key="{{item.key}}" data-name="{{item.name}}" class='tabitem'>-->
+<!--          <text class="nameNormal2" style="color:{{item.key === key?'#686868':'#2E2D2D'}};font-family:{{item.key === key?'PingFangSC-Semibold':'PingFangSC-Regular'}}">-->
+<!--            {{item.name}}-->
+<!--          </text>-->
+<!--          <view style=" transform: translateY(-6px);z-index:2;border-radius: 5rpx;margin-bottom:-2rpx;width:50rpx;height:6rpx;background-color:{{item.key===key?'#2E2D2D;':''}};"></view>-->
+<!--        </view>-->
+<!--      </block>-->
+<!--    </view>-->
+<!--    <view wx:if="{{key === '1002'}}" class='body'>-->
+<!--      <view catchtap='subClick' data-name='推荐' data-key='2001' class='tabitem'>-->
+<!--        <text class="subNameNormal2" style=" transform: translateY(-5px);color:{{subKey === '2001'?'#f23030':'#232326'}};border-bottom: {{subKey==='12001'?'2px solid #f23030;':''}}">-->
+<!--          推荐-->
+<!--        </text>-->
+<!--      </view>-->
+<!--      <view catchtap='subClick' data-name='销量' data-key='2002' class='tabitem'>-->
+<!--        <text class="subNameNormal2" style=" transform: translateY(-5px);color:{{subKey === '2002'?'#f23030':'#232326'}};border-bottom: {{subKey==='12002'?'2px solid #f23030;':''}}">-->
+<!--          销量-->
+<!--        </text>-->
+<!--      </view>-->
+<!--      <view catchtap='subClick' data-name='新品' data-key='2003' class='tabitem'>-->
+<!--        <text class="subNameNormal2" style=" transform: translateY(-5px);color:{{subKey === '2003'?'#f23030':'#232326'}};border-bottom: {{subKey==='12003'?'2px solid #f23030;':''}}">-->
+<!--          新品-->
+<!--        </text>-->
+<!--      </view>-->
+<!--      <view catchtap='subClick' data-name='价格' data-key='2004' class='tabitem'>-->
+<!--        <view class='priceFrame'>-->
+<!--          <text class="subNameNormal2" style=" transform: translateY(-5px);color:{{subKey === '2004'?'#f23030':'#232326'}};border-bottom: {{subKey==='12004'?'2px solid #f23030;':''}}">-->
+<!--            价格-->
+<!--          </text>-->
+<!--          <image style=' transform: translateY(-4px)' class='priceIcon2' src="{{priceIcon}}"></image>-->
+<!--        </view>-->
+<!--      </view>-->
+<!--    </view>-->
+
+<!--    &lt;!&ndash; 促销列表 &ndash;&gt;-->
+<!--    <view wx:if="{{key === '1004'&&promList&&promList.length}}" class='body' style='margin-top:0rpx;width:750rpx;height:80rpx;'>-->
+<!--      <scroll-view scroll-x="true" style="white-space: nowrap; width:750rpx;height:80rpx;">-->
+<!--        <view style='display: inline-block;width:20rpx'></view>-->
+<!--        <block wx:for="{{promList}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">-->
+<!--          <view catchtap='promClick' data-item="{{item}}" style='margin-left:40rpx;display: inline-block;height:80rpx;justify-content: center;align-items: center;'>-->
+<!--            <text class='proItem' style="color:{{item.promoId===promoId?'#f23030':'#7e7e7e'}}">-->
+<!--              {{item.name}}-->
+<!--            </text>-->
+<!--          </view>-->
+<!--        </block>-->
+<!--        <view style='display: inline-block;width:20rpx'></view>-->
+<!--      </scroll-view>-->
+<!--    </view>-->
+<!--    &lt;!&ndash; 带有数量以及logo图的banner &ndash;&gt;-->
+<!--    &lt;!&ndash; <view class='body' style='height:110rpx'>-->
+<!--    <block wx:for="{{shopTabs}}">-->
+<!--    <view bindtap='click' data-key="{{item.key}}" data-name="{{item.name}}"class='tabitem'>-->
+<!--      <block wx:if="{{item.key === '1001'}}">-->
+<!--      <image class = "tab-image" mode=""  src="{{item.key === key?'/pages/shop/shop_images/shop_icon_shop_home_active.png':'/pages/shop/shop_images/shop_icon_shop_home_normal.png'}}" />-->
+<!--      </block>-->
+<!--      <block wx:else>-->
+<!--       <text class="numNormal" style="color:{{item.key === key?'#f23030':'#232326'}};">{{item.num}}</text>-->
+<!--      </block>-->
+
+<!--      <text class="nameNormal" style="color:{{item.key === key?'#f23030':'#232326'}}">{{item.name}}</text>-->
+<!--      <view style="z-index:2;border-radius: 5rpx;margin-bottom:-2rpx;width:50rpx;height:5rpx;background-color:{{item.key===key?'#f23030;':''}};"></view>-->
+<!--    </view>-->
+<!--    </block>-->
+<!--  </view>-->
+<!--  <view wx:if="{{key === '1002'}}" class='body' style='margin-top:0rpx;'>-->
+<!--    <view catchtap='subClick' data-name='推荐' data-key='2001' class='tabitem'>-->
+<!--      <text class-->
+<!--      ="subNameNormal" style="color:{{subKey === '2001'?'#f23030':'#232326'}};border-bottom: {{subKey==='12001'?'2px solid #f23030;':''}}">推荐</text>-->
+<!--    </view>-->
+<!--    <view catchtap='subClick' data-name='销量' data-key='2002' class='tabitem'>-->
+<!--      <text class="subNameNormal" style="color:{{subKey === '2002'?'#f23030':'#232326'}};border-bottom: {{subKey==='12002'?'2px solid #f23030;':''}}">销量</text>-->
+<!--    </view>-->
+<!--    <view catchtap='subClick' data-name='新品' data-key='2003' class='tabitem'>-->
+<!--      <text class="subNameNormal" style="color:{{subKey === '2003'?'#f23030':'#232326'}};border-bottom: {{subKey==='12003'?'2px solid #f23030;':''}}">新品</text>-->
+<!--    </view>-->
+<!--    <view catchtap='subClick' data-name='价格' data-key='2004' class='tabitem'>-->
+<!--      <view class='priceFrame'>-->
+<!--        <text class="subNameNormal" style="color:{{subKey === '2004'?'#f23030':'#232326'}};border-bottom: {{subKey==='12004'?'2px solid #f23030;':''}}">价格</text>-->
+<!--        <image class='priceIcon' src="{{priceIcon}}"></image>-->
+<!--      </view>-->
+<!--    </view>-->
+<!--  </view> &ndash;&gt;-->
+<!--    &lt;!&ndash; 促销列表 &ndash;&gt;-->
+<!--    &lt;!&ndash; <view wx:if="{{key === '1004'&&promList&&promList.length}}" class='body' style='margin-top:0rpx;width:750rpx;height:80rpx;'>-->
+<!--    <scroll-view scroll-x="true" style="white-space: nowrap; width:750rpx;height:80rpx;">-->
+<!--    <view style='display: inline-block;width:20rpx'></view>-->
+<!--     <block wx:for="{{promList}}" wx:for-index="idx" wx:for-item="item">-->
+<!--      <view catchtap='promClick' data-item="{{item}}" style='margin-left:40rpx;display: inline-block;height:80rpx;justify-content: center;align-items: center;'>-->
+<!--        <text class='proItem' style="color:{{item.promoId===promoId?'#f23030':'#7e7e7e'}}">{{item.name}}</text>-->
+<!--      </view>-->
+<!--     </block>-->
+<!--      <view style='display: inline-block;width:20rpx'></view>-->
+<!--    </scroll-view>-->
+<!--  </view> &ndash;&gt;-->
+<!--  </block>-->
+</view>
+<form wx:if="{{key === '1002'}}" style="position:fixed;top:{{100*winScale + statusHeight}}px;z-index: 1;width: 100%" bindsubmit="navChildFormId" class="body-sort">
+    <view wx:if="{{key === '1002'}}" class='body body-sort-con'  style='margin-top:0rpx;display:flex;'>
+        <button wx:if="{{key === '1002'}}" form-type="submit" class="formBtn  tabitem" catchtap='subClick' data-name='推荐'
+                data-key='2001'>
+            <text class="subNameNormal" style="color:{{subKey === '2001'?'#F0250F':'#000'}}">推荐</text>
+        </button>
+        <button wx:if="{{key === '1002'}}" form-type="submit" class="formBtn  tabitem" catchtap='subClick' data-name='销量'
+                data-key='2002'>
+            <text class="subNameNormal" style="color:{{subKey === '2002'?'#F0250F':'#000'}}">销量</text>
+        </button>
+        <button wx:if="{{key === '1002'}}" form-type="submit" class="formBtn  tabitem" catchtap='subClick' data-name='新品'
+                data-key='2003'>
+            <text class="subNameNormal" style="color:{{subKey === '2003'?'#F0250F':'#000'}}">新品</text>
+        </button>
+        <button wx:if="{{key === '1002'}}" form-type="submit" class="formBtn  tabitem" catchtap='subClick' data-name='价格'
+                data-key='2004'>
+            <view class='priceFrame'>
+                <text class="subNameNormal" style="color:{{subKey === '2004'?'#F0250F':'#000'}}">价格</text>
+                <image class='priceIcon' src="{{priceIcon}}"></image>
+            </view>
+        </button>
+    </view>
+</form>
+<!-- 促销列表 -->
+<!-- <form bindsubmit="formSale" wx:if="{{key === '1004'&&promList&&promList.length}}" class='body body-sale'
+      style='margin-top:0rpx;width:750rpx;height:80rpx;position:fixed;top:{{100*winScale + statusHeight}}px;z-index: 1;width: 100%'>
+    <scroll-view scroll-x="true" style="white-space: nowrap; width:750rpx;height:80rpx;">
+        <view style='display: inline-block;width:20rpx'></view>
+        <block wx:for="{{promList}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+            <view catchtap='promClick' data-item="{{item}}" style='margin-left:40rpx;display: inline-block;height:80rpx;justify-content: center;align-items: center;'>
+                <button form-type="submit" class='pingou  formBtn' style="color:{{item.promoId===promoId?'#F0250F':'#000'}}">
+                    {{item.name}}
+                </button>
+            </view>
+        </block>
+        <view style='display: inline-block;width:20rpx'></view>
+    </scroll-view>
+</form> -->

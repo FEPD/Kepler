@@ -1,0 +1,392 @@
+ <!-- 店铺楼层装修模板 -->
+<template name = "floor">
+</template>
+
+<!-- 店铺楼层--优惠券 imgShopFloor -->
+<template name = "floor_coupon">
+<view bindtap="receiveCoupons" data-eid = "WShop_CouponFloor" data-item="{{item}}" data-index="{{idx}}" class="floor_coupon_view {{(idx===couponsCount-1)?'last':''}}">
+  <image class="floor_coupon_img" style="position:absolute;top:0;left:0" src="{{item.applicability?'http://njst.360buyimg.com/jdreact/program/shop_focus_coupon_blue_normal.png':'http://njst.360buyimg.com/jdreact/program/shop_focus_coupon_grey.png'}}" />
+  <view class="" style="margin-top:26rpx;z-index: 1;align-items: center;justify-content: center;width:144rpx;">
+    <view style="margin-left:-25rpx;height:44rpx;display: flex;display:-webkit-flex;flex-direction: row;-webkit-justify-content: center;justify-content: center;align-items: flex-end;">
+      <view style="padding-Bottom:3rpx;">
+        <text class="font_size28 color_white">￥</text>
+      </view>
+      <view style="">
+        <text class="font_size44 font_bold color_white">{{item.discount}}</text>
+      </view>
+    </view>
+    <view style="display: flex;display:-webkit-flex; -webkit-justify-content: center;justify-content: center;align-items: center">
+        <text class="font_size20 color_white" style="text-align: center">满</text>
+        <text class="font_size20 color_white font_bold" style="text-align: center">{{item.quota}}</text>
+        <text class="font_size20 color_white" style="text-align: center">元可用</text>
+    </view>
+  </view>
+  <view class="" style="z-index: 1;margin-left:30rpx;">
+    <block wx:if="{{!item.applicability}}">
+      <image wx:if="{{item.couponStatus==1}}" class="" style="width:66rpx;height:108rpx"src='http://njst.360buyimg.com/jdreact/program/shop_focus_coupon_grey_mark.png' />
+      <image wx:elif="{{item.couponStatus==2}}" class="" style="width:66rpx;height:108rpx"src='http://njst.360buyimg.com/jdreact/program/shop_focus_coupon_unactive_mark.png' />
+      <image wx:elif="{{item.couponStatus==3}}" class="" style="width:66rpx;height:108rpx"src='http://njst.360buyimg.com/jdreact/program/shop_focus_coupon_sellout_mark.png' />
+    </block>
+  </view>
+  <button class='buttonId' form-type="submit"></button>
+</view>
+</template>
+
+
+<!-- 店铺楼层--间隔 -->
+<!--<template name = "floor_gap">
+  <view class=" floor_gap color_f8">
+  </view>
+</template> -->
+
+<!-- 店铺楼层--上拉切换 -->
+<template name = "floor_pull">
+  <view bindtap="jumpAllGoods" class=" floor_pull">
+    <view class="font_size24" style="color:#a0a2a6;margin-left:10rpx;">点击切换到全部商品</view>
+  </view>
+</template>
+
+<!-- 店铺楼层--文字活动 -->
+<template name = "floor_text">
+ <block wx:for="{{configs}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+  <view bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId82_view">
+  <view class="floor_text_lineMore font_size28" style="width:{{item.configType != 0?'666rpx':'710rpx'}}">{{item.text}}
+  </view>
+ <image wx:if="{{item.configType != 0}}"  class="floor_img_arrow" src='http://njst.360buyimg.com/jdreact/program/shop_list_arrow.png' />
+</view>
+ </block>
+</template>
+
+
+<!-- 店铺楼层--单列活动大图 -->
+<template name = "floor_templateId83">
+<view class="floor_templateId83_view">
+  <block wx:for="{{configs}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId83_img" src="{{item.imageUrl}}" />
+  </block>
+</view>
+</template>
+
+<!-- 店铺楼层--单列活动小图 条幅图-->
+<template name = "floor_templateId15">
+<view class="floor_templateId15_view">
+   <block wx:for="{{configs}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+      <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId15_img" src="{{item.imageUrl}}" />
+   </block>
+</view>
+</template>
+
+<!-- 店铺楼层--两列活动 -->
+<template name = "floor_templateId17">
+<view class="floor_templateId17_view">
+  <view class="floor_templateId17_img" wx:for="{{[configs[0]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId17_img" src="{{item.imageUrl}}" />
+  </view>
+  <view style="margin-Left:14rpx" class="floor_templateId17_img" wx:for="{{[configs[1]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId17_img" src="{{item.imageUrl}}" />
+  </view>
+</view>
+</template>
+
+<!-- 店铺楼层--三列活动 -->
+<template name = "floor_templateId84">
+<view class="floor_templateId84_view">
+  <view class="floor_templateId84_img" wx:for="{{[configs[0]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId84_img" src="{{item.imageUrl}}" />
+  </view>
+  <view style="margin-Left:20rpx" class="floor_templateId84_img" wx:for="{{[configs[1]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId84_img" src="{{item.imageUrl}}" />
+  </view>
+  <view style="margin-Left:20rpx" class="floor_templateId84_img" wx:for="{{[configs[2]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId84_img" src="{{item.imageUrl}}" />
+  </view>
+</view>
+</template>
+
+<!-- 店铺楼层--四列活动 -->
+<template name = "floor_templateId18">
+<view class="floor_templateId18_view">
+  <view class="floor_templateId18_img" wx:for="{{[configs[0]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId18_img" src="{{item.imageUrl}}" />
+  </view>
+  <view style="margin-Left:10rpx" class="floor_templateId18_img" wx:for="{{[configs[1]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId18_img" src="{{item.imageUrl}}" />
+  </view>
+  <view style="margin-Left:10rpx" class="floor_templateId18_img" wx:for="{{[configs[2]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId18_img" src="{{item.imageUrl}}" />
+  </view>
+  <view style="margin-Left:10rpx" class="floor_templateId18_img" wx:for="{{[configs[3]]}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+    <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" class="floor_templateId18_img" src="{{item.imageUrl}}" />
+  </view>
+</view>
+</template>
+
+<!-- 店铺楼层-轮播图 -->
+<template name = "floor_templateId11">
+<view class="floor_templateId11_view">
+  <swiper indicator-dots="true"
+  autoplay="true" interval="5000" circular="true" duration="100" class="floor_templateId11_img" indicator-color="rgba(0,0,0,.2)" indicator-active-color="white">
+  <block wx:for="{{configs}}" wx:key="index">
+    <swiper-item>
+      <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-item = "{{item}}" src="{{item.imageUrl}}" class="floor_templateId11_img"/>
+    </swiper-item>
+  </block>
+</swiper>
+</view>
+</template>
+
+
+<!-- 店铺楼层--自由布局--两列 -->
+<template name = "floor_templateId6">
+<view class="floor_templateId6_view">
+  <view class="floor_templateId6_bg">
+    <template  is="floor_templateId6_item" data="{{...products[0],uid,templateId}}"></template>
+  </view>
+  <view class="floor_templateId6_bg" style="margin-left:20rpx">
+    <template  is="floor_templateId6_item" data="{{...products[1],uid,templateId}}"></template>
+  </view>
+</view>
+</template>
+
+
+<template name = "floor_templateId6_item">
+<view bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-wareId = "{{wareId}}" class="" style="background-color: white;position:relative">
+  <image style="background-color:rgab(0,0,0,0);width:345rpx;height:345rpx;position:absolute;left:0;top:0;z-Index:1" src="http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png" />
+  <image style="z-Index:100;position:relative" class="floor_templateId6_img"  src="{{imgPath}}" />
+  <view class="" style="">
+     <view class="floor_text_line2 font_size26" style="width:340rpx;height:70rpx;line-height:35rpx; overflow: hidden;">{{wareName}}</view>
+     <view class="" style="margin-top:2rpx;display:flex;display:-webkit-flex;flex-diraction:row;align-items: flex-end;-webkit-align-items: flex-end;">
+        <block wx:if="{{isUnderCarriage != 1}}">
+            <view class="price font_size20" style="padding-Bottom:5rpx;">￥</view>
+            <view class="price font_size36 font_bold">{{preJDPrice}}</view>
+            <view class="price font_size20" style="padding-Bottom:5rpx;">.</view>
+            <view class="price font_size20" style="padding-Bottom:5rpx;">{{sufJDPrice}}</view>
+        </block>
+        <block wx:else>
+            <text class="pt-other font_size26 font_bold">{{jdPrice}}</text>
+        </block>
+      </view>
+  </view>
+</view>
+</template>
+
+
+<!-- 店铺楼层--自由布局--上2下1 -->
+<template name = "floor_templateId7">
+<view class="floor_templateId7_view">
+  <view class="" style="display: flex;display:-webkit-flex;flex-direction: row;">
+    <view class="floor_templateId7_img1" style="position:relative;">
+      <template  is="pt-item-templateId7-1" data="{{...products[0],uid,templateId}}"></template>
+    </view>
+    <view class="floor_templateId7_img1" style="margin-left:20rpx;position:relative">
+      <template  is="pt-item-templateId7-1" data="{{...products[1],uid,templateId}}"></template>
+    </view>
+  </view>
+  <view class="floor_templateId7_img2" style="position:relative">
+    <template  is="pt-item-templateId7-2" data="{{...products[2],uid,templateId}}"></template>
+  </view>
+</view>
+</template>
+
+<template name = "pt-item-templateId7-1">
+  <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-wareId = "{{wareId}}" class="floor_templateId7_img1" style="position:absolute;left:0;top:0;z-Index:0" src="{{imgPath}}" />
+      <view class="" style="z-Index:3;width:345rpx;height:80rpx;align-items: center;">
+        <view class="" style="margin-top:265rpx;display:flex;justify-content: center;width:345rxp;height:80rpx;background-color: white;opacity: 0.84;flex-direction: column;">
+          <view class="floor_text_line1" style="overflow:hidden;margin-left:5rpx;width:325rpx;font-size: 26rpx">{{wareName}}</view>
+          <view class="" style="margin-left:5rpx;margin-top:5rpx;display:flex;display:-webkit-flex;flex-diraction:row;align-items: flex-end;-webkit-align-items: flex-end;">
+              <block wx:if="{{isUnderCarriage != 1}}">
+                <view class="price font_size20" style="padding-Bottom:5rpx;">￥</view>
+                <view class="price font_size30 font_bold">{{preJDPrice}}</view>
+                <view class="price font_size20" style="padding-Bottom:5rpx;">.</view>
+                <view class="price font_size20" style="padding-Bottom:5rpx;">{{sufJDPrice}}</view>
+              </block>
+              <block wx:else>
+                <text class="pt-other font_size26 font_bold">{{jdPrice}}</text>
+              </block>
+          </view>
+         </view>
+      </view>
+</template>
+
+
+<template name = "pt-item-templateId7-2">
+  <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-wareId = "{{wareId}}" class="floor_templateId7_img2" style="position:absolute;left:0;top:-20rpx;z-Index:0" src="{{imgPath}}" />
+      <view class="" style="z-Index:3;width:710rpx;height:60rpx;align-items: center;">
+        <view class="" style="position:relative;margin-top:650rpx;display:flex;justify-content: center;width:710rxp;height:60rpx;background-color: white;opacity: 0.84;flex-direction: column;">
+        <view class="" style="display:flex;flex-direction: row;">
+
+          <view class="" style="display:flex;flex-direction: column;">
+            <view class="floor_text_line1" style="margin-left:5rpx;width:550rpx;font-size: 26rpx">{{wareName}}</view>
+          </view>
+
+          <view class="" style="width:160rpx;display:flex;flex-direction: row;justify-content: flex-end;align-items: center;">
+           <view class="" style="display:flex;display:-webkit-flex;-webkit-align-items: flex-end;flex-diraction:row;align-items: flex-end;">
+              <block wx:if="{{isUnderCarriage != 1}}">
+                <view class="price font_size20" style="padding-Bottom:5rpx;">￥</view>
+                <view class="price font_size30 font_bold">{{preJDPrice}}</view>
+                <view class="price font_size20" style="padding-Bottom:5rpx;">.</view>
+                <view class="price font_size20" style="padding-Bottom:5rpx;">{{sufJDPrice}}</view>
+              </block>
+              <block wx:else>
+                <text class="pt-other font_size26 font_bold">{{jdPrice}}</text>
+              </block>
+           </view>
+          </view>
+        </view>
+         </view>
+      </view>
+</template>
+
+<!-- 店铺楼层--自由布局--左2右1 -->
+<template name = "floor_templateId8">
+<view class="floor_templateId8_view">
+  <view class="floor_templateId8_bg1" style="display: flex;display:-webkit-flex;flex-direction: column;-webkit-flex-direction: column;">
+      <view class="floor_templateId8_bg1_item">
+          <template  is="floor_templateId8_left" data="{{...products[0],uid,templateId}}" />
+      </view>
+      <view class="floor_templateId8_bg1_item" style="margin-top:20rpx">
+          <template  is="floor_templateId8_left" data="{{...products[1],uid,templateId}}" />
+      </view>
+  </view>
+  <view class="floor_templateId8_bg2">
+      <template  is="floor_templateId8_right" data="{{...products[2],uid,templateId}}" />
+  </view>
+</view>
+</template>
+
+<template name = "floor_templateId8_left">
+<view bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-wareId = "{{wareId}}" class="" style="">
+  <image class="floor_templateId8_img1"  src="{{imgPath}}" />
+  <view class="" style="">
+     <view class="floor_text_line2" style="height:56rpx;line-height:28rpx;width:180rpx;font-size: 24rpx">{{wareName}}</view>
+     <view class="" style="margin-top:4rpx;display:flex;display:-webkit-flex;-webkit-align-items: flex-end;flex-diraction:row;align-items: flex-end;">
+        <block wx:if="{{isUnderCarriage != 1}}">
+          <view class="price font_size18" style="padding-Bottom:5rpx;">￥</view>
+              <view class="price font_size26 font_bold">{{preJDPrice}}</view>
+              <view class="price font_size18" style="padding-Bottom:5rpx;">.</view>
+              <view class="price font_size18" style="padding-Bottom:5rpx;">{{sufJDPrice}}</view>
+        </block>
+        <block wx:else>
+        <text class="pt-other font_size26 font_bold">{{jdPrice}}</text>
+        </block>
+      </view>
+  </view>
+</view>
+</template>
+
+<template name = "floor_templateId8_right">
+<view bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-wareId = "{{wareId}}" class="" style="background-color: white;">
+  <image class="floor_templateId8_img2"  src="{{imgPath}}" />
+  <view class="" style="">
+      <view style="width:480rpx;height:75rpx;">
+        <view class="floor_text_line2" style="width:480rpx;font-size: 26rpx;line-height:35rpx;">{{wareName}}</view>
+      </view>
+     <view class="" style="margin-top:0rpx;display:flex;display:-webkit-flex;-webkit-align-items: flex-end;flex-diraction:row;align-items: flex-end;">
+        <block wx:if="{{isUnderCarriage != 1}}">
+          <view class="price font_size20" style="padding-Bottom:5rpx;">￥</view>
+          <view class="price font_size30 font_bold">{{preJDPrice}}</view>
+          <view class="price font_size18" style="padding-Bottom:5rpx;">.</view>
+          <view class="price font_size20" style="padding-Bottom:5rpx;">{{sufJDPrice}}</view>
+        </block>
+        <block wx:else>
+          <text class="pt-other font_size26 font_bold">{{jdPrice}}</text>
+        </block>
+      </view>
+  </view>
+</view>
+</template>
+
+<!-- 店铺楼层--自由布局--上1下3 -->
+<template name = "floor_templateId9">
+<view class="floor_templateId9_view" >
+  <view class="floor_templateId9_img1" style="position:relative;">
+    <template  is="pt-item-templateId7-2" data="{{...products[0],uid,templateId}}"></template>
+  </view>
+  <view class="floor_templateId9_bg2" style="display: flex;display:-webkit-flex;flex-direction: row;margin-top:20rpx">
+      <view class="floor_templateId9_bg2_item">
+        <template  is="pt-item-templateId9-1" data="{{...products[1],uid,templateId}}"></template>
+      </view>
+      <view class="floor_templateId9_bg2_item" style="margin-left:20rpx">
+        <template  is="pt-item-templateId9-1" data="{{...products[2],uid,templateId}}"></template>
+      </view>
+      <view class="floor_templateId9_bg2_item" style="margin-left:20rpx">
+        <template  is="pt-item-templateId9-1" data="{{...products[3],uid,templateId}}"></template>
+      </view>
+  </view>
+
+</view>
+</template>
+
+<template name = "pt-item-templateId9-1">
+<view bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-wareId = "{{wareId}}" class="" style="background-color: white;">
+  <image class="floor_templateId9_img2"  src="{{imgPath}}" />
+      <view class="" style="margin-top:-10rpx;width:224rpx;height:98rpx;background-color: white;">
+          <view class="floor_text_line2" style="height:60rpx;line-height:30rpx;padding-top:10rpx;margin-left:5rpx;width:224rpx;font-size: 24rpx">{{wareName}}</view>
+          <view class="" style="margin-left:5rpx;margin-top:5rpx;display:flex;display:-webkit-flex;-webkit-align-items: flex-end;flex-diraction:row;align-items: flex-end;">
+            <block wx:if="{{isUnderCarriage != 1}}">
+              <view class="price font_size18" style="padding-Bottom:3rpx;">￥</view>
+              <view class="price font_size26 font_bold">{{preJDPrice}}</view>
+              <view class="price font_size18" style="padding-Bottom:3rpx;">.</view>
+              <view class="price font_size18" style="padding-Bottom:3rpx;">{{sufJDPrice}}</view>
+            </block>
+            <block wx:else>
+            <text class="pt-other font_size26 font_bold">{{jdPrice}}</text>
+            </block>
+          </view>
+         </view>
+    </view>
+</template>
+
+<!-- 店铺楼层--自由布局--商家自由组合 -->
+<template name = "floor_templateId91">
+<view class="floor_templateId91_view">
+  <view class="floor_templateId91_view_content" style="height:{{89*cellsInHeight}}rpx;">
+  <block wx:for="{{configs}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+      <image bindtap="floorClick" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-configs = "{{item.configs}}"
+      src="{{item.imageUrl}}"
+      style="position: absolute; top: {{(item.y*100)/cellsInHeight}}%;left: {{(item.x*100)/8}}%;width:{{(item.w*100)/8}}%;height:{{(item.h*100)/cellsInHeight}}%;"/>
+  </block>
+  </view>
+</view>
+</template>
+
+<!-- 店铺楼层--新品推荐 19 -->
+<template name = "floor_templateId19">
+<view class="floor_templateId19_view">
+  <!-- 新品推荐  -->
+  <view wx:if="{{isUseTitle===1 && title}}" style="display: flex;flex-direction: column;justify-content: center;display: -webkit-flex;-webkit-flex-direction: column;-webkit-justify-content: center;height:79rpx;width:750rpx;">
+      <text style="font-size: 32rpx;color: #232326;margin-left:20rpx;">{{title}}</text>
+  </view>
+  <!-- 商品  -->
+<view class="pt-list" style="background-color:#ffffff;">
+  <view wx:for="{{products}}" wx:key="wareId"  class="item-marginLeft item-marginBottom" wx:key="index">
+    <template  is="floor_templateId6_item" data="{{...item,uid,templateId}}"></template>
+  </view>
+</view>
+
+
+  <!-- 查看更多 -webkit-  -->
+  <view wx:if="{{isMore}}" style="display: flex;flex-direction: column;display: -webkit-flex;-webkit-flex-direction: column;align-items: center;-webkit-align-items: center;height:72rpx;width:750rpx;background-color: white;">
+    <view class="" data-name="value" style="background-color:#f8f8f8;height:1px;width:710rpx;" />
+    <view bindtap="moreNewProduct" data-uid="{{uid}}" data-moduleType="PD_PRODUCT" data-name="{{title}}" class="" style="height:71rpx;width:710rpx;display:flex;flex-direction: row;align-items: center;justify-content: flex-end;display:-webkit-flex;-webkit-flex-direction: row;-webkit-align-items: center;-webkit-justify-content: flex-end;">
+      <text style="font-size: 26rpx;color: #666666;">查看更多</text>
+      <image class="floor_more_goods_img" style="margin-left:22rpx;" src='http://njst.360buyimg.com/jdreact/program/shop_more_goods_arrow_normal.png' />
+    </view>
+  </view>
+</view>
+
+</template>
+
+
+
+<!-- 店铺楼层--热区 -->
+<template name = "floor_templateId132">
+<view bindtap="floorClick" data-pix="{{pix}}" data-uid = "{{uid}}" data-templateId = "{{templateId}}" data-configs = "{{configs}}" style="margin-left:10px;width:{{drawWidth}}px;height:{{drawHeight}}px">
+<image
+      src="{{imageUrl}}"
+      style="width:{{drawWidth}}px;height:{{drawHeight}}px"/>
+</view>
+</template>
+
+
+

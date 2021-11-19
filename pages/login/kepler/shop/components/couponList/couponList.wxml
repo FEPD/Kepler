@@ -1,0 +1,157 @@
+<template is="couponList" data="{{couponList,couponUseList,moreInfo}}" />
+<!-- 东券列表 -->
+<template name="dqItem">
+  <view class="coupon-box coupon-wrapper blue {{couponStatus==3?'gray':''}}" bindtap="couponClick" data-state="{{applicability}}" data-enable="{{couponStatus!==3}}" data-type="{{bindType}}" data-id="{{couponId}}">
+      <view class="coupon-wrap">
+        <view class="left-box">
+          <block wx:if="{{style===3}}">
+              <view class="m-box" wx:if="{{minDiscount&&!maxDiscount}}">
+                <block wx:if="{{minInt}}">
+                    <view class="f76">
+                      <text class="intTxt">{{minInt}}</text><text class="dotTxt">.{{minDot}}</text>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="f76">{{minDiscount}}</view>
+                </block>
+                <view class="f30 d-unit">折</view>
+              </view>
+              <view class="m-box multi-discount" wx:elif="{{minDiscount&&maxDiscount}}">
+                <view class="f76">
+                  <block wx:if="{{minInt}}">
+                      <text class="intTxt">{{minInt}}</text><text class="dotTxt">.{{minDot}}</text>
+                  </block>
+                  <block wx:else>
+                      <text class="intTxt">{{minDiscount}}</text>
+                  </block><text class="intTxt">-</text>
+                  <block wx:if="{{maxInt}}">
+                      <text class="intTxt">{{minInt}}</text><text class="dotTxt">.{{maxDot}}</text>
+                  </block>
+                  <block wx:else>
+                      <text class="intTxt">{{maxDiscount}}</text>
+                  </block>
+                </view>
+                <view class="f30 d-unit">折</view>
+              </view>
+          </block>
+          <view class="m-box" wx:else> 
+            <view class="f30">¥</view>   
+            <view class="f76 discount-num">{{discount}}</view>
+          </view>
+          <view class="n-m" wx:if="{{quota > 0}}">
+            满{{quota}}元可用
+          </view>
+          <view class="n-m" wx:elif="{{quota == 0}}">
+            不限金额
+          </view>
+          <view class="r"></view>
+        </view>
+        <view class="right-box">
+          <view class="right-l">
+            <view class="coupon-l">
+              <view class="coupon-bg">东券 </view>
+              <view class="coupon-font">{{couponName}} </view>
+            </view>
+            <view class="r-bot-box" wx:if="{{couponStatus!==3}}">
+                <view class="use-t">{{beginTime}}-{{endTime}}</view>
+                <view wx:if="applicability" class="use-btn">点击领取</view>
+                <view wx:else class="use-btn">立即使用</view>
+            </view>
+            <view class="discountWrap" >
+              <view wx:if="{{style===3}}"  catchtap="toggleDiscountInfo" data-id="{{couponId}}" class="discount-box {{couponUseList[couponId]?'topArrow':''}}">
+                <view class="discountDesc">详细信息</view>
+                <view class="arrow-box">
+                    <view class="arrow-icon"></view>  
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view  wx:if="{{style===3&&couponUseList[couponId]}}"  class="moreDisInfo">
+        <rich-text  wx:if="{{couponFaceDescription}}" nodes="{{couponFaceDescription}}"></rich-text>
+      </view>
+  </view>
+</template>
+<!-- 京券列表 -->
+<template name="jqItem">
+  <view class="coupon-box coupon-wrapper red {{applicability?'':'gray'}}" bindtap="checkCb" data-type="0" data-id="{{couponId}}">
+    <view class="coupon-wrap">
+      <view class="left-box">
+        <view class="m-box"> 
+          <view class="f30">¥</view>   
+          <view class="f76 discount-num">{{discount}}</view>
+        </view>
+        <view class="n-m" wx:if="{{quota > 0}}">
+          满{{quota}}元可用
+        </view>
+        <view class="n-m" wx:elif="{{quota == 0}}">
+          不限金额
+        </view>
+        <view class="r"></view>
+      </view>
+      <view class="right-box">
+        <view class="right-l">
+          <view class="coupon-l">
+            <view class="coupon-bg">京券 </view>
+            <view class="coupon-font">{{couponName}} </view>
+          </view>
+          <view class="r-bot-box">
+              <view class="use-t">{{beginTime}}-{{endTime}}</view>
+              <view wx:if="applicability" class="use-btn">点击领取</view>
+              <view wx:else class="use-btn">立即使用</view>
+          </view>
+          <view class="discountWrap" ></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<!-- 运费券列表 -->
+<template name="yfqItem">
+  <view class="coupon-box green {{item.gray=='1'?'':'gray'}}" bindtap="checkCb" wx:for="{{yfqArr}}" wx:key="unique" wx:for-index="index" data-index="{{index}}" data-type="3">
+    <view class="left-box">
+      <view class="m-box">
+        <view class="f36">{{item.discount}}元</view>
+      </view>
+      <!-- <view class="n-m">除偏远山区、极速达</view> -->
+      <view class="r"></view>
+    </view>
+    <view class="right-box">
+      <view class="right-l">
+        <view class="coupon-l">
+          <view class="coupon-bg">运费券</view>
+          <view class="coupon-font">{{couponName}}</view>
+        </view>
+        <view class='overlay-wrap'>
+          <view wx:if='{{item.isSupportOverlay}}' class='overlay'>可叠加</view>
+        </view>
+        <view class="use-t">{{beginTime}}-{{endTime}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+<!--套装促销  -->
+<template name="couponList">
+    <view class='couponList'>
+      <block wx:for="{{couponList || []}}" wx:key="{{item.couponId}}">
+          <!-- 京券 -->
+          <block wx:if="{{item.type===0}}">
+              <template is="jqItem" data="{{...item,couponUseList}}" />
+          </block>
+          <!-- 东券 -->
+          <block wx:if="{{item.type===1}}">
+              <template is="dqItem" data="{{...item,couponUseList}}" />
+          </block>
+          <!-- 屏蔽运费券 -->
+          <!-- <block wx:if="{{item.type===2}}">
+              <template is="zkqItem" data="{{...item,couponUseList}}" />
+          </block> -->
+      </block>
+      <view wx:if="{{moreInfo}}" class='checkmore'>
+        <text>查看更多</text>
+        <view></view>
+      </view>
+    </view>
+</template>
+

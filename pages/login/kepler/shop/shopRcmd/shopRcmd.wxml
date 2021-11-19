@@ -1,0 +1,36 @@
+<!-- shopRcmd.wxml -->
+<!-- <import src = "../shop/shop_template/shop_template" />
+<import src = "../shop/shop_template/floorTemplate" />
+<template is= "product-list" data="{{list,noData,netError,hasNext,platform,loadingfailed}}" /> -->
+
+<!--商品列表  -->
+<skuList sku-list="{{list}}" sku-type="{{1002}}"/> 
+
+<!--加载状态  -->
+<view wx:if="{{state===1}}" class="loadingFrame">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+<!--已加载全部数据状态  -->
+<view wx:if="{{!hasNext && list.length}}" class="loadingFrame">
+  <view class="weui-loadmore__tips">我是有底线的~</view>
+</view>
+<view wx:elif="{{!hasNext&&!list.length}}" class='pt-hasNoData'>
+  <image class="pt-img-noData" src='http://njst.360buyimg.com/jdreact/program/shop_joy.png' />
+  <view class = "fontNodata">抱歉，暂无符合条件的商品</view>
+</view>
+<!--网络异常  -->
+<netError bindreloadevent="onReload" net-state="{{state}}"/>
+
+
+
+
+
+
+
+
+
+
+
+
+

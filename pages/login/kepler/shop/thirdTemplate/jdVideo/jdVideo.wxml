@@ -1,0 +1,15 @@
+<view id="videoBox" class='videoBox' bindtap='onPlay'
+data-videoId="{{videoData.data.videoId}}" style="margin-top:{{marginTop||0}};margin-bottom:{{marginBottom||0}}">
+<block wx:if="{{isVieoShow}}">
+    <video  class="videoItem" id="myVideo"
+  src="{{videoData.data.videoUrl.length? videoData.videoUrl: '../../shop_images/shop_goods_img_default.png'}}" controls
+  duration='{{videoData.data.duration}}' objectFit="contain" autoplay='autoplay'></video>
+</block>
+<block wx:else>
+    <image class="model-img" style="width: 750rpx;height: calc(9 * 750rpx / 16);"
+      mode="aspectFill" src="{{videoData.imageUrl}}"></image>
+     <view class="model-btn">
+         <view class="play-icon"></view>
+     </view>
+</block>
+</view>

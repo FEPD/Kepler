@@ -31,7 +31,8 @@
         "kepler/vstoreh5/vstoreh5",
         "kepler/guideAddress/guideAddress",
         "kepler/order/order",
-        "kepler/web-h5/web-h5"
+        "kepler/web-h5/web-h5",
+        "kepler/shop/shop"
       ],
       "plugins": {
         "myPlugin": {
@@ -54,6 +55,5 @@
   "window": {
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }

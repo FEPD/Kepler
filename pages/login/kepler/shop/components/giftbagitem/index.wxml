@@ -1,0 +1,50 @@
+<!--
+  奖励的类型：
+  0：店铺京券
+  1：店铺东券
+  4：京豆
+  6：积分
+  -->
+<!--京券或者东券  -->
+<block wx:if="{{dataItem.prizeType==0||dataItem.prizeType==1}}">
+<view class='giftItem {{dataSum==1||dataSum==3?"oneItem":"twoItem"}}'>
+  <image src="https://m.360buyimg.com/marketingminiapp/jfs/t24349/64/1023082844/1132/2da811bf/5b4d999bNc062f39b.png" class='bean'></image>
+ <view class='content'>
+    <view class="tit_box one">
+     <text class='tit jifen'>{{dataItem.redWord}}</text>
+     <text class='subtitle'>优惠券</text>
+    </view>
+    <text class='txt_appear'>{{dataItem.secLineWord}}</text>
+ </view>
+</view>
+</block>
+
+
+<!--京豆  -->
+<block wx:if="{{dataItem.prizeType==4}}">
+<view class='giftItem {{dataSum==1||dataSum==3?"oneItem":"twoItem"}}'>
+  <image src="https://m.360buyimg.com/marketingminiapp/jfs/t21529/274/2267601784/982/adcbf3e0/5b4d997cN7ed650be.png" class='bean'></image>
+ <view class='content'>
+    <view class="tit_box two">
+     <text class='tit'>{{dataItem.redWord}}</text>
+     <text class='jindou'>{{dataItem.rearWord}}</text>
+    </view>
+ </view>
+</view>
+</block>
+
+
+
+<!--积分  -->
+<block wx:if="{{dataItem.prizeType==6}}">
+<view class='giftItem {{dataSum==1||dataSum==3?"oneItem":"twoItem"}} '>
+  <image src="https://m.360buyimg.com/marketingminiapp/jfs/t23164/6/990560955/1164/a600668d/5b4d9981N6e3be726.png" class='bean'></image>
+ <view class='content'>
+    <view class="tit_box one">
+     <text class='tit jifen'>{{dataItem.redWord}}</text>
+     <text class='subtitle'>会员积分</text>
+    </view>
+    <text class='txt_appear'>可在京东App店铺内查看</text>
+ </view>
+</view>
+</block>

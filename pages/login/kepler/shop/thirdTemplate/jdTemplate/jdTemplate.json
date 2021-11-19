@@ -1,0 +1,15 @@
+{
+  "component": true,
+  "usingComponents": {
+        "jdText": "../jdText/jdText",
+        "jdContainer":"../jdContainer/jdContainer",
+        "jdImage": "../jdImage/jdImage",
+        "jdLine": "../jdLine/jdLine",
+        "jdSlider": "../jdSlider/jdSlider",
+        "jdGrid": "../jdGrid/jdGrid",
+        "jdList": "../jdList/jdList",
+        "jdVideo": "../jdVideo/jdVideo",
+        "jdCoupon":"../coupon/index",
+        "jdCollage":"../jdCollage/index"
+  }
+}

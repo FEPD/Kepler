@@ -1,0 +1,325 @@
+<import src="shop_template/shop_template" />
+<import src="shop_template/floorTemplate" />
+
+<view wx:if="{{!!isApiError}}" class="guide-address-wrap">
+    <image class="error-icon" src="https://newbuz.360buyimg.com/jingshop/error/error_logo.png"></image>
+    <view class="error-text-wrap">
+      <view class="error-text">很抱歉，访问异常火爆！</view>
+      <view class="error-text">请您刷新重试</view>
+    </view>
+    <view class="refresh-btn" bindtap="refreshShop">点击刷新</view>
+</view>
+
+<block wx:else>
+<!-- 顶部tab -->
+<shopTab wx:scope-data="{{...seoReportParams,tabKey}}" scroll-top="{{scrollTop}}" ex-type="{{switchKey}}" scroll-top="{{scrollTop}}" ex-type="{{switchKey}}" status-height="{{statusBarHeight}}" win-scale="{{winScale}}" tab-key="{{tabKey}}" prom-list="{{promList}}" shop-tabs="{{tabs}}" tab-flag="{{promotionFlag}}" bindtabevent="onTabEvent" bind:clickFunc="clickFunc" userInfoBac='{{userInfoBac}}' isScroll="{{isScroll}}">
+<!--  <block wx:if="{{!isScroll}}">-->
+    <template is="shop_banner_userinfo" data="{{menuWidth,menuRight,platform,statusBarHeight,isScroll,logoType,imgUrl,shopID,winWidth,isBanner,shopInfo,searchText, bInputText,bDisplayMask,needShieldShopCategory,conternData,follow,followType,contactInfo,winScale}}" />
+<!--  </block>-->
+<!--  <block wx:else>-->
+<!--    <template is="shop_banner_search" data="{{isScroll,logoType,imgUrl,shopID,winWidth,isBanner,shopInfo,searchText, bInputText,bDisplayMask,needShieldShopCategory}}" />-->
+<!--  </block>-->
+</shopTab>
+<!-- 占位高度 -->
+<!-- 添加到我的小程序 -->
+<addToMy bindtoastShowExFunc="toastShowExFunc" isHaveHeader="{{false}}" bindcloseToast="closeAddToast" showAddToast="{{showAddToast}}"></addToMy>
+<view style='height:{{100*winScale + concernPlaceHeight}}px' ></view>
+<view style="height:46.5px" wx:if="{{tabKey==='1002'}}"></view>
+<!-- <view style="height:80rpx" wx:if="{{tabKey==='1004'}}"></view> -->
+<!-- 列表 -->
+<block wx:if="{{tabKey==='1006'}}">
+  <activity activity-list="{{allGoodList}}" wx:if="{{isActivitySupport}}"/>
+  <skuList wx:if="{{allGoodList&&allGoodList.length && !isActivitySupport}}" sku-list="{{allGoodList}}" sku-param="{{requestParam}}" sku-type="{{tabKey}}" prom-list="{{promList}}" promo-rule="{{promo}}" />
+</block>
+<block wx:elif="{{tabKey==='1001'}}">
+  <!-- 有超码数据展示超码配置，没有的话显示关键词 -->
+    <block wx:if="{{isShowContact}}">
+      <button open-type="contact" show-message-card="true" bindcontact="handleContact" bindtap="contactClick"
+              class="banner-contact banner-contact-type-{{contactInfo.configType||1}}"
+              style="height:{{28 * winScale}}px;line-height:{{28 * winScale}}px;"
+              wx:if="{{contactInfo.applyState == 1}}">
+          <block wx:if="{{contactInfo.configType != '1' && contactInfo.configType != '2'}}">
+              <view class="contact-bg"
+                    style="{{'background: url(' + contactInfo.configImage +') 0 0 no-repeat'}}"></view>
+          </block>
+          <view class="contact-concern">{{contactInfo.configButton}}</view>
+          <view class="contact-text">{{contactInfo.configDesc}}</view>
+      </button>
+    </block>
+  <view class="{{floorData.length>1?'compages0':'compages1'}}">
+    <!-- 固定楼层优惠券 -->
+    <scroll-view wx:if="{{coupons&&coupons.length}}" scroll-x="true" style="padding-bottom:20rpx;white-space: nowrap; width:750rpx;height:128rpx;background: #f8f8f8" bindscroll="couponScroll">
+      <form class="formId" bindsubmit="formCoupon" wx:for="{{coupons}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+          <template is="floor_coupon" data="{{idx,item,couponsCount}}"></template>
+      </form>
+    </scroll-view>
+    <block wx:for="{{floorData}}" wx:for-index="idx" wx:for-item="citem" wx:key="floors +{{idx}}">
+      <block wx:for="{{citem}}" wx:for-index="index" wx:for-item="item" wx:key="floor +{{index}}">
+        <view wx:if="{{item.moduleType==='PD_TEMPLATE'}}">
+          <jdTemplate bind:clickTemplateItem="didClickFloorItem" bind:clickFunc="clickFunc" thirdTemplates="{{item.containerData}}" floorExtInfo="{{item.floorExtInfo}}" isVieoShow="{{isVieoShow}}" sizeRule="{{item.sizeRule}}"></jdTemplate>
+        </view>
+        <!-- templateId===91 自由布局 -->
+        <view wx:elif="{{item.templateId===91}}">
+          <template is="floor_templateId91" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===82 文字活动 -->
+        <view wx:elif="{{item.templateId===82}}">
+          <template is="floor_text" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===83 单列活动（大图） -->
+        <view wx:elif="{{item.templateId===83}}">
+          <template is="floor_templateId83" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===17 双列活动 -->
+        <view wx:elif="{{item.templateId===17}}">
+          <template is="floor_templateId17" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===84 三列活动 -->
+        <view wx:elif="{{item.templateId===84}}">
+          <template is="floor_templateId84" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===18 四列活动 -->
+        <view wx:elif="{{item.templateId===18}}">
+          <template is="floor_templateId18" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===16 单列活动（小图） -->
+        <view wx:elif="{{item.templateId===16}}">
+          <template is="floor_templateId15" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===11 轮播图 -->
+        <view wx:elif="{{item.templateId===11}}">
+          <template is="floor_templateId11" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===19 超值单品 -->
+        <view wx:elif="{{item.templateId===19|| item.templateId===73 ||item.templateId === 74 ||item.templateId === 53}}">
+          <template is="floor_templateId19" data="{{...item.dsConfig ,...item}}" />
+        </view>
+        <!-- templateId===6 自由布局-双列 -->
+        <view wx:elif="{{item.templateId===6}}">
+          <template is="floor_templateId6" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===7 自由布局-上2下1 -->
+        <view wx:elif="{{item.templateId===7}}">
+          <template is="floor_templateId7" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===8 自由布局-左2右1 -->
+        <view wx:elif="{{item.templateId===8}}">
+          <template is="floor_templateId8" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===9 自由布局-上1下3 -->
+        <view wx:elif="{{item.templateId===9}}">
+          <template is="floor_templateId9" data="{{...item.dsConfig,...item}}" />
+        </view>
+        <!-- templateId===132 热区楼层 -->
+        <view wx:elif="{{item.templateId===132}}">
+          <template is="floor_templateId132" data="{{...item.dsConfig,...item}}" />
+        </view>
+      </block>
+    </block>
+    <template wx:if="{{floorData&&floorData.length}}" is="floor_pull" />
+<!--      <block wx:if="{{isCustomTabbar}}">-->
+<!--          <view class="tabr-bar-height"></view>-->
+<!--          <view class="{{isIphoneX?'phoneXFillingStyleSec':''}}"></view>-->
+<!--      </block>-->
+  </view>
+</block>
+<!-- <block wx:elif="{{tabKey==='1004'}}">
+  <view class="sale-container">
+    <view class="nav-box"><view class="n-bg-left"></view><text>逛促销</text><view class="n-bg-right"></view></view>
+     <form bindsubmit="formSale" wx:if="{{promList&&promList.length}}" class='body body-sale'>
+      <scroll-view scroll-x="true" style="white-space: nowrap; width:710rpx;height:80rpx;">
+          <view style='display: inline-block;width:20rpx'></view>
+          <block wx:for="{{promList}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+              <view catchtap='promClick' data-item="{{item}}" style='display: inline-block;height:80rpx;justify-content: center;align-items: center;{{idx!=0?"margin-left:40rpx;":""}}'>
+                  <button form-type="submit" class='pingou  formBtn' style="color:{{item.promoId===promoId?'#F0250F':'#232326'}}">
+                      {{item.name}}
+                  </button>
+              </view>
+          </block>
+          <view style='display: inline-block;width:20rpx'></view>
+      </scroll-view>
+     </form>
+     <skuList wx:if="{{allGoodList&&allGoodList.length}}" class="sale-skulist" sku-list="{{allGoodList}}" sku-param="{{requestParam}}" sku-type="{{tabKey}}" prom-list="{{promList}}" promo-rule="{{promo}}" />
+  </view>
+</block> -->
+<block wx:elif="{{tabKey==='1008'}}">
+  <view class="activity-box">
+  <!-- 活动tab，秒杀闪购等 开始-->
+    <view id="centerContainer"  class="pt10">
+      <block wx:if="{{secKillInfo.total>0&&secKillInfo.data&&secKillInfo.data.length>0}}">
+        <view class="sale-container bg-fff">
+          <view class="nav-box"><view class="n-bg-left"></view><text>限时秒杀</text><view class="n-bg-right"></view></view>
+          <secKillList bind:clickFunc="clickFunc" bindrefresh="refreshSecKill"  class="sale-skulist" sku-info="{{secKillInfo}}" sku-type="MS" module-type="tab" />
+        </view>
+      </block>
+      <block wx:if="{{flahPurchaseInfo.total>0&&flahPurchaseInfo.data&&flahPurchaseInfo.data.length>0}}">
+        <view class="sale-container bg-fff">
+          <view class="nav-box"><view class="n-bg-left"></view><text>限时闪购</text><view class="n-bg-right"></view></view>
+          <secKillList bind:clickFunc="clickFunc" bindrefresh="refreshSecKill"  class="sale-skulist" sku-info="{{flahPurchaseInfo}}" sku-type="SG" module-type="tab" />
+        </view>
+      </block>
+      <!-- <block wx:if="{{couponInfo&&couponInfo.length>0}}">
+        <view class="sale-container bg-fff">
+          <view class="nav-box"><view class="n-bg-left"></view><text>优惠券</text><view class="n-bg-right"></view></view>
+          <couponList  coupon-info="{{couponInfo}}" />
+        </view>
+      </block> -->
+    </view>
+    <block wx:if="{{promotionInfo&&promotionInfo.type==1&&promotionInfo.firstTabFirstPageSkuList&&promotionInfo.promotionTitles}}">
+      <view class="sale-container bg-fff">
+        <view class="nav-box" id="navcontainer"><view class="n-bg-left"></view><text>逛促销</text><view class="n-bg-right"></view></view>
+        <view style="width: 710rpx; height: 80rpx;">
+            <form  id="promotionMenu" bindsubmit="formSale" wx:if="{{proTitles&&proTitles.length}}" style="top:{{menuFixed?100*winScale + concernPlaceHeight+'px':auto}}" class='body body-sale {{menuFixed ? "menuFixed": ""}}'>
+                <scroll-view scroll-x="true" style="white-space: nowrap; width:710rpx;height:80rpx;">
+                    <view style='display: inline-block;width:20rpx'></view>
+                    <block wx:for="{{proTitles}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+                        <view catchtap='promTabClick' data-item="{{item}}" data-idx="{{idx}}" style='display: inline-block;height:80rpx;justify-content: center;align-items: center;{{idx!=0?"margin-left:40rpx;":""}}'>
+                            <button form-type="submit" class='pingou formBtn' style="color:{{item.erpPromotionId===currentPromId&&idx===currPromIdx?'#F0250F':'#232326'}}">
+                                {{item.promotionTitle}}
+                            </button>
+                        </view>
+                    </block>
+                    <view style='display: inline-block;width:20rpx'></view>
+                </scroll-view>
+            </form>
+        </view>
+        <skuList wx:if="{{allGoodList&&allGoodList.length}}" bind:clickFunc="clickFunc" class="sale-skulist" tab-name="{{currentTitle}}" sku-list="{{allGoodList}}"  sku-type="1008" prom-list="{{promList}}" promo-desc="{{proDescTxt}}" />
+      </view>
+    </block>
+    <block wx:if="{{currentType==='hotSale'}}">
+      <view class="sale-container bg-fff">
+        <view class="nav-box"><view class="n-bg-left"></view><text>热 销</text><view class="n-bg-right"></view></view>
+        <skuList wx:if="{{allGoodList&&allGoodList.length}}"  sku-param="{{requestParam}}" sku-list="{{allGoodList}}"  sku-type="1008" sku-category="hotSale" />
+      </view>
+    </block>
+  </view>
+</block>
+<block wx:else>
+  <skuList wx:if="{{allGoodList&&allGoodList.length}}" sku-list="{{allGoodList}}" sku-param="{{requestParam}}" sku-type="{{tabKey}}" prom-list="{{promList}}" promo-rule="{{proDescTxt}}" />
+</block>
+<!-- 加载状态 -->
+<view wx:if="{{state===1}}" class="loadingFrame">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<!-- 已加载全部数据状态 -->
+<view wx:if="{{!hasNext && allGoodList.length}}" class="loadingFrame">
+  <view class="weui-loadmore__tips">我是有底线的~</view>
+</view>
+<view wx:elif="{{!hasNext && !allGoodList.length}}" class='pt-hasNoData'>
+  <image class="pt-img-noData" src='http://njst.360buyimg.com/jdreact/program/shop_joy.png' />
+  <view class="fontNodata">抱歉，暂无符合条件的商品</view>
+</view>
+<!-- 网络异常 -->
+<netError bindreloadevent="onReload" net-state="{{state}}" />
+<!-- /返回顶部按钮 -->
+<view wx:if="{{isShowBackTop}}" class="back-top" bindtap='backtoTop'>
+  <image class="back-top-img" mode="" src="{{boolBack ? imgUrl+'shop_butn_goup_pressed.png' : imgUrl+'/shop_butn_goup_normal.png'}}" />
+</view>
+<!-- 弹窗-领取成功提示 -->
+<view class="drawer_box_toast" wx:if="{{isShowToast}}">
+  <view class="toast_content">
+    <image class="" src="{{(showToast.processStatus==='999' || showToast.processStatus===999)?'http://njst.360buyimg.com/jdreact/program/shop_toast_icon_ok.png':'http://njst.360buyimg.com/jdreact/program/shop_toast_icon_warnning.png'}}" style="width:52rpx;height:52rpx; margin-top:35rpx; "></image>
+    <view class="toast_title" style="margin-top:20rpx;max-width:400rpx">{{showToast.desc}}</view>
+  </view>
+</view>
+<!-- 年货节活动 -->
+<floatImage wx:if="{{isShowActivity}}" shop-id="{{shopID}}"></floatImage>
+<!-- 关注成功的弹窗 -->
+<view class='contern_box_toast' wx:if="{{isShowHeart}}">
+  <image src="http://m.360buyimg.com/marketingminiapp/jfs/t1/5450/12/11255/1890/5bced850E70ab048b/5ce4b3e5cb86146f.png" class='heart'></image>
+  <text class='heartText'>{{conternMsg}}</text>
+</view>
+<!-- 关注有礼的弹窗 -->
+<view class="giftContern" wx:if="{{isShowGift}}" style="padding-top:{{giftMsg.length==2||giftMsg.length==3?'237rpx':'337rpx'}}">
+  <giftbag giftMsg="{{giftMsg}}" bind:clickContainerClose="clickClose"></giftbag>
+</view>
+<!-- 挂件 -->
+<movable-area style="pointer-events: none;height: {{winHeight-100*winScale - concernPlaceHeight}}px;width: 65px; position: fixed; top: {{100*winScale + concernPlaceHeight}}px;right: 0; z-index: 99; ">
+  <movable-view direction="all" out-of-bounds="true"  x="{{winWidth-74}}" y="{{winHeight-146-100*winScale - concernPlaceHeight}}" style="pointer-events: auto;width: 65px; height: 65px;">
+    <form bindsubmit="formPendant" class="formId" wx:if="{{pendant_open}}">
+      <block wx:if="{{PendantParam.jumpType=='6'}}">
+        <view class='pendant_box'>
+          <button class="pendant-btn  buttonId" data-plugurl='{{PendantParam.jumpLink}}' bindtap='toLoginPendant' data-shopId="{{shopID}}">
+            <image class='pendant_img' src='{{PendantParam.iconAddress}}' data-source="pendant" data-id="{{PendantParam.id}}" bindtap='jumpToPlug' />
+          </button>
+        </view>
+      </block>
+      <block wx:else>
+        <businessplat PendantParam="{{PendantParam}}"></businessplat>
+      </block>
+    </form>
+  </movable-view>
+</movable-area>
+<!-- 弹屏 -->
+<block wx:for="{{ScreenParam}}" wx:key=''>
+  <form bindsubmit='formScreen' class='screenBox formId' wx:if="{{(item.jumpType==='6'&& screen_open==true&&item.screenType == 'generalScreen'&&index == currentScreenIndex)||(item.jumpType!=='6'&&item.screenType == 'generalScreen'&&index == currentScreenIndex)}}" catchtouchmove='stopScroll'>
+    <block wx:if="{{item.jumpType=='5'}}">
+      <navigator target="miniProgram" app-id="{{item.jumpAppid}}" path="{{item.jumpLink}}" version="release" extra-data="" hover-class="none" data-id="{{item.id}}" bindtap='jumpToOther'>
+        <button form-type="submit" class="buttonId">
+          <image class="screenImg" src='{{item.iconAddress}}'></image>
+        </button>
+      </navigator>
+    </block>
+    <block wx:if="{{item.jumpType==='4'}}">
+      <button form-type="submit" class="buttonId" style='background:none' bindtap='jumpToPage' data-path="{{item.jumpLink}}" data-id="{{item.id}}">
+        <image class="screenImg" src='{{item.iconAddress}}'></image>
+      </button>
+    </block>
+    <block wx:if="{{item.jumpType=='1'||item.jumpType=='2'||item.jumpType=='3'}}">
+      <button form-type="submit" class="buttonId" style='background:none' bindtap='jumpToScreen' data-type="{{item.jumpType}}" data-link="{{item.jumpLink}}" data-id="{{item.id}}">
+        <image class="screenImg" src='{{item.iconAddress}}' />
+      </button>
+    </block>
+    <block wx:if="{{item.jumpType=='6'&& screen_open==true}}">
+      <button form-type="submit" class="getuserinfo-btn" open-type='getUserInfo' data-plugurl='{{item.jumpLink}}' bindgetuserinfo='toLoginPendant' data-shopId="{{shopID}}">
+        <image class="screenImg" src='{{item.iconAddress}}' data-id="{{item.id}}" data-source="screen" bindtap='jumpToPlug' />
+      </button>
+    </block>
+    <image class="screenClose" data-type="screen" bindtap='closeScreen' src='http://m.360buyimg.com/marketingminiapp/jfs/t23905/137/1721396544/6489/4e0ccff9/5b67ed59N062a89e7.png' />
+  </form>
+  <!-- 新人红包 -->
+  <form bindsubmit='formScreen' class='new_reward_box' wx:if="{{item.screenType == 'initBag'&&index == currentScreenIndex}}" catchtouchmove='stopScroll'>
+    <view class='new_reward_wrap'>
+      <image class='new_reward_bg' src='http://m.360buyimg.com/marketingminiapp/jfs/t23254/274/2587685567/364747/a6d45e5b/5b83c71dN1bc62728.png'></image>
+      <view class='new_reward_coupon'>
+        <image class='new_reward_coupon_img' src='http://m.360buyimg.com/marketingminiapp/jfs/t1/1641/29/16100/36471/5be11104E6d1f0ca9/4a85bc04d5858d47.png'></image>
+        <view class='new_reward_coupon_amount'>
+          <text>￥</text>
+          {{item.couponList&&item.couponList[0]&&item.couponList[0].discount}}
+        </view>
+        <view class='new_reward_coupon_principle'>
+          优惠券满{{item.couponList&&item.couponList[0]&&item.couponList[0].quota}}元可用
+        </view>
+      </view>
+      <button class="getuserinfo-btn new_reward_btn" data-activityid='{{item.activityId}}' data-ruleid='{{item.couponList&&item.couponList[0]&&item.couponList[0].couponParam&&item.couponList[0].couponParam.ruleId}}' data-encryptedkey='{{item.couponList&&item.couponList[0]&&item.couponList[0].couponParam&&item.couponList[0].couponParam.encryptedKey}}' open-type='getUserInfo' catchtap='getNewArrivalCoupon'>
+        <image class='' src='{{isLogin?"http://m.360buyimg.com/marketingminiapp/jfs/t1/1387/36/16103/36365/5be110a6Eae53fcfd/577d7bc24bbc01f0.png":"http://m.360buyimg.com/marketingminiapp/jfs/t1/9673/21/6396/45217/5be110dbEf52e8820/13870e8f9136a0b5.png"}}'></image>
+      </button>
+    </view>
+    <image class="newrewardClose" data-type="newreward" bindtap='closeScreen' src='http://m.360buyimg.com/marketingminiapp/jfs/t23905/137/1721396544/6489/4e0ccff9/5b67ed59N062a89e7.png' />
+  </form>
+
+  <!--中心化弹屏-->
+  <form bindsubmit='formScreen' class='screenBox formId' wx:if="{{center_screen_open &&item.screenType == 'centringScreen'&&index == currentScreenIndex}}" catchtouchmove='stopScroll'>
+    <button form-type="submit" class="buttonId" style='background:none' bindtap='getCenterScreenCoupon' data-activityid='{{item.activityId}}' data-ruleid='{{item.couponList&&item.couponList[0]&&item.couponList[0].couponParam&&item.couponList[0].couponParam.ruleId}}' data-encryptedkey='{{item.couponList&&item.couponList[0]&&item.couponList[0].couponParam&&item.couponList[0].couponParam.encryptedKey}}' open-type='getUserInfo'>
+      <image class="screenImg" src='{{item.iconAddress}}'></image>
+    </button>
+    <image class="screenClose" data-type="screen" bindtap='closeScreen' src='http://m.360buyimg.com/marketingminiapp/jfs/t23905/137/1721396544/6489/4e0ccff9/5b67ed59N062a89e7.png' />
+  </form>
+</block>
+<view class='redPackeTips' style='display:{{redPackeTipsOpc==0?"none":"block"}};opacity:{{redPackeTipsOpc}};'>
+  {{redPacketMsg}}
+</view>
+<view class="wSceneTip" wx:if="{{wSceneTip}}">前往小程序享受更多优惠</view>
+<!-- 超码 -->
+<view class="supercode-box">
+  <superCode returnUrl="/pages/shop/shop" showType="floor" pageType="0" isCustomNavbar="true" closeable="true" bindExpoPoint="bindExpoPoint" bindClickPoint="bindClickPoint"></superCode>
+</view>
+<!--<block wx:if="{{isCustomTabbar}}">-->
+<!--    <view class="tabr-bar-height"></view>-->
+<!--    <view class="{{isIphoneX?'phoneXFillingStyleSec':''}}"></view>-->
+<!--</block>-->
+<!--&lt;!&ndash;自定义tabbar&ndash;&gt;-->
+<!--<custom-tab-bar selected="/pages/shop/shop"></custom-tab-bar>-->
+
+</block>

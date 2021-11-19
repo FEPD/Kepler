@@ -1,0 +1,57 @@
+<!--pages/shop/thirdTemplate/jdContainer/jdContainer.wxml-->
+<!-- <text>jdContainer</text>    -->
+<view style="height:{{height}};width:{{width}};margin-left:{{marginLeft}}px;padding-top:{{paddingTop}}px;padding-left:{{paddingLeft}}px;padding-right:{{paddingRight}}px;padding-bottom:{{paddingBottom}}px;background-color:{{backgroundColor}};display:{{visible?'flex':'none'}};flex-direction:{{styles.orientation == 'vertical'? 'row':'row'}};justify-content:{{styles.orientation == 'vertical'? 'flex-start':'space-around'}};align-items:{{styles.orientation == 'vertical'? 'flex-start':'center'}};flex-wrap:wrap;position: {{ position == 'absolute'? 'relative':(positionAsFather == 'absolute'? 'absolute':'static')}};">
+    <slot></slot>
+    <block wx:for="{{skuList}}" wx:for-item="sku" wx:for-index="index" wx:key="index">
+        <block wx:if="{{foreachFiltered.template.containerType == 'container'}}">
+            <view catchtap="_clickItem" data-index="{{index}}"
+                  style="width:{{((sku.coordinate.w / 1125) * 375) * winScale}}px;height:{{((sku.coordinate.h / 1125) * 375) * winScale}}px;top:{{(sku.coordinate.y/1125) * 375 * winScale}}px;border-width:{{foreachFiltered.template.style.borderWidth}}px;border-color:{{foreachFiltered.template.style.borderColor}};left:{{foreachFiltered.template.style.layout =='absolute'? 0:((sku.coordinate.x/1125) * 375 * winScale)}}px;display:flex;flex-direction:{{child.styles.orientation == 'vertical'? 'column':'row'}};background-color:{{foreachFiltered.template.style.backgroundColor}};flex-wrap:wrap;position: {{child.style.layout =='absolute'?'relative':(foreachFiltered.template.style.layout =='absolute'?'relative':'absolute')}};z-index:2">
+
+                <block wx:for="{{foreachFiltered.template.children}}" wx:for-item="child" wx:for-index="subIndex"
+                       wx:key="subIndex">
+                    <!-- image skuImage  -->
+
+                    <image wx:if="{{child.containerType == 'image'}}"
+                           style="width:{{child.style.width * winScale}}px;height:{{child.style.height * winScale}}px;top:{{child.style.marginTop * winScale}}px;left:{{child.style.marginLeft * winScale}}px;position:{{foreachFiltered.template.style.layout =='absolute'?'absolute':'static'}};"
+                           src="{{child.urlRefer? child.urlRefer : sku.imageUrl}}"></image>
+
+                    <!--   <jdImage wx:if="{{child.containerType == 'image'}}" styles="{{child.style}}" editProperty="{{editProperty}}" urlRefer="{{child.urlRefer}}" source="{{child.source}}" isAbsolute="{{styles}}" events="{{child.events}}" dataMap="{{child.dataMap}}"></jdImage> -->
+                    <text wx:if="{{child.containerType == 'text' && sku.showSkuPrice }}"
+                          style="width:{{((child.style.width / 1125) * 375) * winScale}}px;height:{{((child.style.height / 1125) * 375) * winScale}}px;line-height: {{child.style.height? (child.style.height * winScale /child.style.lines) : child.style.fontSize}}px;top:{{((child.style.marginTop / 1125) * 375)* winScale}}px;left:{{((child.style.marginLeft / 1125) * 375)* winScale}}px;position:{{foreachFiltered.template.style.layout =='absolute'?'absolute':'static'}};font-size:{{child.style.fontSize}}px;text-align:{{child.style.textAlign? child.style.textAlign:left}};lines:{{child.style.lines}};color:{{child.style.textColor}};overflow: hidden;text-overflow: ellipsis; white-space: {{child.style.lines == '1' ? nowrap : wrap}};">
+                        <text style="font-size:{{subChild.style.fontSize * 0.64}}px">{{sku.prefix}}</text>{{sku.price}}
+                    </text>
+
+                    <!-- text  sku Price & sku Name  -->
+
+                    <block wx:if="{{child.containerType == 'container'}}">
+                        <view style="width:{{((child.style.width / 1125) * 375)  * winScale}}px;height:{{((child.style.height / 1125) * 375) * winScale}}px;left:{{sku.priceStyleConfig.x * winScale}}px;top:{{sku.priceStyleConfig.y  * winScale}}px;background-color: {{child.style.backgroundColor}};display:flex;flex-direction:row;flex-wrap:wrap;position:{{positionAsFather == 'absolute'? 'absolute':''}};">
+                            <block wx:for="{{child.children}}" wx:for-item="subChild" wx:for-index="subIndex"
+                                   wx:key="subIndex">
+                                <block wx:if="{{subChild.containerType == 'text' && sku.showSkuPrice}}">
+                                    <text style="width:{{((subChild.style.width / 1125) * 375) * winScale}}px;height:{{((subChild.style.height / 1125) * 375) * winScale}}px;top:{{((subChild.style.marginTop / 1125) * 375)* winScale}}px;left:{{((subChild.style.marginLeft / 1125) * 375)* winScale}}px;line-height: {{subChild.style.height? (subChild.style.height * winScale /subChild.style.lines) : subChild.style.fontSize}}px;font-size:{{subChild.style.fontSize}}px;text-align:{{subChild.style.textAlign? subChild.style.textAlign:left}};lines:{{subChild.style.lines}};color:{{subChild.style.textColor}}; white-space: nowrap;">
+                                        <text style="font-size:{{subChild.style.fontSize * 0.64}}px">{{sku.prefix}}</text>{{sku.price}}
+                                    </text>
+                                </block>
+
+
+                            </block>
+
+                        </view>
+                    </block>
+
+                </block>
+                <!-- block container 第二层结束  -->
+            </view>
+
+            <!-- block container 结束  -->
+        </block>
+
+        <!-- 第二层判断 image 开始  -->
+        <block wx:if="{{foreachFiltered.template.containerType == 'image'}}">
+            <image style="width:{{sku.w * winScale}}px;height:{{sku.h * winScale}}px;position: relative;z-index:1" src="{{sku.imageUrl}}"
+                   catchtap="_clickItem" data-index="{{index}}"></image>
+        </block>
+
+        <!-- skuList 循环结束  -->
+    </block>
+</view>

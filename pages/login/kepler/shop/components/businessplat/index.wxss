@@ -1,0 +1,23 @@
+.entryHide{
+  display: none;
+}
+.entryShow{
+  display: block;
+}
+.buttonId {
+  position: static;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: content-box;
+  font-size: medium;
+  text-align: left;
+  text-decoration: none;
+  line-height: normal;
+  border-radius: 0px;
+  overflow: visible;
+  color: not specified;
+  background: none
+}

@@ -1,0 +1,17 @@
+<!--pages/shop/components/coupon/index.wxml-->
+<view style="width:100%;background-color: #f3f4f7;height:auto;">
+    <!--弹窗-领取成功提示-->
+    <view class="drawer_box_toast" wx:if="{{isShowToast}}">
+        <view class="toast_content">
+            <image class="" src="http://njst.360buyimg.com/jdreact/program/shop_toast_icon_ok.png" style="width:52rpx;height:52rpx; margin-top:35rpx; "></image>
+            <view class="toast_title" style="margin-top:20rpx;max-width:400rpx">{{showToast.desc}}</view>
+        </view>
+    </view>
+    <block wx:for="{{editPropertys}}" wx:for-index="index" wx:key="index">
+        <image class="{{'coupon' + (columns||1)}}" src="{{item.imageUrl}}" data-item="{{item}}" data-index="{{index}}" bindtap="receiveCoupons" data-roleId="{{item.roleId}}"
+        data-receiveState="{{item.state}}" style="height:{{item.height * winScale}}px">
+            <view wx:if="{{item.path || bizCode[index]}}" class="shade"></view>
+            <image class="coupon_status" src="{{item.path || (((columns||1) == 1) ?(bizCode.index||bizCode[index]):bizCode[index])}}"></image>
+        </image>
+    </block>
+</view>

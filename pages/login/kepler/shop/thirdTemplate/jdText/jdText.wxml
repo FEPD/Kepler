@@ -1,0 +1,4 @@
+<!--pages/shop/thirdTemplate/jdText/jdText.wxml-->
+ <view wx:if="{{visible == 'true'}}" style="background-color:{{backgroundColor}};height:{{height}};width:{{width}};right:0px;bottom:0px;padding-top:{{paddingTop}}px;padding-left:{{paddingLeft}}px;flex:1;display:flex;flex-direction:column;justify-content:{{justifyContent}};align-items:center;position:{{positionAsFather == 'absolute'? 'absolute': ''}}">
+     <text bindtap='_tapText' style="height:{{height}};width:{{width}};line-height: {{lineHeight}}; lines:{{styles.lines}};font-size:{{styles.fontSize}}px;lines:{{styles.lines}};text-align:{{textAlign}};vertical-align:middle;text-decoration:{{textDecorationLine}};font-weight:{{fontWeight}};color:{{styles.textColor}};">{{valueRefer ? valueRefer:title}}</text>
+  </view>

@@ -1,0 +1,8 @@
+<view wx:if="{{h5Url}}">
+    <web-view src="{{h5Url}}" bindload="onH5LoadSuccess" binderror="handleH5LoadError"></web-view>
+</view>
+<!--<view wx:else>-->
+    <!--页面出错了-->
+<!--</view>-->
+<!--https://sale.jd.com/m/act/7WbQmShgin.html-->
+<!--"activityUrl":"https://sale.jd.com/m/act/YptQBMRcSh1A.html?jd_pop=70073c4f-579d-452a-b29b-b2559bd38b31&abt=1",-->

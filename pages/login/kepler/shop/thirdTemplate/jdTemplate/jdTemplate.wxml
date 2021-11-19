@@ -1,0 +1,108 @@
+<!-- pages/shop/thirdTemplate/jdTemplate/jdTemplate.wxml -->
+<view style=' overflow: hidden;width:750rpx'>
+  <!-- 第三方模版 container -->
+  <block wx:for="{{thirdTemplates}}" wx:key="index">
+    <!-- container -->
+    <block wx:if="{{floorExtInfo.moduleFlag!='mPingou'&&floorExtInfo.moduleFlag!='mPingou:dev'}}">
+      <block wx:if="{{item.containerData.containerType == 'container'}}">
+        <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" styles="{{item.containerData.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{item.containerData.foreach}}" sizeRule="{{sizeRule}}">
+          <!-- 第一层 -->
+          <block wx:if="{{item.containerData.children}}">
+            <block wx:for="{{item.containerData.children}}" wx:for-item="child" wx:key="index">
+              <jdText bind:clickTextWord="didClickFloorItem" wx:if="{{child.containerType == 'text'}}" styles="{{child.style}}" title="{{child.valueRefer}}" editProperty="{{item.containerData.editProperty.dataDefines}}" isAbsolute="{{item.containerData.style}}" events="{{child.events ? child.events : item.containerData.events}}" dataMap="{{child.dataMap}}"></jdText>
+              <jdImage bind:clickImage="didClickFloorItem" wx:if="{{child.containerType == 'image'}}" styles="{{child.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" urlRefer="{{child.urlRefer}}" source="{{child.source}}" isAbsolute="{{item.containerData.style}}" events="{{child.events?child.events:item.containerData.events}}" dataMap="{{child.dataMap}}"></jdImage>
+              <jdGrid bind:clickFloorItem="didClickFloorItem" wx:if="{{child.containerType == 'grid'}}" styles="{{child.style}}" foreach="{{child.foreach}}" editProperty="{{item.containerData.editProperty.dataDefines ? item.containerData.editProperty.dataDefines : child.editProperty.dataDefines}}"></jdGrid>
+              <jdSlider bind:clickFloorItem="didClickFloorItem" wx:if="{{child.containerType == 'slider'}}" styles="{{child.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{child.foreach}}" sizeRule="{{sizeRule}}" version="2"></jdSlider>
+                <!--查看更多-->
+                <block wx:if="{{item.containerData.children[index-1].containerType == 'grid'}}">
+                  <block wx:for-item="kit" wx:key="kidx" wx:for="{{item.containerData.editProperty.dataDefines}}">
+                      <block wx:if="{{kit.name == 'skuList' && kit.nodeText.data.length > 6}}">
+                          <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" wx:if="{{child.containerType == 'container'}}" styles="{{child.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{child.foreach}}" isAbsolute="{{item.containerData.style}}" sizeRule="{{sizeRule}}">
+                              <block wx:for="{{child.children}}" wx:for-item="subChild" wx:key="index">
+                                  <jdText bind:clickTextWord="didClickFloorItem" wx:if="{{subChild.containerType == 'text'}}" styles="{{subChild.style}}" title="{{subChild.valueRefer}}" bind:clickText="clickTempText" editProperty="{{item.containerData.editProperty.dataDefines}}" isAbsolute="{{child.style}}" events="{{subChild.events? subChild.events :child.events }}" dataMap="{{subChild.dataMap}}"></jdText>
+                                  <jdImage bind:clickImage="didClickFloorItem" wx:if="{{subChild.containerType == 'image'}}" styles="{{subChild.style}}" urlRefer="{{subChild.urlRefer}}" editProperty="{{item.containerData.editProperty.dataDefines}}" source="{{subChild.source}}" isAbsolute="{{child.style}}" events="{{subChild.events? subChild.events : child.events}}" dataMap="{{subChild.dataMap}}"></jdImage>
+                                  <jdVideo wx:if="{{subChild.containerType == 'livevideo'}}" styles="{{subChild.style}}" editProperty="{{child.editProperty.dataDefines||item.containerData.editProperty.dataDefines}}" isVieoShow="{{isVieoShow}}"></jdVideo>
+                                  <!-- 第三层 container -->
+                                  <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" wx:if="{{subChild.containerType == 'container'}}" styles="{{subChild.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{subChild.foreach}}" isAbsolute="{{child.style}}" sizeRule="{{sizeRule}}">
+                                      <block wx:for="{{subChild.children}}" wx:for-item="thirdChild" wx:key="index">
+                                          <jdText wx:if="{{thirdChild.containerType == 'text'}}" styles="{{thirdChild.style}}" title="thirdChild" isAbsolute="{{subChild.style}}" dataMap="{{thirdChild.dataMap}}"></jdText>
+                                          <jdImage wx:if="{{thirdChild.containerType == 'image'}}" styles="{{thirdChild.style}}" urlRefer="{{thirdChild.urlRefer}}" editProperty="{{item.containerData.editProperty.dataDefines}}" source="{{thirdChild.source}}" isAbsolute="{{subChild.style}}" dataMap="{{thirdChild.dataMap}}"></jdImage>
+                                          <text wx:if="{{thirdChild.containerType == 'list'}}">lxy</text>
+                                      </block>
+                                      <!-- 第三层结束 -->
+                                  </jdContainer>
+                              </block>
+                              <!-- 第二层结束 -->
+                          </jdContainer>
+                      </block>
+                  </block>
+              </block>
+                <!-- 第二层 container -->
+                <!--不是.查看更多.楼层-->
+              <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" wx:if="{{child.containerType == 'container' &&  item.containerData.children[index-1].containerType != 'grid'}}" styles="{{child.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{child.foreach}}" isAbsolute="{{item.containerData.style}}" sizeRule="{{sizeRule}}">
+                <block wx:for="{{child.children}}" wx:for-item="subChild" wx:key="index">
+                  <jdText bind:clickTextWord="didClickFloorItem" wx:if="{{subChild.containerType == 'text'}}" styles="{{subChild.style}}" title="{{subChild.valueRefer}}" bind:clickText="clickTempText" editProperty="{{item.containerData.editProperty.dataDefines}}" isAbsolute="{{child.style}}" events="{{subChild.events? subChild.events :child.events }}" dataMap="{{subChild.dataMap}}"></jdText>
+                  <jdImage bind:clickImage="didClickFloorItem" wx:if="{{subChild.containerType == 'image'}}" styles="{{subChild.style}}" urlRefer="{{subChild.urlRefer}}" editProperty="{{item.containerData.editProperty.dataDefines}}" source="{{subChild.source}}" isAbsolute="{{child.style}}" events="{{subChild.events? subChild.events : child.events}}" dataMap="{{subChild.dataMap}}"></jdImage>
+                  <jdVideo wx:if="{{subChild.containerType == 'livevideo'}}" styles="{{subChild.style}}" editProperty="{{child.editProperty.dataDefines||item.containerData.editProperty.dataDefines}}" isVieoShow="{{isVieoShow}}"></jdVideo>
+                  <!-- 第三层 container -->
+                  <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" wx:if="{{subChild.containerType == 'container'}}" styles="{{subChild.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{subChild.foreach}}" isAbsolute="{{child.style}}" sizeRule="{{sizeRule}}">
+                    <block wx:for="{{subChild.children}}" wx:for-item="thirdChild" wx:key="index">
+                      <jdText wx:if="{{thirdChild.containerType == 'text'}}" styles="{{thirdChild.style}}" title="thirdChild" isAbsolute="{{subChild.style}}" dataMap="{{thirdChild.dataMap}}"></jdText>
+                      <jdImage wx:if="{{thirdChild.containerType == 'image'}}" styles="{{thirdChild.style}}" urlRefer="{{thirdChild.urlRefer}}" editProperty="{{item.containerData.editProperty.dataDefines}}" source="{{thirdChild.source}}" isAbsolute="{{subChild.style}}" dataMap="{{thirdChild.dataMap}}"></jdImage>
+                      <text wx:if="{{thirdChild.containerType == 'list'}}">lxy</text>
+                    </block>
+                    <!-- 第三层结束 -->
+                  </jdContainer>
+                </block>
+                <!-- 第二层结束 -->
+              </jdContainer>
+            </block>
+          </block>
+          <!-- 第一层结束 -->
+        </jdContainer>
+      </block>
+    </block>
+    <!-- slider -->
+    <block wx:if="{{item.containerData.containerType == 'slider'}}">
+      <jdSlider bind:clickFloorItem="didClickFloorItem" styles="{{item.containerData.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{item.containerData.foreach}}" sizeRule="{{sizeRule}}"></jdSlider>
+    </block>
+    <!-- 拼购 -->
+    <block wx:if="{{floorExtInfo.moduleFlag=='mPingou'||floorExtInfo.moduleFlag=='mPingou:dev'}}">
+      <jdCollage dataList="{{item.containerData.editProperty.dataDefines[0].nodeText.data?item.containerData.editProperty.dataDefines[0].nodeText.data:item.containerData.children[0].editProperty.dataDefines[0].nodeText.data}}"></jdCollage>
+    </block>
+    <!-- 优惠券 -->
+    <block wx:if="{{floorExtInfo.moduleFlag=='mCoupon'}}">
+      <jdCoupon editProperty="{{item.containerData.editProperty.dataDefines[0].nodeText.data?item.containerData.editProperty.dataDefines[0].nodeText.data:item.containerData.children[0].editProperty.dataDefines[0].nodeText.data}}" columns="{{ item.containerData.children && item.containerData.children[0].children && item.containerData.children[0].children[0].style.column}}"></jdCoupon>
+      <jdCoupon editProperty="{{item.containerData.children[0].children[0].editProperty.dataDefines[0].nodeText.data}}" columns="{{ item.containerData.children && item.containerData.children[0].children && item.containerData.children[0].children[0].style.column}}"></jdCoupon>
+    </block>
+    <!-- content -->
+    <block wx:if="{{item.containerData.containerType == 'content'}}">
+      <!--  -->
+      <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" styles="{{item.containerData.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" sizeRule="{{sizeRule}}">
+        <block wx:if="{{item.containerData.children}}">
+          <block wx:for="{{item.containerData.children}}" wx:for-item="child" wx:key="index">
+            <jdText wx:if="{{child.containerType == 'text'}}" styles="{{child.style}}" title="{{child.valueRefer}}" editProperty="{{item.containerData.editProperty.dataDefines}}"></jdText>
+            <jdImage wx:if="{{child.containerType == 'image'}}" styles="{{child.style}}" urlRefer="{{subChild.urlRefer}}" source="{{child.source}}"></jdImage>
+            <jdGrid wx:if="{{child.containerType == 'grid'}}" styles="{{child.style}}" foreach="{{child.foreach}}" editProperty="{{item.containerData.editProperty.dataDefines}}"></jdGrid>
+            <!-- 第二层 container -->
+            <jdContainer bind:clickContainerItem="didClickFloorItem" bind:middleClickFunc="middleClickFunc" wx:if="{{child.containerType == 'container'}}" styles="{{child.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{child.foreach}}" sizeRule="{{sizeRule}}">
+              <block wx:for="{{child.children}}" wx:for-item="subChild" wx:key="index">
+                <jdText wx:if="{{subChild.containerType == 'text'}}" styles="{{subChild.style}}" title="{{subChild.valueRefer}}"></jdText>
+                <jdImage wx:if="{{subChild.containerType == 'image'}}" styles="{{subChild.style}}" urlRefer="{{subChild.urlRefer}}" source="{{subChild.source}}"></jdImage>
+                <!-- 第三层 container -->
+                <jdContainer wx:if="{{subChild.containerType == 'container'}}" bind:middleClickFunc="middleClickFunc" styles="{{subChild.style}}" editProperty="{{item.containerData.editProperty.dataDefines}}" foreach="{{subChild.foreach}}">
+                  <block wx:for="{{subChild.children}}" wx:for-item="thirdChild" wx:key="index">
+                    <jdText wx:if="{{thirdChild.containerType == 'text'}}" styles="{{thirdChild.style}}" title="{{thirdChild.valueRefer}}"></jdText>
+                    <jdImage wx:if="{{thirdChild.containerType == 'image'}}" styles="{{thirdChild.style}}" urlRefer="{{thirdChild.urlRefer}}" source="{{thirdChild.source}}"></jdImage>
+                  </block>
+                  <!-- 第三层结束 -->
+                </jdContainer>
+              </block>
+            </jdContainer>
+          </block>
+        </block>
+      </jdContainer>
+    </block>
+  </block>
+  <!-- 第三方模版结束 -->
+</view>

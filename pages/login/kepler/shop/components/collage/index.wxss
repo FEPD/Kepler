@@ -1,0 +1,86 @@
+/* pages/shop/components/collage/index.wxss */
+.collageBox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.collageItem{
+   width:372rpx;
+   display: flex;
+   flex-direction: column;
+}
+.collageItem>image{
+   width: 100%;
+   height: 372rpx;
+}
+.collageTit{
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 14rpx;
+  padding-right: 11rpx;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  -webkit-line-clamp: 2; 
+  overflow: hidden;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #2E2D2D;
+}
+.collagePrice{
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 14rpx;
+  padding-right: 11rpx;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+.nowP{
+  margin-right: 20rpx;
+  font-family: JDZhengHei-01-Bold;
+  color: #F0250F;
+}
+.skuL{
+   font-size: 24rpx;
+}
+.skuM{
+   font-size: 32rpx;
+}
+.skuR{
+   font-size: 24rpx;
+}
+.oldP{
+  font-family: JDZhengHei-01-Light;
+  font-size: 22rpx;
+  color: #363636;
+  text-align: left;
+}
+.collageBtn{
+  width:330rpx;
+  height: 50rpx;
+  background-image: linear-gradient(36deg, #FF4F18 0%, #FF2000 24%, #F10000 100%);
+  border-radius: 100rpx;
+  margin-left: 21rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 17rpx 27rpx 20rpx 21rpx;
+}
+.collNum{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  text-align: center;
+  flex-grow: 1;
+  border-right: 1rpx solid rgba(250, 250, 250, 0.5)
+}
+.collGo{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  text-align: center;
+  flex-grow: 1;
+}

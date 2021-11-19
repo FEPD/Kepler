@@ -1,0 +1,36 @@
+<!--pages/shop/components/giftbag/index.wxml-->
+<block wx:if="{{giftMsg.length==1}}">
+<view  class='giftbox boxOne' style="background-image:url('https://m.360buyimg.com/marketingminiapp/jfs/t23713/273/1003124754/37676/7439c5b9/5b4c65e8Nffdc9b00.png')">
+       <block wx:for="{{giftMsg}}">
+          <giftbagItem dataItem="{{item}}" dataSum="{{giftMsg.length}}"></giftbagItem>
+       </block>
+     <image src="https://m.360buyimg.com/marketingminiapp/jfs/t19993/172/2720948301/6165/bcab549e/5b4da597Nb2e0c418.png" class='btn one' bindtap='closeFn'></image>
+</view>
+ <view class='closebox' bindtap='closeFn'>
+   <image src="https://m.360buyimg.com/marketingminiapp/jfs/t21913/359/2391097974/721/9d409750/5b5556f3N7c355da5.png" class='close'></image>
+ </view>
+</block>
+
+<block wx:if="{{giftMsg.length==2}}">
+<view  class='giftbox boxTwo' style="background-image:url('https://m.360buyimg.com/marketingminiapp/jfs/t21247/77/2245405218/43396/65a2d38b/5b4c65efN39200633.png')">
+       <block wx:for="{{giftMsg}}">
+          <giftbagItem dataItem="{{item}}" dataSum="{{giftMsg.length}}"></giftbagItem>
+       </block>
+     <image src="https://m.360buyimg.com/marketingminiapp/jfs/t19993/172/2720948301/6165/bcab549e/5b4da597Nb2e0c418.png" class='btn two' bindtap='closeFn'></image>
+</view>
+ <view class='closebox' bindtap='closeFn'>
+   <image src="https://m.360buyimg.com/marketingminiapp/jfs/t21913/359/2391097974/721/9d409750/5b5556f3N7c355da5.png" class='close'></image>
+ </view>
+</block>
+
+<block wx:if="{{giftMsg.length==3}}">
+<view  class='giftbox boxThree' style="background-image:url('https://m.360buyimg.com/marketingminiapp/jfs/t21247/77/2245405218/43396/65a2d38b/5b4c65efN39200633.png')">
+       <block wx:for="{{giftMsg}}">
+          <giftbagItem dataItem="{{item}}" dataSum="{{giftMsg.length}}"></giftbagItem>
+       </block>
+     <image src="https://m.360buyimg.com/marketingminiapp/jfs/t19993/172/2720948301/6165/bcab549e/5b4da597Nb2e0c418.png" class='btn one' bindtap='closeFn'></image>
+</view>
+ <view class='closebox' bindtap='closeFn'>
+   <image src="https://m.360buyimg.com/marketingminiapp/jfs/t21913/359/2391097974/721/9d409750/5b5556f3N7c355da5.png" class='close'></image>
+ </view>
+</block>

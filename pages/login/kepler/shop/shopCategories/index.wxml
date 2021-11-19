@@ -1,0 +1,109 @@
+<!--pages/shop/shopCategories/index.wxml-->
+<import src="../shop_template/shop_template"/>
+<view class="cate-bg" style="background-image:url({{userInfoBac}})"></view>
+<view class="cate-bg-cover"></view>
+<view class='frame' style="z-index: 9999;overflow: hidden">
+    <view class="cate-bg-banner" style="background-image:url({{userInfoBac}})"></view>
+    <view class="cate-bg-banner-cover"></view>
+    <template is="shop_banner_userinfo" data="{{statusBarHeight,conternData,contactInfo,logoType,shopInfo,follow,followType,noneFollow}}"/>
+    <view class="category-search" wx:if="{{shopCategories.length || list.length}}">
+        <view class="input-view contern-input-view">
+            <image class="concern-icon"
+                   src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_icon.png"></image>
+            <input placeholder="{{hotwords}}"
+                   class="input-placeholder"
+                   placeholder-class="input-sytle concern-style"
+                   bindtap="clickSearch"
+                   confirm-type="search"
+                   disabled="true"
+                   />
+            <view wx:if="{{bDisplayMask&&searchText}}"
+                  style="display:flex;display: -webkit-flex;width:64rpx;height:64rpx;margin-right: -18rpx;align-items: center;justify-content: center;-webkit-align-items: center;-webkit-justify-content: center;"
+                  bindtap="deleteClick">
+                <image class="delete-icon"
+                       src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_cancel.png"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<view style='height:{{98*winScale + concernPlaceHeight}}px' />
+
+<view class="category-content">
+<!--    <view class="category-area">-->
+<!--        <view bindtap='clickAllgood' class='cat-item'>-->
+<!--            <view class="banner-icon"></view>-->
+<!--            <text class='cat-font'>全部商品</text>-->
+<!--            <view class="cat-flex"></view>-->
+<!--            <image class="cat-img" src="http://njst.360buyimg.com/jdreact/program/shop_arrow_right.png"/>-->
+<!--        </view>-->
+<!--    </view>-->
+    <view wx:for="{{shopCategories}}" wx:key="cat-index" class="category-area">
+
+        <view bindtap='clickBar' class='cat-item' data-item="{{item}}" data-index="{{index}}">
+            <view class="banner-icon"></view>
+            <text class='cat-font'>{{item.title}}</text>
+            <view class="cat-flex"></view>
+            <image class="cat-img"
+                   src="{{(item.open&&item.subCategories&&item.subCategories.length>0)?'http://njst.360buyimg.com/jdreact/program/shop_arrow_up.png':(!item.open&&item.subCategories&&item.subCategories.length>0)?'http://njst.360buyimg.com/jdreact/program/shop_arrow_down.png':'http://njst.360buyimg.com/jdreact/program/shop_arrow_right.png'}}"/>
+        </view>
+<!--        <view wx:if="{{item.open&&item.subCategories&&item.subCategories.length>0}}">-->
+<!--            <view class='cat-sub-itemBody'>-->
+<!--                <view bindtap='clickItem' data-item="{{subItm}}" class='cat-sub-item' wx:for="{{item.subCategories}}"-->
+<!--                      wx:key="cat-subindex" wx:for-index="subIdx" wx:for-item="subItm">-->
+<!--                    <text class='cat-font'>{{subItm.title}}</text>-->
+<!--                </view>-->
+<!--            </view>-->
+<!--            <view bindtap='clickSeeAll' data-cateId="{{item.id}}" class='cat-seeall'>-->
+<!--                <text class='cat-seeal-font'>查看全部</text>-->
+<!--            </view>-->
+<!--        </view>-->
+        <view wx:if="{{item.open&&item.subCategories&&item.subCategories.length>0}}">
+            <view class='cat-sub-itemBody'>
+                <view bindtap='clickItem' data-item="{{subItm}}" class='cat-sub-item' wx:for="{{item.subCategories}}"
+                      wx:key="cat-subindex" wx:for-index="subIdx" wx:for-item="subItm">
+                    <text class='cat-font text-ellipsis'>{{subItm.title}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="category-area category-rcmd" wx:if="{{list.length}}">
+        <view class='cat-item'>
+            <view class="banner-icon"></view>
+            <text class='cat-font'>推荐商品</text>
+            <view class="cat-flex"></view>
+        </view>
+    </view>
+    <!--商品列表  -->
+    <skuList sku-param="{{requestParam}}" bind:clickFunc="clickFunc" sku-list="{{list}}" sku-type="{{1002}}" sku-category="category"/>
+</view>
+
+
+<!--加载状态  -->
+<view wx:if="{{state===1}}" class="loadingFrame">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<!--已加载全部数据状态  -->
+<view wx:if="{{!hasNext && list.length}}" class="loadingFrame">
+    <view class="weui-loadmore__tips">我是有底线的~</view>
+</view>
+<view wx:elif="{{!hasNext && !list.length}}" class='pt-hasNoData'>
+    <image class="pt-img-noData" src='http://njst.360buyimg.com/jdreact/program/shop_joy.png' />
+    <view class = "fontNodata">抱歉，暂无符合条件的商品</view>
+</view>
+<!--网络异常  -->
+<netError bindreloadevent="onReload" net-state="{{state}}"/>
+
+<!-- /返回顶部按钮 -->
+<view wx:if = "{{isShowBackTop}}" class = "back-top" bindtap='backtoTop'>
+    <image class = "back-top-img" mode=""  src="{{boolBack ? imgUrl+'shop_butn_goup_pressed.png' : imgUrl+'shop_butn_goup_normal.png'}}" />
+</view>
+<!--<block wx:if="{{isCustomTabbar}}">-->
+<!--    <view class="tabr-bar-height"></view>-->
+<!--    <view class="{{isIphoneX?'phoneXFillingStyleSec':''}}"></view>-->
+<!--</block>-->
+<!--&lt;!&ndash;自定义tabbar&ndash;&gt;-->
+<!--<custom-tab-bar selected="/pages/shop/shopCategories/index"></custom-tab-bar>-->
+
+

@@ -1,0 +1,33 @@
+/* pages/shop/thirdTemplate/jdVideo/jdVideo.wxss */
+.videoBox{
+  width:750rpx;
+  height: 400rpx;
+  position: relative;
+  background-color: #fff;
+}
+.videoItem{
+  width:750rpx;
+  height: 400rpx;
+}
+.model-img{
+  width:750rpx;
+  height: 400rpx;
+}
+.model-btn{
+	position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+    width:100rpx;
+    height:100rpx;
+    border-radius:50%;
+    background-color: rgba(0,0,0,.3);
+}
+.play-icon{
+    margin:28rpx 42rpx;
+    border-top:26rpx solid transparent;
+    border-left:36rpx solid #fff;
+    border-bottom:22rpx solid transparent;
+}

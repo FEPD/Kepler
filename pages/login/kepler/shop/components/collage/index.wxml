@@ -1,0 +1,50 @@
+<view  class='collageBox' wx:for="{{dataList}}" wx:key="index">
+ <view class='collageItem'>
+  <image src='{{item.goods.imageurl}}'/>
+ <text class='collageTit'>{{item.goods.wname}}</text>
+ <view class='collagePrice'>
+    <view class='nowP'>
+         <text class='skuL'>¥</text>
+         <text class='skuM'>{{getinteger(item.pingouInfo.validSku[index].jd_price)}}</text>
+         <text class='skuR'>.99</text>
+    </view>
+   <text class='oldP'>¥299.99</text>
+ </view>
+ <view class='collageBtn'>
+     <text class='collNum'>{{item.pingouInfo.tuanMemberCount}}人拼</text>
+      <text class='collGo'>去开团</text>
+ </view>
+</view>
+<view class='collageItem'>
+  <image src='http://m.360buyimg.com/marketingminiapp/jfs/t16696/286/2600626470/77401/fdb2f0cf/5b027703N967bc325.png'/>
+ <text class='collageTit'>春装新品彩裙上市，美丽的优惠的修身牛仔裙</text>
+ <view class='collagePrice'>
+    <view class='nowP'>
+         <text class='skuL'>¥</text>
+         <text class='skuM'>1999</text>
+         <text class='skuR'>.99</text>
+    </view>
+   <text class='oldP'>¥299.99</text>
+ </view>
+ <view class='collageBtn'>
+     <text class='collNum'>2人拼</text>
+      <text class='collGo'>去开团</text>
+ </view>
+</view>
+<view class='collageItem'>
+  <image src='http://m.360buyimg.com/marketingminiapp/jfs/t16696/286/2600626470/77401/fdb2f0cf/5b027703N967bc325.png'/>
+ <text class='collageTit'>春装新品彩裙上市，美丽的优惠的修身牛仔裙</text>
+ <view class='collagePrice'>
+    <view class='nowP'>
+         <text class='skuL'>¥</text>
+         <text class='skuM'>1999</text>
+         <text class='skuR'>.99</text>
+    </view>
+   <text class='oldP'>¥299.99</text>
+ </view>
+ <view class='collageBtn'>
+     <text class='collNum'>2人拼</text>
+      <text class='collGo'>去开团</text>
+ </view>
+</view>
+</view>

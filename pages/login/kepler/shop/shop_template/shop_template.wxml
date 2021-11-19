@@ -1,0 +1,481 @@
+<!-- 顶部banner,不带关注 -->
+<template name="shop_banner_search">
+    <!--定义关注的内容  -->
+    <view class='contern' wx:if="{{shopInfo.logoUrl}}">
+        <image bindload="loadLogo"
+               wx:if="{{shopInfo.logoUrl}}"
+               class="{{logoType===1?'header-logo-squre':'header-logo-userinfo'}} "
+               mode="scaleToFill"
+               src="{{shopInfo.logoUrl?shopInfo.logoUrl:'https://njst.360buyimg.com/jdreact/program/shop_logo_default.png'}}"
+               bindtap="goShopDetail"/>
+        <view class="shop-title">
+            <view class="text-ellipsis">{{shopInfo.shopName}}</view>
+            <text class='concernNum'>{{conternData}}人关注</text>
+        </view>
+        <!--
+        followType：判断关注或者关注有礼
+         关注：1
+         关注有礼：2
+          -->
+        <block wx:if="{{followType==2}}">
+            <view class='conternSum' bindtap='clickGiftContern'>
+                <button form-type="submit" class='concrenBtn formBtn unfollowed'>关注</button>
+                <image class='giftBtn'
+                       src="http://img13.360buyimg.com/devfe/jfs/t1/48559/10/7698/3697/5d53e6e7E74b19c19/bac8bbdca60ee2c9.gif"
+                       mode='scaleToFill'/>
+
+            </view>
+        </block>
+        <block wx:else>
+            <form bindsubmit="conternFormId">
+                <view class='conternSum' bindtap='clickContern'>
+                    <button form-type="submit" class='concrenBtn formBtn followed' wx:if="{{follow}}">已关注</button>
+                    <button form-type="submit" class='concrenBtn formBtn unfollowed' wx:else >关注</button>
+                </view>
+            </form>
+        </block>
+
+
+    </view>
+<!--    <view class="banner">-->
+<!--        <view class="banner-ct">-->
+<!--            <image bindload="loadLogo"-->
+<!--                   wx:if="{{shopInfo.logoUrl}}"-->
+<!--                   class="{{logoType===1?'banner-logo-squre':'banner-logo'}}"-->
+<!--                   mode="scaleToFill"-->
+<!--                   src="{{shopInfo.logoUrl? shopInfo.logoUrl:'http://njst.360buyimg.com/jdreact/program/shop_logo_default.png'}}"-->
+<!--                   bindtap="goShopDetail"/>-->
+<!--            <view class="input-view">-->
+<!--                <image class="search-icon"-->
+<!--                       src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_icon.png"></image>-->
+<!--                <input placeholder="搜索本店铺内商品" class="input-placeholder" placeholder-class="input-sytle"-->
+<!--                       bindinput="bindinput" value="{{searchText}}" bindfocus="bindfocus" bindconfirm="clickSearch"-->
+<!--                       confirm-type="search" focus="{{focus}}" bindblur="bindblur"/>-->
+<!--                <view wx:if="{{bDisplayMask&&searchText}}"-->
+<!--                      style="display:flex;display: -webkit-flex;width:64rpx;height:64rpx;margin-right: -18rpx;align-items: center;justify-content: center;-webkit-align-items: center;-webkit-justify-content: center;"-->
+<!--                      bindtap="deleteClick">-->
+<!--                    <image class="delete-icon"-->
+<!--                           src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_cancel.png"-->
+<!--                    ></image>-->
+
+<!--                </view>-->
+<!--            </view>-->
+<!--            <block wx:if="{{bDisplayMask}}">-->
+<!--                <text class="searh-text" catchtap="clickSearch" style="color:{{isScroll?'#232326':'#ffffff'}}">-->
+<!--                    {{searchText ? '搜索' : '取消'}}-->
+<!--                </text>-->
+<!--            </block>-->
+<!--            <block wx:else>-->
+<!--                <block wx:if="{{needShieldShopCategory}}">-->
+<!--                    <view></view>-->
+<!--                </block>-->
+<!--                <block wx:else>-->
+<!--                    <view class='contern_categoty' bindtap='shopCategories'>-->
+<!--                        <image style='width : 40rpx;height : 40rpx;' src="../shop/shop_images/tab_icon_list_black.png"/>-->
+<!--                        <text style='font-family: PingFangSC-Light;font-size: 20rpx;color: #2E2D2D;text-align: center;'>-->
+<!--                            分类-->
+<!--                        </text>-->
+<!--                    </view>-->
+<!--                </block>-->
+<!--            </block>-->
+
+<!--        </view>-->
+<!--    </view>-->
+</template>
+<!--顶部带有关注的banner  -->
+<template name="shop_banner_userinfo">
+    <view class="banner banner_userinfo">
+        <view style="height:{{statusBarHeight}}px"></view>
+
+        <!--定义关注的内容  -->
+        <view class='contern' wx:if="{{shopInfo.logoUrl}}"  style="padding-right:{{menuWidth + menuRight + 5}}px">
+            <image bindload="loadLogo"
+                   wx:if="{{shopInfo.logoUrl}}"
+                   class="{{logoType===1?'header-logo-squre':'header-logo-userinfo'}} "
+                   mode="scaleToFill"
+                   src="{{shopInfo.logoUrl?shopInfo.logoUrl:'https://njst.360buyimg.com/jdreact/program/shop_logo_default.png'}}"
+                   bindtap="goShopDetail"/>
+            <view class="shop-title">
+                 <view class="text-ellipsis">{{shopInfo.shopName}}</view>
+                 <text class='concernNum'>{{conternData}}人关注</text>
+            </view>
+            <!--
+            followType：判断关注或者关注有礼
+             关注：1
+             关注有礼：2
+              -->
+            <block wx:if="{{!noneFollow}}">
+                <block wx:if="{{followType==2}}">
+                    <view class='conternSum' bindtap='clickGiftContern' style="top:{{platform == 'ios'?6:8}}px">
+                        <button form-type="submit" class='concrenBtn formBtn unfollowed'>关注</button>
+                        <image class='giftBtn'
+                               src="http://img13.360buyimg.com/devfe/jfs/t1/48559/10/7698/3697/5d53e6e7E74b19c19/bac8bbdca60ee2c9.gif"
+                               mode='scaleToFill'/>
+
+                    </view>
+                </block>
+                <block wx:else>
+                    <form bindsubmit="conternFormId">
+                        <view class='conternSum' bindtap='clickContern' style="top:{{platform == 'ios'?6:8}}px">
+                            <button form-type="submit" class='concrenBtn formBtn followed' wx:if="{{follow}}">已关注</button>
+                            <button form-type="submit" class='concrenBtn formBtn unfollowed' wx:else >关注</button>
+                        </view>
+                    </form>
+                </block>
+            </block>
+
+        </view>
+<!--        <view class="banner-ct">-->
+<!--            <view class="input-view contern-input-view">-->
+<!--                <image class="concern-icon"-->
+<!--                       src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_icon.png"></image>-->
+<!--                <input placeholder="搜索本店内商品" class="input-placeholder" placeholder-class="input-sytle concern-style"-->
+<!--                       bindinput="bindinput" value="{{searchText}}" bindfocus="bindfocus" bindconfirm="clickSearch"-->
+<!--                       confirm-type="search" focus="{{focus}}" bindblur="bindblur"/>-->
+<!--                <view wx:if="{{bDisplayMask&&searchText}}"-->
+<!--                      style="display:flex;display: -webkit-flex;width:64rpx;height:64rpx;margin-right: -18rpx;align-items: center;justify-content: center;-webkit-align-items: center;-webkit-justify-content: center;"-->
+<!--                      bindtap="deleteClick">-->
+<!--                    <image class="delete-icon"-->
+<!--                           src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_cancel.png"></image>-->
+<!--                </view>-->
+<!--            </view>-->
+<!--            <block wx:if="{{bDisplayMask}}">-->
+<!--                <text class="searh-text" catchtap="clickSearch" style="color:{{isScroll?'#232326':'#ffffff'}}">-->
+<!--                    {{searchText ? '搜索' : '取消'}}-->
+<!--                </text>-->
+<!--            </block>-->
+<!--            <block wx:else>-->
+<!--                <block wx:if="{{needShieldShopCategory}}">-->
+<!--                    <view></view>-->
+<!--                </block>-->
+<!--                <block wx:else>-->
+<!--                    <view class='contern_categoty'>-->
+<!--                        <image bindtap='shopCategories' style='width : 40rpx;height : 40rpx;'-->
+<!--                               src="../shop/shop_images/tab_icon_list.png"/>-->
+<!--                        <text style='font-family: PingFangSC-Light;font-size: 20rpx;color: #FFFFFF;text-align: center;'>-->
+<!--                            分类-->
+<!--                        </text>-->
+<!--                    </view>-->
+<!--                    &lt;!&ndash; <form bindsubmit="sortFormId">-->
+<!--                 <view class='contern_categoty'>-->
+<!--                         <button form-type="submit" class="formBtn" bindtap='shopCategories' style="background-size: 40rpx 40rpx; width : 40rpx;height : 40rpx; background-image:url('/pages/shop/shop_images/tab_icon_list.png')" />-->
+<!--                       <text style='font-family: PingFangSC-Light;font-size: 20rpx;color: #FFFFFF;text-align: center;'>分类</text>-->
+
+<!--                 </view>-->
+<!--                     </form> &ndash;&gt;-->
+<!--                </block>-->
+<!--            </block>-->
+<!--        </view>-->
+
+    </view>
+</template>
+
+
+<!--搜索页面的banner -->
+<template name="shop_search">
+    <view wx:if="{{true}}" class="banner">
+        <view class="banner-ct">
+            <image bindload="loadLogo"
+                   wx:if="{{shopInfo.logoUrl}}"
+                   class="{{logoType===1?'banner-logo-squre':'banner-logo'}}"
+                   mode="scaleToFill"
+                   src="{{shopInfo.logoUrl? shopInfo.logoUrl:'http://njst.360buyimg.com/jdreact/program/shop_logo_default.png'}}"
+                   mode="scaleToFill"
+                   bindtap="goShopDetail" wx:if="{{!isXproject}}"/>
+            <view class="input-view">
+                <image class="search-icon"
+                       src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_icon.png"></image>
+                <input placeholder="搜索本店铺内商品" class="input-placeholder" placeholder-class="input-sytle"
+                       bindinput="bindinput" value="{{searchText}}" bindfocus="bindfocus" bindconfirm="clickSearch"
+                       confirm-type="search" bindblur="bindblur"/>
+                <view wx:if="{{bDisplayMask&&searchText}}"
+                      style="display:flex;display: -webkit-flex;width:64rpx;height:64rpx;margin-right: -18rpx;align-items: center;justify-content: center;-webkit-align-items: center;-webkit-justify-content: center;"
+                      catchtap="deleteClick">
+                    <image class="delete-icon"
+                           src="http://njst.360buyimg.com/jdreact/program/shop_search_bar_cancel.png"
+                    ></image>
+
+                </view>
+            </view>
+            <block wx:if="{{bDisplayMask}}">
+                <text class="searh-text" catchtap="clickSearch" style="color:'#232326'">{{searchText ? '搜索' : '取消'}}
+                </text>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!-- 中间选项卡 推荐 销量 新品 价格-->
+<template name="shop_tab">
+    <view class="selecttab">
+        <text class="tab-select {{select.recommend ? 'activity' : ''}}" bindtap="recommend_tap">推荐</text>
+        <text class="tab-select {{select.sale ? 'activity' : ''}}" bindtap="sale_tap">销量</text>
+        <text class="tab-select {{select.new ? 'activity' : ''}}" bindtap="new_tap">新品</text>
+        <view class="tab-select {{select.price ? 'activity' : ''}}">
+            <text class="text-select {{select.price ? 'activity' : ''}}" bindtap="price_tap">价格</text>
+            <image class="price_icon" src="{{imgUrl+priceImage}}"></image>
+        </view>
+    </view>
+</template>
+
+<!-- 商品卡片 -->
+<template name="shop_row">
+
+</template>
+
+<!--product list-->
+<template name="pt-list">
+
+    <block wx:if="{{status.allProduct}}">
+        <view class="pt-list">
+            <view wx:for="{{list}}" wx:key="wareId" data-id="{{item.wareId}}"
+                  class="pt-item {{index%2===0 ? 'pt-marginRight':''}}" data-eid="MShop_AllProductProduct"
+                  data-eparam="{{item.wareId}}" bindtap="wareClick">
+                <!--<navigator url="../../pages/product/product?wareId={{item.wareId}}">-->
+                <!--<image class="pt-img" src="{{item.imageurl}}"></image>
+                <view class="pt-title">{{item.wname}}</view>
+                <view class="pt-price">
+                    <text class="pt-price-1 pt-price-text">¥</text>
+                    <text class="pt-price-2 pt-price-text">{{item.preJDPrice}}.</text>
+                    <text class="pt-price-3 pt-price-text">{{item.sufJDPrice}}</text>
+
+                </view>-->
+
+
+                <view class="pt-img">
+                    <image class="pt-img" src="http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png"/>
+                    <image class="pt-img"
+                           style="{{(item.isUnderCarriage === 1 || item.stock === 0) ? 'opacity: .5;':'opacity: 1;'}} ;position:relative;top:-380rpx"
+                           src="{{item.imageurl.length?item.imageurl:'http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png'}}"></image>
+                </view>
+
+                <image wx:if="{{item.isUnderCarriage === 1 || item.stock === 0}}" class="pt-img-gray"
+                       src="{{item.isUnderCarriage === 1 ?'http://njst.360buyimg.com/jdreact/program/shop_mark_off_shelf.png':'http://njst.360buyimg.com/jdreact/program/shop_mark_sold_out.png'}}"></image>
+                <view class="pt-title {{(item.isUnderCarriage === 1 || item.stock === 0) ? 'pt-price-text-gray':''}}">
+                    {{item.wname}}
+                </view>
+                <view class="pt-price {{(item.isUnderCarriage === 1 || item.stock === 0) ? 'pt-price-text-gray':'pt-price-text'}}">
+                    <block wx:if="{{item.isUnderCarriage != 1}}">
+                        <text class="pt-price-1">¥</text>
+                        <text class="pt-price-2">{{item.preJDPrice}}.</text>
+                        <text class="pt-price-3">{{item.sufJDPrice}}</text>
+                    </block>
+                    <block wx:elif="{{!item.isJDPrice}}">
+                        <text class="pt-UnderCarriage">{{item.jdPrice}}</text>
+                    </block>
+                    <block wx:else>
+                        <text class="pt-other">{{item.jdPrice}}</text>
+                    </block>
+                </view>
+
+
+                <!--</navigator>-->
+
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{status.newProduct && list.length}}">
+        <block wx:for="{{list}}" wx:key="pt-newProduct-item" wx:for-index="listIndex1" wx:for-item="listItem1">
+            <view class="pt-newProduct-tips">
+                <view>
+                    <image src="http://njst.360buyimg.com/jdreact/program/shop_new_clock.png"></image>
+                    <text>{{listItem1.title}}</text>
+                </view>
+            </view>
+            <view class="pt-list">
+                <view wx:for="{{listItem1.wareList}}" wx:for-index="listIndex2" wx:for-item="listItem2" wx:key="wareId"
+                      data-id="{{listItem2.wareId}}" class="pt-item {{listIndex2%2===0 ? 'pt-marginRight':''}}"
+                      data-eid="MShop_UpdateProduct" data-eparam="{{listItem2.wareId}}" bindtap="wareClick">
+                    <!--<navigator url="../../pages/product/product?wareId={{listItem2.wareId}}">-->
+
+
+                    <!--<image class="pt-img" src="{{listItem2.imgPath}}"></image>
+                    <view class="pt-title">{{listItem2.wareName}}</view>
+                    <view class="pt-price">
+                        <text class="pt-price-1 pt-price-text">¥</text>
+                        <text class="pt-price-2 pt-price-text">{{listItem2.preJDPrice}}.</text>
+                        <text class="pt-price-3 pt-price-text">{{listItem2.sufJDPrice}}</text>
+
+                    </view>-->
+                    <view class="pt-img">
+                        <image class="pt-img"
+                               src="http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png"/>
+                        <image class="pt-img"
+                               style="{{(listItem2.isUnderCarriage === 1 || item.stock === 0) ? 'opacity: .5;':'opacity: 1;'}} ;position:relative;top:-380rpx"
+                               src="{{listItem2.imgPath.length?listItem2.imgPath:'http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png'}}"></image>
+                    </view>
+
+
+                    <image wx:if="{{listItem2.isUnderCarriage === 1 || listItem2.stock === 0}}" class="pt-img-gray"
+                           src="{{listItem2.isUnderCarriage === 1 ?'http://njst.360buyimg.com/jdreact/program/shop_mark_off_shelf.png':'http://njst.360buyimg.com/jdreact/program/shop_mark_sold_out.png'}}"></image>
+                    <view class="pt-title {{(listItem2.isUnderCarriage === 1 || listItem2.stock === 0) ? 'pt-price-text-gray':''}}">
+                        {{listItem2.wareName}}
+                    </view>
+                    <view class="pt-price {{(listItem2.isUnderCarriage === 1 || listItem2.stock === 0) ? 'pt-price-text-gray':'pt-price-text'}}">
+                        <block wx:if="{{listItem2.isUnderCarriage != 1}}">
+                            <text class="pt-price-1">¥</text>
+                            <text class="pt-price-2">{{listItem2.preJDPrice}}.</text>
+                            <text class="pt-price-3">{{listItem2.sufJDPrice}}</text>
+                        </block>
+                        <block wx:elif="{{!listItem2.isJDPrice}}">
+                            <text class="pt-UnderCarriage">{{listItem2.jdPrice}}</text>
+                        </block>
+                        <block wx:else>
+                            <text class="pt-other">{{listItem2.jdPrice}}</text>
+                        </block>
+
+                    </view>
+
+
+                    <!--</navigator>-->
+
+                </view>
+            </view>
+
+        </block>
+
+
+    </block>
+    <block wx:if="{{status.promotionProduct}}">
+        <view class="pt-list">
+            <view wx:for="{{list}}" wx:key="wareId" data-id="{{item.wareId}}"
+                  class="pt-item {{index%2===0 ? 'pt-marginRight':''}}" data-eid="MShop_PromotionProduct"
+                  data-eparam="{{item.wareId}}" bindtap="wareClick">
+                <!--<navigator url="../../pages/product/product?wareId={{item.wareId}}">-->
+
+                <view class="pt-img">
+                    <image class="pt-img" src="http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png"/>
+                    <image class="pt-img"
+                           style="{{(item.isUnderCarriage === 1 || item.stock === 0) ? 'opacity: .5;':'opacity: 1;'}} ;position:relative;top:-380rpx"
+                           src="{{item.imgPath.length?item.imgPath:'http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png'}}"></image>
+                </view>
+
+
+                <image wx:if="{{item.isUnderCarriage === 1 || item.stock === 0}}" class="pt-img-gray"
+                       src="{{item.isUnderCarriage === 1 ?'http://njst.360buyimg.com/jdreact/program/shop_mark_off_shelf.png':'http://njst.360buyimg.com/jdreact/program/shop_mark_sold_out.png'}}"></image>
+                <view class="pt-title {{(item.isUnderCarriage === 1 || item.stock === 0) ? 'pt-price-text-gray':''}}">
+                    {{item.wareName}}
+                </view>
+                <view class="pt-price {{(item.isUnderCarriage === 1 || item.stock === 0) ? 'pt-price-text-gray':'pt-price-text'}}">
+                    <block wx:if="{{item.isUnderCarriage != 1}}">
+                        <text class="pt-price-1">¥</text>
+                        <text class="pt-price-2">{{item.preJDPrice}}.</text>
+                        <text class="pt-price-3">{{item.sufJDPrice}}</text>
+                    </block>
+                    <block wx:elif="{{!item.isJDPrice}}">
+                        <text class="pt-UnderCarriage">{{item.jdPrice}}</text>
+                    </block>
+                    <block wx:else>
+                        <text class="pt-other">{{item.jdPrice}}</text>
+                    </block>
+
+                    <view wx:if="{{item.promName}}" class="pt-price-4"
+                          style="color: #ffffff;{{(item.isUnderCarriage === 1 || item.stock === 0) ? 'opacity: .5;':'opacity: 1;'}}  top:{{(platform === 'ios')?'-5rpx;':'0rpx;'}} ">
+                        <view>{{item.promName}}</view>
+                    </view>
+                </view>
+                <!--</navigator>-->
+
+            </view>
+        </view>
+    </block>
+
+    <block wx:if="{{!noData && !netError}}">
+
+        <!--<view class="weui-loadmore" wx:if="{{isMore}}">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>-->
+
+        <view wx:if="{{!hasNext}}" class="pt-hasMore">
+            我是有底线的~
+        </view>
+        <view wx:elif="{{loadingfailed}}" class="pt-hasMore">
+            加载失败，请稍后重试
+        </view>
+        <view wx:else class="pt-hasMore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>
+    </block>
+
+    <block wx:if="{{noData}}">
+        <view class="pt-hasNoData">
+            <image class="pt-img-noData" src='http://njst.360buyimg.com/jdreact/program/shop_joy.png'/>
+            <view class="fontNodata">抱歉，暂无符合条件的商品</view>
+        </view>
+    </block>
+
+    <block wx:if="{{netError}}">
+        <view class="pt-hasNoData">
+            <image class="pt-img-wifi" src='../../pages/shop/shop_images/shop_wifi.png'/>
+            <view class="fontWifi">网络请求失败</view>
+            <view bindtap="_reloadData" class="fontReload">重新加载</view>
+        </view>
+    </block>
+
+
+</template>
+
+<!--单品推荐使用-->
+<template name="product-list">
+    <block>
+        <view class="pt-list">
+            <view wx:for="{{list}}" wx:key="wareId" data-id="{{item.wareId}}"
+                  class="pt-item {{index%2===0 ? 'pt-marginRight':''}}" data-eid="MShop_AllProductProduct"
+                  data-eparam="{{item.wareId}}" bindtap="wareClick">
+                <!--<navigator url="../../pages/product/product?wareId={{item.wareId}}">-->
+
+                <view class="pt-img">
+                    <image class="pt-img" src="../../pages/shop/shop_images/shop_goods_img_default.png"/>
+                    <image class="pt-img"
+                           style="{{(item.isUnderCarriage === 1 || item.stock === 0) ? 'opacity: .5;':'opacity: 1;'}} ;position:relative;top:-380rpx"
+                           src="{{item.imgPath.length?item.imgPath:'http://njst.360buyimg.com/jdreact/program/shop_goods_img_default.png'}}"></image>
+                </view>
+
+                <image wx:if="{{item.isUnderCarriage === 1 || item.stock === 0}}" class="pt-img-gray"
+                       src="{{item.isUnderCarriage === 1 ?'http://njst.360buyimg.com/jdreact/program/shop_mark_off_shelf.png':'http://njst.360buyimg.com/jdreact/program/shop_mark_sold_out.png'}}"></image>
+                <view class="pt-title {{(item.isUnderCarriage === 1 || item.stock === 0) ? 'pt-price-text-gray':''}}">
+                    {{item.wareName}}
+                </view>
+                <view class="pt-price {{(item.isUnderCarriage === 1 || item.stock === 0) ? 'pt-price-text-gray':'pt-price-text'}}">
+                    <block wx:if="{{item.isUnderCarriage != 1}}">
+                        <text class="pt-price-1">¥</text>
+                        <text class="pt-price-2">{{item.preJDPrice}}.</text>
+                        <text class="pt-price-3">{{item.sufJDPrice}}</text>
+                    </block>
+                    <block wx:elif="{{!item.isJDPrice}}">
+                        <text class="pt-UnderCarriage">{{item.jdPrice}}</text>
+                    </block>
+                    <block wx:else>
+                        <text class="pt-other">{{item.jdPrice}}</text>
+                    </block>
+                </view>
+                <!--</navigator>-->
+            </view>
+        </view>
+    </block>
+
+    <block wx:if="{{!noData && !netError}}">
+
+        <!--<view class="weui-loadmore" wx:if="{{isMore}}">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+        </view>-->
+
+        <view wx:if="{{!hasNext}}" class="pt-hasMore">
+            我是有底线的~
+        </view>
+        <view wx:elif="{{loadingfailed}}" class="pt-hasMore">
+            加载失败，请稍后重试
+        </view>
+    </block>
+
+    <block wx:if="{{netError}}">
+        <view class="pt-hasNoData" style="background:white">
+            <image class="pt-img-wifi" src='../../pages/shop/shop_images/shop_wifi.png'/>
+            <view class="fontWifi">网络请求失败</view>
+            <view bindtap="_searchWare" class="fontReload">重新加载</view>
+        </view>
+    </block>
+</template>

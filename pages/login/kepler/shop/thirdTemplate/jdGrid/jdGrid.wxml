@@ -1,0 +1,61 @@
+<!--pages/shop/thirdTemplate/jdGrid/jdGrid.wxml-->
+<!-- {{styles.orientation == 'vertical'? 'column':'row'}}  -->
+
+<view class="skulist">
+   <block wx:for="{{skuList}}" wx:for-item="sku" wx:if="{{index <= endIndex}}"
+   wx:key="index">
+      <!-- <image style="width:150px;height={{styles.height/2}}px;background-color:green;" src="{{sku.imageUrl}} "></image>
+     -->
+
+     <!-- position:{{foreach.template.style.layout}} -->
+
+        <block if="{{foreachFiltered.template.containerType == 'container'}}">
+          <view bindtap='_tapGridItem' data-index="{{index}}" class="skuitem {{index%2 == 0?'sku-right':''}}">
+             <block wx:for="{{foreachFiltered.template.children}}" wx:for-item="child"  wx:key="index">
+                 <block wx:if="{{child.containerType == 'image'}}">
+                   <image class="skuimg" src="{{sku.imageUrl}}"> </image>
+                 </block>
+
+                 <block wx:if="{{child.containerType == 'container'}}">
+                   <view>
+                    <!-- 二级 child  -->
+                     <block wx:for="{{child.children}}" wx:for-item="subChild" wx:for-index="subIndex"  wx:key="subIndex">
+                        <block wx:if="{{subChild.containerType == 'image'}}">
+                           <image class="skuimg" src="{{sku.imageUrl}}"> </image>
+                        </block>
+
+
+                        <block wx:if="{{subChild.containerType == 'text'}}">
+                          <view class="{{subChild.valueRefer? (subChild.valueRefer == 'skuName' ? 'skutitle' : (subChild.valueRefer == 'price' ? 'skuprice' : 'skutitle')) : (subIndex > 0? 'skuprice' : 'skutitle')}}">
+                              {{subChild.valueRefer? (subChild.valueRefer == 'skuName' ? sku.skuName : (subChild.valueRefer == 'price' ? '￥'+sku.price : subChild.valueRefer)) : (subIndex > 0? '￥'+sku.price : sku.skuName)}}
+                          </view>
+                        </block>
+
+                        <block wx:if="{{subChild.containerType == 'container'}}">
+                        <view >
+                        <!-- 三级 child  -->
+                        <block wx:for="{{subChild.children}}" wx:for-item="thirdChild" wx:for-index="thirdIndex"  wx:key="thirdIndex">
+
+                             <image wx:if="{{thirdChild.containerType == 'image'}}" class="skuimg" src="{{sku.imageUrl}}"> </image>
+
+                             <view wx:if="{{thirdChild.containerType == 'text'}}" class="{{thirdChild.valueRefer? (thirdChild.valueRefer == 'skuName' ? 'skutitle' : (thirdChild.valueRefer == 'price' ? 'skuprice' : 'skutitle')) : (thirdIndex > 0? 'skuprice' : 'skutitle')}}">{{thirdChild.valueRefer? (thirdChild.valueRefer == 'skuName' ? sku.skuName : (thirdChild.valueRefer == 'price' ? '￥'+sku.price : thirdChild.valueRefer)) : (thirdIndex > 0? '￥'+sku.price : sku.skuName)}}</view>
+
+                        </block>
+                        </view>
+
+                        </block>
+
+
+                     </block>
+
+                   </view>
+                 </block>
+
+
+             </block>
+          </view>
+      </block>
+
+  </block>
+  <slot> </slot>
+</view>

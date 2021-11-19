@@ -1,0 +1,61 @@
+<!--pages/shop/thirdTemplate/jdList/jdList.wxml-->
+<view style="width:{{width}};height:{{}};background-color:{{styles.backgroundColor}};margin-left:{{marginLeft}}px;margin-top:{{marginTop}}px;margin-right:{{marginRight}}px;margin-bottom:{{marginBottom}}px;display:flex;flex-direction:row;justify-content:space-around;align-items:center;flex-wrap:wrap;">
+   <block wx:for="{{skuList}}" wx:for-item="sku" wx:if="{{index <= endIndex}}">
+      <!-- <image style="width:150px;height={{styles.height/2}}px;background-color:green;" src="{{sku.imageUrl}} "></image>  
+     -->
+
+     <!-- position:{{foreach.template.style.layout}} -->
+
+        <block if="{{foreachFiltered.template.containerType == 'container'}}">
+          <view bindtap='_tapGridItem' data-index="{{index}}" style="width:{{cellWidth}};height:{{foreachFiltered.template.style.height * winScale}}px;background-color:{{foreachFiltered.template.style.backgroundColor}};position:{{position == 'absolute'? 'relative': ''}};">
+             <block wx:for="{{foreachFiltered.template.children}}" wx:for-item="child">
+                 <block wx:if="{{child.containerType == 'image'}}">
+                   <image style="width:{{child.style.width * winScale}}px;height:{{child.style.height * winScale}}px;margin-top:{{child.style.marginTop}}px;margin-right:{{child.style.marginRight}}px;" src="{{child.urlRefer == 'imageUrl'? sku.imageUrl : child.urlRefer}}"> </image>
+                 </block>
+
+                 <block wx:if="{{child.containerType == 'container'}}">
+                   <view style="width:{{child.style.width * winScale}}px;height:{{child.style.height* winScale}}px;border-width:{{child.style.borderWidth}}px;border-color:{{child.style.borderColor}};border-style: {{child.style.borderColor? 'solid':''}}; margin-left:{{child.style.marginLeft}}px;top:{{child.style.marginTop}}px;display:flex;flex-direction:row;justify-content:space-between;align-items:center;flex-wrap:wrap;position:{{position}};">
+                    <!-- 二级 child  -->
+                     <block wx:for="{{child.children}}" wx:for-item="subChild" wx:for-index="subIndex"> 
+                        <block wx:if="{{subChild.containerType == 'image'}}">
+                           <image style="width:{{subChild.style.width * winScale}}px;height:{{subChild.style.height * winScale}}px;" src="{{subChild.urlRefer == 'imageUrl'? sku.imageUrl : subChild.urlRefer}}"> </image>
+                        </block>
+
+
+                        <block wx:if="{{subChild.containerType == 'text'}}">
+                          <view style="width:{{subChild.style.width * winScale}}px;height:{{subChild.style.height * winScale}}px;margin-left:{{subChild.style.marginLeft}}px;line-height:{{subChild.style.height ? ((subChild.style.height * winScale) / subChild.style.lines): 15}}px;font-size:{{subChild.style.fontSize}}px;text-align:{{subChild.style.textAlign}};lines:{{subChild.style.lines}};color:{{subChild.style.textColor}};overflow:hidden;text-overflow :ellipsis;">{{subChild.valueRefer == 'skuName' ? sku.skuName : (subChild.valueRefer == 'price' ? sku.price : subChild.valueRefer)}}</view>
+                        </block>
+
+                        <view wx:if="{{subChild.containerType == 'wrline'}}" style="height:{{subChild.style.height * winScale}}px;width:{{subChild.style.width * winScale}}px;background-color:{{subChild.style.backgroundColor}};border-width:{{subChild.style.borderWidth}}px;border-type:{{subChild.style.borderStyle=='solid'?'solid':'dotted'}};"></view>
+
+                        <block wx:if="{{subChild.containerType == 'container'}}">
+                        <view style="width:{{subChild.style.width * winScale}}px;height:{{subChild.style.height * winScale}}px;border-width:{{subChild.style.borderWidth}}px;border-color:{{subChild.style.borderColor}};margin-left:{{subChild.style.marginLeft}}px;margin-top:{{subChild.style.marginTop}}px;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;flex-wrap:wrap;position:{{position}};">
+                        <!-- 三级 child  -->
+                        <block wx:for="{{subChild.children}}" wx:for-item="thirdChild" wx:for-index="thirdIndex">
+
+                             <image wx:if="{{thirdChild.containerType == 'image'}}" style="width:{{thirdChild.style.width * winScale}}px;height:{{thirdChild.style.height * winScale}}px;" src="{{thirdChild.urlRefer == 'imageUrl'? sku.imageUrl : thirdChild.urlRefer}}"> </image>
+                       
+                             <view wx:if="{{thirdChild.containerType == 'text'}}" style="width:{{thirdChild.style.width * winScale}}px;height:{{thirdChild.style.height * winScale}}px;margin-left:{{thirdChild.style.marginLeft}}px;line-height:{{thirdChild.style.height ? ((thirdChild.style.height * winScale) / thirdChild.style.lines): 15}}px;font-size:{{thirdChild.style.fontSize ? thirdChild.style.fontSize: 15}}px;text-align:{{thirdChild.style.textAlign}};lines:{{thirdChild.style.lines}};color:{{thirdChild.style.textColor}};overflow:hidden;text-overflow:ellipsis;overflow:hidden;text-overflow: ellipsis;">{{thirdChild.valueRefer == 'skuName' ? sku.skuName : (thirdChild.valueRefer == 'price' ? sku.price : thirdChild.valueRefer)}}</view>
+
+                             <view wx:if="{{thirdChild.containerType == 'wrline'}}" style="height:{{thirdChild.style.height * winScale}}px;width:{{thirdChild.style.width * winScale}}px;background-color:{{thirdChild.style.backgroundColor}};border-width:{{thirdChild.style.borderWidth}}px;border-type:{{thirdChild.style.borderStyle=='solid'?'solid':'dotted'}};"></view>
+                        
+
+                        </block>
+                        </view>
+
+                        </block>
+
+
+                     </block>
+                   
+                   </view>
+                 </block>
+
+
+             </block>
+          </view>
+      </block>  
+
+  </block> 
+  <slot> </slot>
+</view>

@@ -1,0 +1,55 @@
+
+<import src = "../shop_template/shop_template" />
+
+<view style="position:fixed;left:0;top:0;z-Index:111300">
+<template is = "shop_search" data="{{logoType,imgUrl,winScale,winWidth,isBanner,shopInfo,searchText, bInputText,bDisplayMask,focus,isXproject}}" />
+<template is = "shop_tab" data = "{{priceImage,select,imgUrl}}" />
+</view>
+<div class="hotwords-bg" catchtap="hideHotwords" style="display: {{(!hasSearch && cateId == '')?'block':(hotwords.length && isShowHotwords ?'block':'none')}}">
+    <view class="hotwords" style="display: {{hotwords.length ?'block':'none'}}">
+        <view class="hotwords-title" >热搜</view>
+        <view class="hotwords-items">
+            <text wx:for="{{hotwords}}" wx:key="" data-item="{{item}}" catchtap="searchHotWord">{{item}}</text>
+        </view>
+    </view>
+</div>
+
+<!--占位高度  -->
+<view style="height:170rpx;overflow: hidden;" />
+<!--商品列表  -->
+<skuList sku-param="{{requestParam}}" sku-list="{{list}}" sku-type="{{1002}}"/>
+
+<!--加载状态  -->
+<view wx:if="{{state===1}}" class="loadingFrame">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+<!--已加载全部数据状态  -->
+<view wx:if="{{!hasNext && list.length}}" class="loadingFrame">
+  <view class="weui-loadmore__tips">我是有底线的~</view>
+</view>
+<view wx:elif="{{!hasNext && !list.length}}" class='pt-hasNoData'>
+  <image class="pt-img-noData" src='http://njst.360buyimg.com/jdreact/program/shop_joy.png' />
+  <view class = "fontNodata">抱歉，暂无符合条件的商品</view>
+  <view class = "toCategory" bindtap="toCategory" wx:if="{{!isXproject}}">查看店内分类</view>
+</view>
+<!--网络异常  -->
+<netError bindreloadevent="onReload" net-state="{{state}}"/>
+
+<!-- /返回顶部按钮 -->
+<view wx:if = "{{isShowBackTop}}" class = "back-top" bindtap='backtoTop'>
+    <image class = "back-top-img" mode=""  src="{{boolBack ? imgUrl+'shop_butn_goup_pressed.png' : imgUrl+'shop_butn_goup_normal.png'}}" />
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+<wxs module="clock">
+    var getinteger=function (m){
+    console.log("进来了")
+    var a=m.split(".")[0]
+    return a;
+    }
+    var getdecimal=function (n){
+    var b = n.split(".")[1]
+    return b;
+    }
+    var getUrl=function(myUrl){
+    var newUrl;
+    if(myUrl.indexOf('https')==-1){
+    newUrl="https:"+myUrl;
+    }
+    console.log("======》"+newUrl)
+    return newUrl;
+    }
+    module.exports.getinteger=getinteger;
+    module.exports.getdecimal=getdecimal;
+    module.exports.getUrl=getUrl;
+
+</wxs>
+<view class='collageBox'>
+    <view class='collageItem' wx:for="{{dataList}}" wx:key="index">
+        <!--去开团  -->
+        <block wx:if="{{item.pingouInfo.status===1}}">
+            <view bindtap='jumpToFt' data-link="{{item.pingouInfo.url}}" class='itemBox'
+                  data-skuId="{{item.pingouInfo.skuId}}" data-num="{{item.pingouInfo.groupOrdNumber}}"
+                  data-state="{{item.pingouInfo.status}}">
+                <image src="{{clock.getUrl(item.skuInfoDetail.imageUrl)}}"/>
+                <text class='collageTit'>{{item.skuInfoDetail.skuName}}</text>
+                <view class='collagePrice'>
+                    <view class='nowP'>
+                        <text class='skuL'>¥</text>
+                        <text class='skuM'>{{clock.getinteger(item.pingouInfo.promoPrice)}}</text>
+                        <text class='skuR'>.{{clock.getdecimal(item.pingouInfo.promoPrice)}}</text>
+                    </view>
+                    <text class='oldP'>¥{{item.skuInfoDetail.price}}</text>
+                </view>
+                <view class='collageBtn start'>
+                    <text class='collNum'>{{item.pingouInfo.tuanMemberCount}}人拼</text>
+                    <text class='collGo'>去开团</text>
+                </view>
+            </view>
+        </block>
+        <!-- 未开始 -->
+        <block wx:if="{{item.pingouInfo.status===0}}">
+            <view class='itemBox'>
+                <image src="{{clock.getUrl(item.skuInfoDetail.imageUrl)}}"/>
+                <text class='collageTit'>{{item.skuInfoDetail.skuName}}</text>
+                <view class='collagePrice'>
+                    <view class='nowP'>
+                        <text class='skuL'>¥</text>
+                        <text class='skuM'>{{clock.getinteger(item.pingouInfo.promoPrice)}}</text>
+                        <text class='skuR'>.{{clock.getdecimal(item.pingouInfo.promoPrice)}}</text>
+                    </view>
+                    <text class='oldP'>¥{{item.skuInfoDetail.price}}</text>
+                </view>
+                <view class='collageBtn end'>
+                    <text class='collNum'>{{item.pingouInfo.tuanMemberCount}}人拼</text>
+                    <text class='collGo'>即将开始</text>
+                </view>
+            </view>
+        </block>
+        <!-- 已经结束 -->
+        <block wx:if="{{item.pingouInfo.status===2}}">
+            <view class='itemBox'>
+                <image src="{{clock.getUrl(item.skuInfoDetail.imageUrl)}}"/>
+                <text class='collageTit'>{{item.skuInfoDetail.skuName}}</text>
+                <view class='collagePrice'>
+                    <view class='nowP'>
+                        <text class='skuL'>¥</text>
+                        <text class='skuM'>{{clock.getinteger(item.pingouInfo.promoPrice)}}</text>
+                        <text class='skuR'>.{{clock.getdecimal(item.pingouInfo.promoPrice)}}</text>
+                    </view>
+                    <text class='oldP'>¥{{item.skuInfoDetail.price}}</text>
+                </view>
+                <view class='collageBtn end'>
+                    <text class='collNum'>{{item.pingouInfo.tuanMemberCount}}人拼</text>
+                    <text class='collGo'>已结束</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

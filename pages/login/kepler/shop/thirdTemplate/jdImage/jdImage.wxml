@@ -1,0 +1,10 @@
+<!--pages/shop/thirdTemplate/jdImage/jdImage.wxml-->
+<view  style="height:{{height}};width:{{width}};display:flex;border-radius:{{styles.isCircle ? 'radius': 0 }}px;left: {{marginLeft}}px;top:{{marginTop}}px;position: {{positionAsFather == 'absolute'? 'absolute':'static'}};">
+    <image bindtap="_clickImage" style="height:{{height}};width:{{width}};border-radius:{{styles.isCircle ? 'radius': 0 }}px;position:absolute;" src="{{imageUrl}}">
+    </image>
+
+  	<block wx:for="{{sourceData}}" wx:for-item="hotData" wx:key="">
+		<view style="width:{{hotData.coordinate.w * winScale}}px;height: {{hotData.coordinate.h * winScale}}px;margin-top: {{hotData.coordinate.y * winScale}}px;margin-left: {{hotData.coordinate.x * winScale}}px;background-color: '';position: absolute;z-index: 100;" catchtap="_clickHotarea" data-index="{{index}}"></view>
+	</block>
+
+</view>

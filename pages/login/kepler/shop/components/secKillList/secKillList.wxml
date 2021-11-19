@@ -1,0 +1,118 @@
+<!--秒杀和闪购tab模版  -->
+<view wx:if='{{moduleType=="tab"}}'>
+  <block wx:if="{{skuList.length > 1}}">
+    <view class="product-multiple-info">
+      <scroll-view class="scroll-img-wrap" lower-threshold="0" bindscrolltolower="goCheckMore" scroll-x="true">
+        <view class="prod-img-list" style="width:{{imgListWidth}};">
+          <block wx:key="" wx:for="{{skuList}}" wx:for-index="index">
+            <view class="prod-item-wrap" bindtap="goProductInfo" data-state="{{timeList[index].msState}}" data-id="{{item.skuId}}">
+              <view class="prod-img-wrap">
+                <image wx:if="{{skuType=='MS'}}" class="product-img"  src="{{item.imageUrl}}"></image>
+                <image wx:else class="product-img"  src="{{item.skuImg}}"></image>
+                <view wx:if="{{item.soldOut == 1}}" class="sold-out-icon"></view>
+                <view wx:if="{{timeList[index].msState == '已结束'}}" class="finish-icon"></view>
+              </view>
+              <view class="product-title">{{item.skuName}}</view>
+              <view>
+                <view class="skuprice">
+                  <text class="skuPriceLeft">￥</text>
+                  <text class="skuPriceRight">{{item.preMSPrice}}</text>
+                  <text class="skuPriceLeft">.{{item.sufMSPrice}}</text>
+                </view>
+                <view class="oldprice">￥{{item.jdPrice}}</view>
+              </view>
+              <view class="coutdown-wrap">
+                <text wx:if="{{timeList[index].msState=='进行中'||timeList[index].msState=='已结束'}}" class="c-left-desc">仅剩</text>
+                <text class="time">{{timeList[index].countTimeObj.hours}}</text>
+                <text class="dot"></text>
+                <text class="time">{{timeList[index].countTimeObj.minutes}}</text>
+                <text class="dot"></text>
+                <text class="time">{{timeList[index].countTimeObj.sec}}</text>
+                <text wx:if="{{timeList[index].msState=='未开始'}}" class="c-right-desc">后开始</text>
+              </view>
+            </view>
+          </block>
+          <view class="nomore" wx:if="{{!moreInfo}}">
+            <text>没有更多了</text>
+          </view>
+          <view class="checkmore" bindtap="checkMoreInfo" wx:else>
+            <view class="more-icon"></view>
+            <text>查看更多</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="product-single-info">
+      <view class="main-pro flex-container"  bindtap="goProductInfo" data-state="{{timeList[0].msState}}" data-id="{{commodityInfo.skuId}}">
+        <view class="lf sub-flex-ave">
+          <image wx:if="{{skuType=='MS'}}" class="product-img"  src="{{commodityInfo.imageUrl}}"></image>
+          <image wx:else class="product-img"  src="{{commodityInfo.skuImg}}"></image>
+          <view wx:if="{{commodityInfo.soldOut == 1}}" class="sold-out-icon"></view>
+          <view wx:if="{{timeList[0].msState == '已结束'}}" class="finish-icon"></view>
+        </view>
+        <view class="rt sub-flex-ave">
+          <view class="product-title">{{commodityInfo.skuName}}</view>
+          <view class="price-box">
+              <view class="skuprice">
+                  <text class="skuPriceLeft">￥</text>
+                  <text class="skuPriceRight">{{commodityInfo.preMSPrice}}</text>
+                  <text class="skuPriceLeft">.{{commodityInfo.sufMSPrice}}</text>
+              </view>
+              <view class="oldprice">￥{{commodityInfo.jdPrice}}</view>
+          </view>
+          <view class="bot-content">
+            <view class="coutdown-wrap">
+               <text wx:if="{{timeList[0].msState=='进行中'||timeList[0].msState=='已结束'}}" class="c-left-desc">仅剩</text>
+                  <text class="time">{{timeList[0].countTimeObj.hours}}</text>
+                  <text class="dot"></text>
+                  <text class="time">{{timeList[0].countTimeObj.minutes}}</text>
+                  <text class="dot"></text>
+                  <text class="time">{{timeList[0].countTimeObj.sec}}</text>
+                  <text wx:if="{{timeList[0].msState=='未开始'}}" class="c-right-desc">后开始</text>
+            </view>
+            <view class="buy-btn">
+              <image src="http://newbuz.360buyimg.com/jingshop/shop/buyBtn.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<!--秒杀和闪购模版list -->
+<view wx:if='{{moduleType=="list"}}'>
+  <view class="pro-wrap">
+    <block  wx:key="" wx:for="{{skuList}}"  wx:for-index="index">
+        <view class="prod-item-wrap" bindtap="goProductInfo" data-id="{{item.skuId}}" data-state="{{timeList[index].msState}}">
+            <view class="prod-img-wrap">
+              <image wx:if="{{skuType=='MS'}}" class="product-img"  src="{{item.imageUrl}}"></image>
+              <image wx:else class="product-img"  src="{{item.skuImg}}"></image>
+              <view wx:if="{{item.soldOut == 1}}" class="sold-out-icon"></view>
+              <view wx:if="{{timeList[index].msState == '已结束'}}" class="finish-icon"></view>
+            </view>
+            <view class="prod-content">
+              <view class="product-title">{{item.skuName}}</view>
+              <view>
+                <view class="skuprice">
+                  <text class="skuPriceLeft">￥</text>
+                  <text class="skuPriceRight">{{item.preMSPrice}}</text>
+                  <text class="skuPriceLeft">.{{item.sufMSPrice}}</text>
+                </view>
+                <view class="oldprice">￥{{item.jdPrice}}</view>
+              </view>
+              <view class="coutdown-wrap">
+                  <text wx:if="{{timeList[index].msState=='进行中'||timeList[index].msState=='已结束'}}" class="c-left-desc">仅剩</text>
+                  <text class="time">{{timeList[index].countTimeObj.hours}}</text>
+                  <text class="dot"></text>
+                  <text class="time">{{timeList[index].countTimeObj.minutes}}</text>
+                  <text class="dot"></text>
+                  <text class="time">{{timeList[index].countTimeObj.sec}}</text>
+                  <text wx:if="{{timeList[index].msState=='未开始'}}" class="c-right-desc">后开始</text>
+                </view>
+          </view>
+        </view>
+    </block>
+  </view>
+</view>

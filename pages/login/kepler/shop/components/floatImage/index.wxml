@@ -1,0 +1,3 @@
+ <view catchtap='click' catchtouchmove="move" style="z-Index:301;position:fixed;top:{{top}}px;left:{{left}}px;height: 60px;width: 60px;background: rgba(0,0,0,0);">
+ <image style='width:60px;height:60px' src='http://njst.360buyimg.com/jdreact/program/floatImg1.png'></image>
+  </view>

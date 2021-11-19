@@ -1,0 +1,305 @@
+
+/*product*/
+
+.product-single-info {
+  padding: 20rpx;
+}
+
+.product-multiple-info {
+  border-bottom: 1rpx solid #f6f6f6;
+  border-top: 1rpx solid #f6f6f6;
+}
+
+.scroll-img-wrap {
+  width: 100%;
+  height: 484rpx;
+}
+
+.prod-img-list {
+  width: auto;
+  height: 484rpx;
+  overflow: hidden;
+  display: flex;
+}
+
+.prod-item-wrap {
+  width: 280rpx;
+  height: 484rpx;
+  font-size: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 10rpx;
+  
+}
+.prod-item-wrap+.prod-item-wrap {
+  border-left: 1px solid #f6f6f6;
+}
+.prod-img-wrap {
+  width: 260rpx;
+  height: 260rpx;
+  position: relative;
+}
+
+.product-img {
+  width: 260rpx;
+  height: 260rpx;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+}
+
+.product-num {
+  width: 158rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size: 20rpx;
+  color: #888;
+  text-align: center;
+}
+.finish-icon,.sold-out-icon{
+  width: 140rpx;
+  height: 140rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -70rpx;
+  margin-top: -70rpx;
+  z-index: 10;
+}
+.sold-out-icon {
+  background: url("http://newbuz.360buyimg.com/jingshop/shop/mark_soldout.png") 0 0 no-repeat;
+  background-size: cover;
+}
+.finish-icon{
+  background: url("http://newbuz.360buyimg.com/jingshop/shop/mark_finish.png") 0 0 no-repeat;
+  background-size: cover;
+}
+.sub-flex-ave {
+  flex: 1;
+  -webit-flex: 1;
+}
+.main-pro .lf {
+  width: 220rpx;
+  max-width: 220rpx;
+  height: 220rpx;
+  border-radius: 16rpx;
+  position: relative;
+}
+
+.main-pro .lf image {
+  width: 100%;
+  height: 100%;
+}
+
+.main-pro .rt {
+  padding-left: 20rpx;
+}
+
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.p-title {
+  position: relative;
+  font-size: 30rpx;
+  color: #2E2D2D;
+  padding-left: 20rpx;
+  line-height: 42rpx;
+  margin: 24rpx 0 19rpx;
+}
+.p-title:after{
+  content:"";
+  position: absolute;
+  left: 0; 
+  top: 50%;
+  width: 7rpx;
+  height: 24rpx;
+  margin-top: -12rpx;
+  background: #F0250F;
+}
+.product-title{
+  font-size: 24rpx;
+  color:#232326;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-bottom: 22rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  overflow: hidden;
+  height: 63rpx;
+  line-height: 33rpx;
+}
+.skuprice{
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 10rpx;
+}
+.skuPriceLeft{
+  color:#f23030;
+  font-size: 20rpx;
+}
+.skuPriceRight{
+  color:#f23030;
+  font-size: 28rpx;
+}
+.oldprice {
+  display: inline-block;
+  margin-left: 10rpx;
+  text-decoration: line-through;
+  color: #848484;
+  font-size: 20rpx;
+}
+.coutdown-wrap {
+  background: #f8f8f8;
+  text-align: center;
+  width: 260rpx; 
+  height: 44rpx;
+  line-height: 44rpx;
+  margin-top: 18rpx;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2E2D2D;
+  font-size: 22rpx;
+}
+.coutdown-wrap .time {
+  background: url("http://newbuz.360buyimg.com/jingshop/shop/coutdown-bg.png") 0 0 no-repeat;
+  width: 40rpx; 
+  height: 34rpx; 
+  background-size: cover;
+  font-size: 24rpx;
+  display: inline-block;
+  color: #232326;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  text-align: center;
+}
+.coutdown-wrap .dot {
+  background: url("http://newbuz.360buyimg.com/jingshop/shop/coutdown-point.png") 0 0 no-repeat;
+  width: 2rpx; 
+  height: 10rpx; 
+  background-size: cover;
+  display: inline-block;
+  margin: 0 2rpx;
+}
+.c-left-desc {
+  margin-right: 10rpx;
+  font-size: 22rpx;
+  line-height: 44rpx;
+}
+.c-right-desc {
+  margin-left: 10rpx;
+  font-size: 22rpx;
+  line-height: 44rpx;
+}
+.nomore {
+  font-size: 0; 
+  width: 66rpx;
+  display: inline-block;
+  height: 484rpx;
+  vertical-align: middle;
+  text-align: center;
+  border-left:1px solid #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nomore text{
+  font-size: 22rpx;
+  color: #848484;
+  width: 22rpx;
+  line-height: 30rpx;
+  height: 150rpx;
+  display: inline-block;
+}
+.checkmore {
+  font-size: 0; 
+  width: 97rpx;
+  display: inline-block;
+  height: 484rpx;
+  vertical-align: middle;
+  text-align: center;
+  border-left:1px solid #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.checkmore text {
+  font-size: 22rpx;
+  color: #848484;
+  width: 22rpx;
+  line-height: 26rpx;
+  height: 104rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.more-icon {
+  width: 24rpx;
+  height: 24rpx;
+  display: inline-block;
+  background: url("http://newbuz.360buyimg.com/jingshop/shop/arrow_more.png") 0 0 no-repeat;
+  background-size: cover;
+  margin-right: 12rpx;
+  vertical-align: middle;
+}
+.product-single-info .skuPriceRight{
+  font-size: 30rpx;
+}
+.product-single-info .oldprice {
+  font-size: 22rpx;
+}
+.product-single-info .product-title {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  height: 80rpx;
+  margin: 11rpx 0 0;
+}
+.product-single-info .skuprice {
+  margin: 0 10rpx 0 0;
+}
+.product-single-info .coutdown-wrap {
+  margin: 0;
+}
+.product-single-info .price-box {
+  margin: 30rpx 0 0;
+}
+.bot-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20rpx 0 0;
+}
+.buy-btn,.buy-btn image {
+  width: 119rpx;
+  height: 44rpx;
+  overflow: hidden;
+}
+.pro-wrap .prod-item-wrap {
+  width: 350rpx;
+  height: 574rpx;
+  background: #fff;
+  margin: 10rpx 10rpx 0 0;
+  padding: 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+.pro-wrap .product-img,.pro-wrap .prod-img-wrap{
+  width: 350rpx;
+  height: 350rpx;
+}
+.pro-wrap .coutdown-wrap {
+  width: 310rpx;
+}
+.pro-wrap {
+  background: #f6f6f6;
+  padding: 0 10rpx 0 20rpx;
+}
+.prod-content {padding: 23rpx 20rpx 20rpx;}
+.pro-wrap .product-title {font-size: 26rpx;line-height: 32rpx;height: 64rpx;margin-top: 0;}
+.pro-wrap .skuPriceRight {font-size: 30rpx;}
+.pro-wrap .skuPriceLeft,.pro-wrap .oldprice {font-size: 22rpx;}

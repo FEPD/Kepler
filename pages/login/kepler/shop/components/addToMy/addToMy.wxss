@@ -1,0 +1,74 @@
+.addMyToast {
+  position: fixed;
+  z-index: 10000;
+  top: 140rpx;
+  right: 42rpx;
+  width: 437rpx;
+  background: rgba(255,255,255,1);
+  border-radius: 12rpx;
+  box-shadow: 0rpx 5rpx 10rpx 0rpx rgba(0,0,0,0.3);
+}
+.isIphoneX {
+  top:182rpx;
+}
+.jToast {top: 20rpx;}
+.addMywrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-right: 60rpx;
+  box-sizing: border-box;
+  padding: 20rpx 60rpx 20rpx 20rpx;
+}
+.addMyToast,.addMyToast cover-view {
+overflow: visible;
+}
+.close-icon {
+ position: absolute;
+ top: 24rpx;
+ right: 24rpx;
+ width: 30rpx;
+ height: 30rpx;
+ background: url("//newbuz.360buyimg.com/jingshop/shop/close-icon.png") no-repeat 0 0;
+ background-size: cover;
+}
+.addMyBox image,.dot-icon {
+  width: 72rpx;
+  height: 40rpx;
+  margin: 0 10rpx;
+  vertical-align: middle;
+}
+.addMyBox text,.addMyBox cover-view {
+  font-size: 24rpx;
+  color: rgba(0,0,0,0.85);
+  line-height: 34rpx;
+}
+.addMyBox cover-view{
+  display: inline;
+  white-space: pre-line;
+}
+.addMyWrap {
+  padding-top: 40rpx;
+  position: relative;
+}
+.a-txt-1 {position:absolute; top: 0;left: 0;}
+.dot-icon {
+  display: inline-block;
+  position: absolute;
+  left: 47rpx;
+  top: 0;
+}
+.a-txt-2 {
+  display: inline-block;
+  position: absolute;
+  left: 130rpx;
+  top: 0;
+}
+.triangle-pop {
+  position:absolute; width:20rpx; height:20rpx; top:-12rpx; right:92rpx; 
+  background: #fff;
+  transform: rotate(45deg);
+  border-top: 1rpx solid rgba(0,0,0,.1);
+  border-left: 1rpx solid rgba(0,0,0,.1);
+  border-top-left-radius: 6rpx;
+}

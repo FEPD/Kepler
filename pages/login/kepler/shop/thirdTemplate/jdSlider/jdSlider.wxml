@@ -1,0 +1,10 @@
+<!--pages/shop/thirdTemplate/jdSlider/jdSlider.wxml-->
+<!-- <text>pages/shop/thirdTemplate/jdSlider/jdSlider.wxml</text> -->
+<swiper indicator-dots="{{isPointDisplay}}"
+  style="width:{{width}};height:{{height}};border-width:{{styles.borderWidth}}px;border-color:{{styles.borderColor}};background-color:{{styles.backgroundColor}};margin-bottom:{{marginBottom}}px;circular:true;" autoplay="true" interval="3000" duration="1000">
+  <block wx:for="{{imgArray}}" wx:key="">
+    <swiper-item bindtap='_tapSlideItem' data-index="{{index}}">
+      <image src="{{item}}"  style="width: 100%; height: 100%;" />
+    </swiper-item>
+  </block>
+</swiper>

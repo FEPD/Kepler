@@ -1,0 +1,159 @@
+<import src = "../suitList/index" />
+<!--全部商品 热销  -->
+<view wx:if="{{skuType=='1002'||skuType=='1003'||skuType=='1006'}}" class='skulist {{(skuCategory == "category")?"sku-category":""}}'>
+  <view bindtap='click' data-item="{{item}}" data-index="{{index}}" wx:for="{{skuList}}" class="skuitem {{index%2?'':'sku-right'}}"
+  wx:key="{{index}}">
+    <image class='skuimg' src="{{item.imageurl || item.imgPath}}"></image>
+    <template is="title" data="{{...item}}" />
+    <template is="price" data="{{...item}}" />
+    <template is="stock" data="{{...item}}" />
+  </view>
+</view>
+<!--促销  -->
+<view wx:if="{{skuType=='1004'}}" class='skulist sku-wrap'>
+  <block wx:if="{{promoRule&&promoRule.promRule}}">
+    <template is="suitTips" data="{{...promoRule,skuType}}"/>
+  </block>
+  <block wx:if="{{promoDesc}}">
+      <template is="suitTips" data="{{...promoDesc}}"/>
+    </block>
+  <block wx:if="{{skuList&&skuList.length&&skuList[0].combList}}">
+    <suitList suit-list="{{skuList}}"/>
+  </block>
+  <block wx:if="{{!skuList&&skuList.length}}">
+    <suitList suit-list="{{skuList}}"/>
+  </block>
+  <block wx:else>
+    <view bindtap='click' data-item="{{item}}" data-index="{{index}}" wx:for="{{skuList}}" class="promoitem {{index%2?'':'border-right'}}" wx:key="{{index}}">
+      <image class='skuimg' src="{{item.imageurl || item.imgPath}}"></image>
+      <template is="title" data="{{...item}}" />
+      <template is="promNameDesc" data="{{...item}}"/>
+      <template is="price" data="{{...item}}" />
+      <template is="stock" data="{{...item}}" />
+    </view>
+  </block>
+</view>
+<!--活动tab下  -->
+<view wx:if="{{skuType=='1008'}}" class="skulist sku-wrap">
+  <block wx:if="{{skuCategory=='hotSale'}}"><!--活动tab下的热销  -->
+      <view bindtap='click' data-item="{{item}}" data-index="{{index}}" wx:for="{{skuList}}" class="skuitem {{index%2?'':'sku-right'}}"
+      wx:key="{{index}}">
+        <image class='skuimg' src="{{item.imageurl || item.imgPath}}"></image>
+        <template is="title" data="{{...item}}" />
+        <template is="price" data="{{...item}}" />
+        <template is="stock" data="{{...item}}" />
+      </view>
+  </block>
+  <block wx:else><!--活动tab下的促销  -->
+      <template wx:if="{{promoDesc}}" is="suitTips" data="{{...promoDesc}}"/>
+      <view bindtap='click' data-item="{{item}}" data-index="{{index}}" wx:for="{{skuList}}" class="promoitem {{index%2?'':'border-right'}}" wx:key="{{index}}">
+          <image class='skuimg' src="{{item.wareImage}}"></image>
+          <template is="title" data="{{...item}}" />
+          <!-- <template is="promNameDesc" data="{{...item}}"/> -->
+          <view class='skuprice'>
+              <text class='skuPriceLeft'>￥</text>
+              <text class='skuPriceRight'>{{item.preJDPrice}}</text>
+              <text class='skuPriceLeft'>.{{item.sufJDPrice}}</text>
+          </view>
+      </view>
+  </block>
+</view>
+<!--上新 或者拼购
+ 1005：上新
+ 1007：拼购
+ -->
+<view wx:if="{{skuType=='1005'}}" class='skulist'>
+  <view wx:for="{{skuList}}" wx:key="{{index}}">
+    <view wx:if="{{item.title}}" class="pt-newProduct-tips">
+      <view>
+        <image src="/pages/shop/shop_images/shop_icon_new_time.png"></image>
+        <text>{{item.title}}</text>
+      </view>
+    </view>
+    <view class='skulist'>
+      <view bindtap='click' data-date="{{item.date}}" data-item="{{skuItem}}"  wx:for="{{item.wareList}}" wx:for-index="skuIndex" wx:for-item="skuItem" class="skuitem {{skuIndex%2?'':'sku-right'}}" wx:key="skuIndex">
+        <image class='skuimg' src="{{skuItem.imageurl || skuItem.imgPath}}"></image>
+        <template is="title" data="{{...skuItem}}" />
+        <template is="price" data="{{...skuItem}}" />
+        <template is="stock" data="{{...skuItem}}" />
+
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{skuType=='1007'}}" class='skulist'>
+
+    <view class='skulist'>
+      <view bindtap='click' data-date="{{item.date}}" data-item="{{skuItem}}"  wx:for="{{skuList}}" wx:for-index="skuIndex" wx:for-item="skuItem" class="skuitem {{skuIndex%2?'':'sku-right'}}" wx:key="skuIndex">
+        <image class='skuimg' src="{{skuItem.imageurl || skuItem.imgPath || skuItem.imagePath}}"></image>
+        <template is="title" data="{{...skuItem}}" />
+        <template is="price" data="{{...skuItem}}" />
+        <template is="stock" data="{{...skuItem}}" />
+        <template is="fightbuy" data="{{...skuItem}}" wx:if="{{skuItem.SkuInf[0].strPromoPrice != -1}}"/>
+      </view>
+    </view>
+</view>
+<!-- stock 库存数量	0：无库存，-1：库存很多，其他数字：剩余库存数量 -->
+<!-- isUnderCarriage 是否下柜  1:下柜，0：在售 -->
+<!--库存不足或下柜 模板 -->
+<template name="stock">
+<view wx:if="{{isUnderCarriage === 1 || stock === 0}}" class='stock stockbgimg'>
+  <image  class="stockImg" src="{{isUnderCarriage === 1 ?'http://njst.360buyimg.com/jdreact/program/shop_mark_off_shelf.png':'http://njst.360buyimg.com/jdreact/program/shop_mark_sold_out.png'}}" />
+</view>
+</template>
+
+<!--拼购模板  -->
+<template name="fightbuy">
+    <view class='fightbuy_box'>
+       <image src="../../../../images/label_group_buy.png"></image>
+       <text class='fightbuy'>{{tuan_memb_count}}人拼购价</text>
+    </view>
+</template>
+
+<!--赠品促销模板  -->
+<template name="promNameDesc">
+<view wx:if="{{promName}}" class='promFrame'>
+  <text class='txt_promName' style="opacity:{{(isUnderCarriage === 1 || stock === 0)?0.5:1}}">{{promName}}</text>
+<text class='txt_promDesc'>{{promDesc}}</text>
+</view>
+</template>
+
+<!--价格模板  -->
+<template name="price">
+  <view class="pro-item-box">
+    <block wx:if="{{isUnderCarriage === 1 || stock===0}}">
+      <block wx:if="{{isUnderCarriage === 1}}">
+        <view class='skuprice'>
+            <text class="skunderCarriage">{{jdPrice}}</text>
+        </view>
+      </block>
+      <block wx:elif="{{stock === 0}}">
+      <view class='skuprice'>
+        <text class='skuPriceLeft color_gray'>￥</text>
+        <text class='skuPriceRight color_gray'>{{preJDPrice}}</text>
+        <text class='skuPriceLeft color_gray'>.{{sufJDPrice}}</text>
+      </view>
+      </block>
+    </block>
+    <block wx:else>
+    <view class='skuprice'>
+        <text class='skuPriceLeft'>￥</text>
+        <text class='skuPriceRight'>{{preJDPrice || SkuInf[0].prestrPromoPrice}}</text>
+        <text class='skuPriceLeft'>.{{sufJDPrice || SkuInf[0].sufstrPromoPrice}}</text>
+    </view>
+    </block>
+    <block wx:if="{{promotionList&&promotionList.length>1}}">
+      <block wx:for="{{promotionList}}" wx:for-item="pitem">
+        <text class="promTag" wx:if="{{pitem.promName&&pitem.promName.short&&pitem.isEnableFlag}}">{{pitem.promName.short}}</text>
+      </block>
+    </block>
+    <block wx:elif="{{promotionList.length===1}}">
+      <view class="promTag {{promFlag==99?'couponFlag':''}}" wx:if="{{promotionList[0]&&promotionList[0].isEnableFlag&&promotionList[0].promName&&promotionList[0].promName.longer}}">{{promotionList[0].promName.longer}}</view>
+      <view class="promTag {{promFlag==99?'couponFlag':''}}" wx:elif="{{promotionList[0]&&promotionList[0].isEnableFlag&&promotionList[0].promName&&promotionList[0].promName.short}}">{{promotionList[0].promName.short}}</view>
+    </block>
+  </view>
+</template>
+<!--标题模板  -->
+<template name="title">
+  <text class="skutitle {{(isUnderCarriage === 1 || stock === 0)?'skutitleStock':''}}">{{wname || wareName || product_name}}</text>
+</template>

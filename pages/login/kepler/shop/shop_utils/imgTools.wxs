@@ -1,0 +1,66 @@
+var compressSuffix = '.dpg';
+// 适用规则的域名集合
+var matchUrlList = [
+  'http://img30.360buyimg.com/',
+  'https://img30.360buyimg.com/',
+  'http://m.360buyimg.com/',
+  'https://m.360buyimg.com/',
+  'http://img10.360buyimg.com/',
+  'https://img10.360buyimg.com/',
+];
+
+/**
+ * 获取图片优化url
+ * arguments[0]  图片原始url
+ * arguments[1]  页面展示的大小，若不传，则返回图片原始url；  参数格式支持: 100 | 100x100
+ * @returns 
+ */
+var getImgUrl = function() {
+  var originImgUrl = arguments[0];
+  var spec = arguments[1] || '';
+  if (!spec) return originImgUrl;
+  // 如： originImgUrl='https://img30.360buyimg.com/shaidan/s800x500_jfs/t1/90311/9/12727/248678/5e567e9eE34529640/dc9b8fb2e7fcf888.jpg'
+  // 正则表达式-匹配图片域名，必须是http开头或者https开头，结尾为'.com/'
+  var domainReg = getRegExp('^http(s)?:\/\/(.*?)\/')
+  var imgDomain = originImgUrl.match(domainReg)[0];  // 获取图片域名，得到 imgDomain='http://img30.360buyimg.com/'
+  var domainMatchIdx = matchUrlList.indexOf(imgDomain);
+  if (domainMatchIdx === -1) {
+    // 未匹配到适用规则的域名，返回图片原始url
+    return originImgUrl;
+  } else {
+    // 该域名支持 格式如【s100x100】获取不同大小的图片 和 格式如【!q70】获取降质的图片
+    // 正则表达式-匹配 图片原始url上的规格
+    var originImgUrlSpec = getRegExp('\/(s\d+x\d+_)?jfs\/');
+    var newImgUrl = originImgUrl.replace(originImgUrlSpec, '/jfs/'); // 将原先规格剔除，得到 newImgUrl='https://img30.360buyimg.com/shaidan/jfs/t1/90311/9/12727/248678/5e567e9eE34529640/dc9b8fb2e7fcf888.jpg'
+    var specList = (spec+'').split('x');
+    var specStr = specList.length === 1 ? (specList[0] + 'x' + specList[0]) : (specList[0] + 'x' + specList[1]);
+    newImgUrl = newImgUrl.replace('/jfs/', '/s'+specStr+'_jfs/');
+    // console.log('imgTools.wxs=====>originUrl=======>', originImgUrl)
+    // console.log('imgTools.wxs=====>newUrl=======>', newImgUrl)
+    return newImgUrl
+  }
+  
+}
+
+// 获取不同规格的图片 推荐楼层
+var getDifSpecImgUrlForRecommend = function () {
+  var originImgUrl = arguments[0];
+  var len = arguments[1] || 1;
+  var spc;
+  // 一行3张图，一行2张图，一行1张图
+  if (len === 1) {
+    spc = 440
+  } else if (len === 2) {
+    spc = 340
+  } else if (len >= 3) {
+    spc = 220
+  }
+  if (!spc) return originImgUrl;
+  var returnUrl = getImgUrl(originImgUrl, spc);
+  return returnUrl;
+}
+
+module.exports = {
+  getImgUrl: getImgUrl,
+  getDifSpecImgUrlForRecommend: getDifSpecImgUrlForRecommend
+};

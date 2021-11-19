@@ -1,0 +1,24 @@
+<view class="addMyToast {{isHaveHeader?'jToast':''}} {{isIphoneX?'isIphoneX':''}}" wx:if="{{showToast&&!isWebview}}">
+    <view class="addMywrap">
+        <view catchtap="closeAddToast" class="close-icon"></view>
+        <view class="addMyBox">
+            <text>点击</text>
+            <image src="//newbuz.360buyimg.com/jingshop/shop/dots-icon.png"></image>
+            <text>添加到我的小程序，{{guideInfo.text}}</text>
+        </view>
+        <view class="triangle-pop"></view>
+    </view>
+</view>
+<!--webview的弹框浮层  -->
+<cover-view class="addMyToast {{isHaveHeader?'jToast':''}} {{isIphoneX?'isIphoneX':''}}" wx:if="{{showToast&&isWebview}}">
+    <cover-view class="addMywrap">
+        <cover-image catchtap="closeAddToast" src="//newbuz.360buyimg.com/jingshop/shop/close-icon.png" class="close-icon"></cover-image>
+        <cover-view class="addMyBox addMyWrap">
+            <cover-view class="a-txt-1">点击</cover-view>
+            <cover-image class="dot-icon" src="//newbuz.360buyimg.com/jingshop/shop/dots-icon.png"></cover-image>
+            <cover-view class="a-txt-2">添加到我的小程序，</cover-view>
+            <cover-view>{{guideInfo.text}}</cover-view>
+        </cover-view>
+        <cover-view class="triangle-pop"></cover-view>
+    </cover-view>
+</cover-view>

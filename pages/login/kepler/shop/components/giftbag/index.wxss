@@ -1,0 +1,41 @@
+.giftbox{
+  background-image: url("http://m.360buyimg.com/marketingminiapp/jfs/t21247/77/2245405218/43396/65a2d38b/5b4c65efN39200633.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 540rpx;
+  box-sizing: border-box;
+}
+.boxOne{
+   height: 420rpx;
+   padding: 160rpx 80rpx 22rpx 80rpx;
+}
+.boxTwo{
+    height: 620rpx;
+    padding: 160rpx 80rpx 22rpx 80rpx;
+}
+.boxThree{
+    height: 620rpx;
+    padding: 160rpx 80rpx 22rpx 80rpx;
+}
+.btn{
+  width: 454rpx;
+  height: 104rpx;
+  margin-left: -43rpx;
+}
+.one{
+   margin-top: 40rpx;
+}
+.two{
+   margin-top: 78rpx;
+}
+.closebox{
+  width: 100%;
+  height: 130rpx;
+  margin-top: 60rpx;
+ display: flex;
+ justify-content: center;
+}
+.close{
+  width: 70rpx;
+  height: 70rpx;
+}

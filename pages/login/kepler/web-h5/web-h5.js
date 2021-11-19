@@ -43,6 +43,7 @@ Page({
       plugin.promiseGentoken().then(function(res){
 				if(res.data.err_code==0){
 					let _webUrl = res.data.url+'?to='+webObj.url+'&tokenkey='+res.data.tokenkey;
+          console.log('wu','_webUrl',decodeURIComponent(_webUrl))
 					that.setData({webUrl:_webUrl});
 				}
 			})

@@ -1,5 +1,6 @@
 var plugin = requirePlugin("myPlugin");
 const util = require('../utils/util.js');
+util.checkVersion()
 let app = getApp();
 Page({
   data:{
@@ -43,19 +44,22 @@ Page({
     const curPages = getCurrentPages();
     this.pageIndex = curPages.length;
     const pageStackLists = that.setBasicInfo()
+    const pageParamsOption = Object.assign(options, {
+      wxCurrPage: pageStackLists
+    })
     this.setData({
       isIphoneX: !!((app && app.globalData && app.globalData.isIphoneX) || (plugin.getStorageSync('isIphoneX'))),
       options: Object.assign({}, options, {
         initOptionsVal: this.initOptionsVal,
         wareId: options.wareId,
         skuId: options.wareId,
-        pageParams: options,
+        pageParams: pageParamsOption,
         pageIndex: curPages.length,
         wxCurrPage: pageStackLists
       })
     })
     this.updateShareurl(options.wareId)
-    util.checkVersion()
+    
     plugin.emitter.on('goPage' + this.pageIndex, this.goPage.bind(this));
     plugin.emitter.on('scrollToPostion' + this.pageIndex, this.scrollToPostion.bind(this))
     plugin.emitter.on('getScrollTop' + this.pageIndex, this.getScrollTop.bind(this))

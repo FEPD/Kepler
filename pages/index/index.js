@@ -183,8 +183,8 @@ Page({
   //     url: '../proxyUnion/proxyUnion?spreadUrl=https://u.jd.com/cOCvDJ&isVenderAddr=1&venderId=10289299&storeId=24010973&name=百丽丝怀柔专卖店&storeAddress=北京市怀柔区迎宾北路六号百丽丝家纺&storeMark=1&vendSource=4&venderStoreTab=2&wareHouseId=24010973'
   //   })
   // }
-  goTrade: function(e) {
-    let url = e.detail.value.tradeUrl;
+  goPage: function(e) {
+    let url = e.detail.value.pageUrl;
     wx.navigateTo({
       url
     })

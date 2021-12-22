@@ -16,7 +16,7 @@ const getJumpUrl = function ({ type, spreadUrl, currentShare, url }) {
 
 // 记录联盟页面链接
 let unionInfo = null;
-
+let paramStr = '';
 const config = {
   isSubPackage: false,
   /**
@@ -31,6 +31,16 @@ const config = {
       // 如果用埋点插件，需要执行该方法
       plugin.setLogPluginName(logPluginName)
     }
+    // 拼接跳入联盟中间页其它参数，透传到下个页面
+    if (options) {
+      let _paramArry = []
+      for (let key in options) {
+        if (key != 'scene' && key != 'wareId' && key != 'spreadUrl') {
+          _paramArry.push(key + '=' + options[key])
+        }
+      }
+      paramStr = _paramArry.join('&');
+    }
   },
   navigate: {
     /**
@@ -43,8 +53,9 @@ const config = {
       if (!!config.isSubPackage) { // 分包路径
         toUrl = '/pages/login/kepler/product/product'
       }
+      let param = paramStr ? ('&' + paramStr) : ''
       plugin.redirectTo({
-        url: `${toUrl}?wareId=${sku}`
+        url: `${toUrl}?wareId=${sku}${param}`
       })
     },
     /**
@@ -137,6 +148,15 @@ const config = {
       console.log('JDU: customMethods -> getAuthToken')
       return 'token'
     }
+  },
+  /**接入方自定义变量 customConfig
+   * @var {object}  
+   * @property {string} miniProgramUnplSource 小程序下, 获取 source 字段, kipler miniProgramUnplSource=13时, 设置分享和获取unpl
+   * @property {string} miniProgramSharePath 小程序分享路径, miniProgramUnplSource=13时生效
+   */
+  customConfig: {
+    miniProgramUnplSource: '13',
+    miniProgramSharePath: ''
   },
   handleError({ code, message }) {
     // 联盟逻辑错误要跳转的兜底页

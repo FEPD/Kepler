@@ -21,6 +21,8 @@ Page({
     console.log(currentPath)
     const isSubPackage = currentPath.indexOf('login/kepler/') !== -1 ? true : false
     config.isSubPackage = isSubPackage;
+    this.config.currentPath = currentPath;
+    this.config.customConfig.miniProgramSharePath = currentPath;
     return isSubPackage;
   },
   setUnpl(data) {

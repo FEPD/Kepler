@@ -18,7 +18,8 @@ Page({
         isShowPromotionFloor: true, // 是否展示优惠券
         discountCoupon: null,
       },
-      bpChoice: null
+      bpChoice: null,
+      loc: null
     },
     option:{
       apolloId: app.globalData.apolloId ? app.globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',       //阿波罗Id

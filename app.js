@@ -13,6 +13,7 @@ App({
     //myPluginInterface.initStyle({})
   },
   onShow: function(options) {
+    wx.setStorageSync('appShowOptions', options)
     //myPluginInterface.appShow(options, this);
   },
   globalData: {

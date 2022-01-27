@@ -20,7 +20,9 @@ Page({
 
   //跳转到订单列表页
   goToOrder:function(){
+    // 自定义跳转路径
     wx.redirectTo({
+      // url: `/pages/index/index`,
       url: `../order/order`,
     })
   }

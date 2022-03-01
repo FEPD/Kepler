@@ -512,6 +512,6 @@ Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否�
   <font color="#f00">(注意：如果不使用tabbar组件需要将宿主页面内的jdk-tabbar组件删除)</font>
 
     >1. 以下两种接入方式，无论哪种，都需要额外增加以下配置：
-    >接入后需要额外在小程序的app.js文件中增加一个参数配置<font color="#f00">globalData.tabBarPathArr</font>，用于插件内页面跳转宿主小程序页面，跳转方式的判断，详见 https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wx1edf489cb248852c&token=&lang=zh_CN
+    >接入后需要额外在小程序的app.js文件中增加一个参数配置<font color="#f00">globalData.tabBarPathArr</font>，用于插件内页面跳转宿主小程序页面，跳转方式的判断
 
 注：交易插件demo默认接入第2种方式tabbar组件

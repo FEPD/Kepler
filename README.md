@@ -504,14 +504,13 @@ Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否�
 
 ### 常见问题
 ##### 1. 支持的tabbar两种方式：
-1. 微信小程序原生tabbar, 接入方法见微信小程序开发文档
-
-2. 接入交易插件提供的tabBar组件：
-  1)需要在app.js中设置 tabBar 数组列表，详见app.js中tabBar属性
-  2)在tab页面引入jdk-tabbar组件，接入试例可查看提供的接入demo中的/pages/cart/cart.wxml，从页面引入jdk-tabbar组件
-  <font color="#f00">(注意：如果不使用tabbar组件需要将宿主页面内的jdk-tabbar组件删除)</font>
-
-    >1. 以下两种接入方式，无论哪种，都需要额外增加以下配置：
-    >接入后需要额外在小程序的app.js文件中增加一个参数配置<font color="#f00">globalData.tabBarPathArr</font>，用于插件内页面跳转宿主小程序页面，跳转方式的判断
-
-注：交易插件demo默认接入第2种方式tabbar组件
+###### 方式一： 微信小程序原生tabbar, 接入方法见微信小程序官方文档
+另外需要更改几项插件内的配置：
+  1. 在app.js文件中配置 globalData.tabBarPathArr
+  2. 在app.js文件中配置的tabBar数组列表，将其删除
+  3. 在tab页面引入jdk-tabbar组件，将其从宿主页面内删除
+###### 方式二： 接入交易插件提供的tabBar组件<font color="#f00">（demo默认接入方式）</font>
+步骤：
+  1. 在app.js文件中配置 globalData.tabBarPathArr
+  2. 在app.js文件中配置 tabBar 数组列表
+  3. 在tab页面引入jdk-tabbar组件，接入试例可查看提供的接入demo中的/pages/cart/cart.wxml，从页面引入jdk-tabbar组件

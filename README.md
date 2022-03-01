@@ -508,7 +508,7 @@ Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否�
 另外需要更改几项插件内的配置：
   1. 在app.js文件中配置 globalData.tabBarPathArr
   2. 在app.js文件中配置的tabBar数组列表，将其删除
-  3. 在tab页面引入jdk-tabbar组件，将其从宿主页面内删除
+  3. 在tab页面引入的jdk-tabbar组件，将其从宿主页面内删除
 ###### 方式二： 接入交易插件提供的tabBar组件<font color="#f00">（demo默认接入方式）</font>
 步骤：
   1. 在app.js文件中配置 globalData.tabBarPathArr

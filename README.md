@@ -1,4 +1,13 @@
-# 小程序黄金流程插件接入流程
+# 京东微信小程序交易流程插件使用Demo - 京东好物街
+
+## 简介
+  
+京东交易流程插件，通过插件可实现京东商品的小程序内闭环购买。
+
+## 插件申请使用地址
+
+[申请地址](https://mp.weixin.qq.com/wxopen/pluginbasicprofile?action=intro&appid=wx1edf489cb248852c&token=&lang=zh_CN)
+
 ## 标准版（适用于所有接入者）
 > 1. 自助申请小程序专属开普勒appkey [http://k.jd.com/](http://k.jd.com/)  
 > 2. 微信公众平台申请使用好物街插件的权限  
@@ -118,7 +127,7 @@
 ```
 
 Tips:   
-1. **index为demo演示首页，实际开发时请替换成开发者自己的首页。**  
+1. **index为demo演示首页，实际开发时请替换成开发者自己的首页。**  
 2. plugins中myPlugin的版本号（version）改成对应的插件版本号即可。
 
 ### app.js
@@ -493,13 +502,13 @@ Page({
   },
 })
 ```
-Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否则商祥将不展示内容
+Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否则商祥将不展示内容
 ### 联盟中间页
 联盟中间页当前的兜底方案是跳小程序首页，插件接入方可根据自身需求修改`proxyUnion/config.js`文件内的`handleError`方法，将其中传入的跳转链接改为自己所需的地址。也可以修改`app.js`文件内的`errorPage`字段
 ### 支付回调函数
 插件中提供了支付成功的和支付失败的回调函数（payment中的`paymentSuccess`和`paymentFail`），开发者可根据需求做相应的处理
 ### Other
-其他页面调用代码见demo:
+其他页面调用代码见demo:
 [https://github.com/FEPD/Kepler](https://github.com/FEPD/Kepler)
 
 ### 常见问题
@@ -508,7 +517,7 @@ Tips：跳转到商祥的链接一定要携带wareId（商品的sku），否�
 另外需要更改几项插件内的配置：
   1. 在app.js文件中配置 globalData.tabBarPathArr
   2. 在app.js文件中配置的tabBar数组列表，将其删除
-  3. 在tab页面引入的jdk-tabbar组件，将其从宿主页面内删除
+  3. 在tab页面引入jdk-tabbar组件，将其从宿主页面内删除
 ###### 方式二： 接入交易插件提供的tabBar组件<font color="#f00">（demo默认接入方式）</font>
 步骤：
   1. 在app.js文件中配置 globalData.tabBarPathArr

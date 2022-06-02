@@ -1,0 +1,4 @@
+<!--pages/customPage/customPage.wxml-->
+<view class="customPage">
+  带来的参数{{wareId}}
+</view>

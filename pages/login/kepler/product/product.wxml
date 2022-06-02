@@ -1,5 +1,11 @@
-<jdk-product wx:if="{{options}}" options="{{options}}" feGlobalConfig="{{feGlobalConfig}}" isTemplate="{{false}}" 
-bind:doAfterGetdataSuccessInject="doAfterGetdataSuccessInject"
+<!-- 如果不需要自定义点击立即购买跳转链接的请去除下面 bind:coverMethodsAll="_gotoPay" 及 js 文件里的相关逻辑方法-->
+<jdk-product
+  wx:if="{{options}}"
+  options="{{options}}"
+  feGlobalConfig="{{feGlobalConfig}}"
+  isTemplate="{{false}}" 
+  bind:doAfterGetdataSuccessInject="doAfterGetdataSuccessInject"
+  bind:coverMethodsAll="_gotoPay"
 ></jdk-product>
 
 <!-- 置顶按钮，放置在主页面，因为要监听页面滚动事件 -->

@@ -6,7 +6,9 @@ Page({
   data:{
     // 全局配置项
     feGlobalConfig: {
-      coverMethodsAllDefine: [], // 需要覆写的方法，需在此申明注册
+      coverMethodsAllDefine: [
+        'coverGoToBuy' // 非自定义方法请删除这里的值
+      ], // 需要覆写的方法，需在此申明注册
       isHideJDLogo: false, // 是否屏蔽京东元素标识
       hasRecommendFloor: true, // 是否展示推荐楼层
       isCanCouponBuy: true, // boolean类型，默认：true。是否支持领券购买
@@ -18,7 +20,9 @@ Page({
         isShowPromotionFloor: true, // 是否展示优惠券
         discountCoupon: null,
       },
-      bpChoice: null
+      bpChoice: null,
+      disabledAddCart: true, // 隐藏加购按钮
+      disabledShareBtn: false, // 隐藏分享按钮
     },
     option:{
       apolloId: app.globalData.apolloId ? app.globalData.apolloId : 'd1543fc0e8274901be01a9d9fcfbf76e',       //阿波罗Id
@@ -32,6 +36,18 @@ Page({
     toTopDisplay: 'none',    // 是否展示回到顶部按钮
     screenHeight:0,         // 屏幕高度
     rootPath:'' //全局根目录
+  },
+  _gotoPay(data) {
+    // 非自定义跳转请去除
+    // 自定义点击立即购买后的方法
+    console.log('这是我自定义的方法', data);
+    const _wareInfo = data.detail.wareInfo
+    // 根据自己需求取参数
+    if (_wareInfo && _wareInfo.wareInfo && _wareInfo.wareInfo.skuId) {
+      wx.navigateTo({
+        url: `/pages/customPage/customPage?wareId=${_wareInfo.wareInfo.skuId}`
+      })
+    }
   },
   onLoad: function(options) {
     console.log('============00', options)

@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/cart/cart",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/customPage/customPage"
   ],
   "permission": {
     "scope.userLocation": {

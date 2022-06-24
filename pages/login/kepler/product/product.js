@@ -7,7 +7,8 @@ Page({
     // 全局配置项
     feGlobalConfig: {
       coverMethodsAllDefine: [
-        'coverGoToBuy' // 非自定义方法请删除这里的值
+        'coverGoToBuy', // 非自定义方法请删除这里的值
+        // 'coverSwitchSku', // 非自定义方法请删除这里的值
       ], // 需要覆写的方法，需在此申明注册
       isHideJDLogo: false, // 是否屏蔽京东元素标识
       hasRecommendFloor: true, // 是否展示推荐楼层
@@ -38,6 +39,7 @@ Page({
     rootPath:'' //全局根目录
   },
   _gotoPay(data) {
+    
     // 非自定义跳转请去除
     // 自定义点击立即购买后的方法
     console.log('这是我自定义的方法', data);

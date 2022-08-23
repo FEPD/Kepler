@@ -7,7 +7,7 @@ Page({
     // 全局配置项
     feGlobalConfig: {
       coverMethodsAllDefine: [
-        'coverGoToBuy', // 非自定义方法请删除这里的值
+        // 'coverGoToBuy', // 非自定义方法请删除这里的值
         // 'coverSwitchSku', // 非自定义方法请删除这里的值
       ], // 需要覆写的方法，需在此申明注册
       isHideJDLogo: false, // 是否屏蔽京东元素标识
@@ -22,7 +22,7 @@ Page({
         discountCoupon: null,
       },
       bpChoice: null,
-      disabledAddCart: true, // 隐藏加购按钮
+      disabledAddCart: false, // 隐藏加购按钮
       disabledShareBtn: false, // 隐藏分享按钮
     },
     option:{

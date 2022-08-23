@@ -25,6 +25,8 @@ Page({
     console.log(app.globalData)
     const openid = 'xxxxx' // 去获取用户 openid 格式保持 openid_ksz|xx#_#businessType|3;
     plugin.setStorageSync('K_orderText', `openid_ksz|${openid}#_#businessType|3;`)
+    // 自测爆品小程序打标
+    // plugin.setStorageSync('usualExtParams', {"unionInfo":"{\"activityId\":123456,\"shareLevel\":1}"})
   },
   onLoad: function (options) {
     // 主动调用 Ezr 打标
@@ -43,11 +45,6 @@ Page({
   onShow:function(){
     var styleStorageData = wx.getStorageSync('style');
     plugin.isLogin(this.setLoginState)
-  },
-  setEZRText() {
-    // 手动设置 EZR 小程序打标 orderText 字段
-    const openid = 'xxxxx' // 去获取用户 openid 格式保持 openid_ksz|xx#_#businessType|3;
-    plugin.setStorageSync('K_orderText', `openid_ksz|${openid}#_#businessType|3;`)
   },
   setLoginState:function(isLogin){
     this.setData({

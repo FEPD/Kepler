@@ -27,6 +27,9 @@ Page({
     plugin.setStorageSync('K_orderText', `openid_ksz|${openid}#_#businessType|3;`)
     // 自测爆品小程序打标
     // plugin.setStorageSync('usualExtParams', {"unionInfo":"{\"activityId\":123456,\"shareLevel\":1}"})
+
+    // 交易插件支持宿主小程序数据跟单--storage存入'orderChain-event-id'，在交易插件提单时上报埋点
+    //wx.setStorageSync('orderChain-event-id', 'xxxx');
   },
   onLoad: function (options) {
     // 主动调用 Ezr 打标

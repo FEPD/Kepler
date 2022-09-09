@@ -1,7 +1,7 @@
 /*
  * @Author: wuazhu
  * @Date: 2021-07-13 10:35:06
- * @LastEditTime: 2021-08-04 15:19:24
+ * @LastEditTime: 2022-09-09 13:56:14
  */
 //app.js
 var myPluginInterface = requirePlugin('myPlugin');
@@ -12,6 +12,10 @@ App({
   },
   onShow: function(options) {
     myPluginInterface.appShow(options, this);
+
+    // 交易插件支持宿主小程序数据跟单--storage存入场景值，在交易插件提单时上报埋点
+    //wx.setStorageSync('orderChain-scene', options.scene);
+
   },
   
   globalData: {

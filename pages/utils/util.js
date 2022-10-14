@@ -15,6 +15,9 @@ function checkVersion () {
 	    url: 'plugin-private://wx1edf489cb248852c/pages/updateTip/updateTip'
 	  });
 	}
+  
+  myPluginInterface.setStorageSync('_we_tk', app.globalData.eid); //将指纹eid传给开普勒插件，color接口风控使用
+
 }
 
 module.exports = {

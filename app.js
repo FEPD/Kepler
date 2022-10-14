@@ -1,7 +1,7 @@
 /*
  * @Author: wuazhu
  * @Date: 2021-07-13 10:35:06
- * @LastEditTime: 2022-09-09 13:56:14
+ * @LastEditTime: 2022-09-26 15:35:33
  */
 //app.js
 var myPluginInterface = requirePlugin('myPlugin');
@@ -17,7 +17,7 @@ App({
     //wx.setStorageSync('orderChain-scene', options.scene);
 
   },
-  
+
   globalData: {
     unionId: "1000072052", //联盟ID（选填）
     appkey: "wxgdtest", //小程序跟单标识（必填）
